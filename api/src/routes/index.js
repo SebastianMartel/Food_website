@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/recipes/:id', getRecipeById)
 
-router.get('/recipes/name?="..."', getRecipeByName)
+router.get('/recipes', getRecipeByName)
 
 router.post('/recipes', postRecipe)
 

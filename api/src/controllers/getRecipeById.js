@@ -22,7 +22,7 @@ const getRecipeById = async (req, res) => {
                 image: data.image,
                 summary: data.summary,
                 healthScore: data.healthScore,
-                instructions: data.instructions
+                stepByStep: data.analyzedInstructions[0].steps
             }
             console.log(recipe)
             return res.status(200).json(recipe)
