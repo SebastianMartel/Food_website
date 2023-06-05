@@ -3,10 +3,10 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('recipe', {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER, // or UUID
             primaryKey: true
         },
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -18,12 +18,12 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        health_score: {
+        healthScore: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        step_by_step: {
-            type: DataTypes.STRING,
+        stepByStep: {
+            type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: false
         }
       }, {timestamps: false});
