@@ -3,21 +3,23 @@ require('dotenv')
 
 const { API_KEY } = process.env
 const createRecipeDB = require('../controllers/createRecipeDB')
+const { Recipe, Diet } = require('../db')
 
 // it does post and the reponse is the expected, but it's not creating a new item in the db
+// relation this recipe with the db diet, so they are added in recipe_diet
 
 const postRecipe = async (req, res) => {
 
     try {
+
+        const { title, image, summary, healthScore, stepByStep, diet } = req.body        
+        // id not needed
+        const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep }, diet)
         
-        const { id, title, image, summary, healthScore, stepByStep } = req.body
-        
-        const newRecipe = await createRecipeDB({ id, title, image, summary, healthScore, stepByStep })
-        
-        return res.status(200).json(newRecipe)
+            return res.status(200).json(newRecipe)
 
     } catch (error) {
-        return res.status(500).json({error: error.message})
+            return res.status(500).json({error: error.message})
     }
 }   
 

@@ -31,13 +31,13 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 // Sequelize.models contains all the models imported as properties
-  const { Recipe, Diets } = sequelize.models;
+  const { Recipe, Diet } = sequelize.models;
 
 // Relations:
 // Product.hasMany(Reviews);
 
-Recipe.belongsToMany(Diets, {through: 'recipe_diets', timestamps: false})
-Diets.belongsToMany(Recipe, {through: 'recipe_diets', timestamps: false})
+Recipe.belongsToMany(Diet, {through: 'recipes_diets', timestamps: false})
+Diet.belongsToMany(Recipe, {through: 'recipes_diets', timestamps: false})
 
 
 module.exports = {

@@ -1,11 +1,11 @@
-const Diets = require('../db')
+const { Diet } = require('../db')
 
 
 const findAllDietsDB = () => {
 
-    const allDiets = Diets.findAll()
+    const allDiets = Diet.findAll()
 
-    return allDiets
+        return allDiets
 }
 
 

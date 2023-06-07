@@ -1,11 +1,15 @@
-const { Recipe } = require('../db')
+const { Recipe, Diet } = require('../db')
 
 
-const createRecipeDB = async (recipe) => {
+const createRecipeDB = async (recipe, diet) => {
 
-    const newRecipe = await Recipe.create(recipe)
+    const newRecipe = await Recipe.create(recipe) // creates a recipe with only the recipe parameter - omitting diet.
 
-    return newRecipe
+    const dietDB = await Diet.findAll({where: {name: diet}}) // find the diet in the db where the name matches the one passed in the body (postRecipe.js).
+
+    Recipe.setDiet(dietDB) // relation with the diet pa
+
+        return newRecipe
 }
 
 

@@ -14,10 +14,12 @@ const getDiet = (req, res) => {
         const allDiets = findAllDietsDB()
 
         if (!allDiets) return false
-        
+        console.log('success')
+
+            return res.status(200).send(allDiets)
         
     } catch (error) {
-        return res.status(500).json({error: error.message})
+            return res.status(500).json({error: error.message})
     }
 }
 

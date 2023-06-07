@@ -1,9 +1,10 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('recipe', {
+    sequelize.define('Recipe', {
         id: {
-            type: DataTypes.INTEGER, // or UUID
+            type: DataTypes.UUID, // or UUID // or ID
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         title: {
@@ -15,7 +16,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         summary: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         healthScore: {
