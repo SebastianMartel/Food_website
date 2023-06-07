@@ -1,9 +1,9 @@
 const { Diet } = require('../db')
 
 
-const findAllDietsDB = () => {
+const findAllDietsDB = async () => {
 
-    const allDiets = Diet.findAll()
+    const allDiets = await Diet.findAll()
 
         return allDiets
 }

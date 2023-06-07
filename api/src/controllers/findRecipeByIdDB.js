@@ -1,9 +1,9 @@
 const { Recipe } = require('../db')
 
 
-const findRecipeByIdDB = (id) => {
+const findRecipeByIdDB = async (id) => {
 
-    const recipe = Recipe.findByPk(id)
+    const recipe = await Recipe.findByPk(id)
 
         return recipe
 }
