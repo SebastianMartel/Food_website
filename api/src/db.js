@@ -1,8 +1,10 @@
-require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOST, API_KEY } = process.env;
+
+// doesn't work: require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {

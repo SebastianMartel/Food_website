@@ -14,7 +14,7 @@ const postRecipe = async (req, res) => {
 
         const { title, image, summary, healthScore, stepByStep, diet } = req.body        
         // id not needed
-        const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep }, diet)
+        const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep })
         
             return res.status(200).json(newRecipe)
 
