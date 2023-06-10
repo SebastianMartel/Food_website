@@ -1,25 +1,21 @@
 const axios = require('axios')
 require('dotenv').config()
-
-const { API_KEY } = process.env
-const { Recipe } = require('../db')
-const { Sequelize } = require('sequelize')
-const { Op } = require('sequelize');
-
 // just in case:
 // const path = require('path');
 // require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-const findRecipeByNameDB = require('../controllers/findRecipeByNameDB')
+const { API_KEY } = process.env
+const { findRecipeByNameDB } = require('../controllers/RecipeControllers')
 
 
-// console.log(findRecipeByNameDB)
 const getRecipeByName = async (req, res) => {
 
     // O: validate name received by query, look in the API and DATABASE and return the correct recipe.
     try {
 
         const { name } = req.query
+        
+        // API OPTION:
 
         // const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}` // this is an endpoint provided by the api that search trough the whole api the name that matches the value of 'query'.
 
@@ -27,7 +23,7 @@ const getRecipeByName = async (req, res) => {
         // const { data } = response
         // const { results } = data
 
-        // if (results && results.length > 0) {
+        // if (results.length > 0) {
 
         //     const recipesId = results.map((recipe) => recipe.id) // creates a new array with the id's that matches the name.
         //     const recipes = [] // array to store the needed information of the id's that mathes the name.
@@ -77,12 +73,11 @@ const getRecipeByName = async (req, res) => {
           }));
 
         // now from the db:
-
         const recipesDB = await findRecipeByNameDB(name)
-        console.log(recipesDB)
 
+        // both:
         const allRecipes = [
-            ...recipesAPI, ...recipesDB // ...recipesDB (not iterable, maybe since it's just one)
+            ...recipesAPI, ...recipesDB
         ]
 
         if (allRecipes.length > 0) {

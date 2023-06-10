@@ -2,22 +2,25 @@ const axios = require('axios')
 require('dotenv')
 
 const { API_KEY } = process.env
-const findAllDietsDB = require('../controllers/findAllDietsDB')
+const { createDietDB } = require('../controllers/DietControllers')
 
 
-const getDiet = (req, res) => {
-    // diets: Gluten Free, Ketogenic, Vegetarian, Lacto-Vegetarian, Ovo-Vegetarian, Vegan, Pescetarian, Paleo, Primal, Low FODMAP, Whole30
-
-    // check diets in the db
+// API DOC diets: Gluten Free, Ketogenic, Vegetarian, Lacto-Vegetarian, Ovo-Vegetarian, Vegan, Pescetarian, Paleo, Primal, Low FODMAP, Whole30.
+const getDiet = async (req, res) => {
+    // O: create in the DB all the diets of the recipes I'm working with.
+    // diets working with: 'gluten free', 'dairy free', 'lacto ovo vegetarian', 'vegan', 'paleolithic', 'primal', 'whole 30', 'pescatarian', 'ketogenic', fodmap friendly'.
     try {
-        
-        const allDiets = findAllDietsDB()
 
-        if (!allDiets) return false
-        console.log('success')
+        const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
 
-            return res.status(200).send(allDiets)
-        
+        const response = await axios(ENDPOINT)
+        const { data } = response
+        const { results } = data
+
+        const dietsDB = await createDietDB(results) // creates the diets in the DB.
+
+            return res.status(200).send(dietsDB) // send the created records
+
     } catch (error) {
             return res.status(500).json({error: error.message})
     }

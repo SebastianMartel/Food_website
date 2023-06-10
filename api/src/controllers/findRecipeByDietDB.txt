@@ -1,5 +1,5 @@
 const { Recipe, Diet } = require('../db')
-const { findRecipeByIdDB } = require('../controllers/findRecipeByIdDB')
+const  findRecipeByIdDB  = require('../findRecipeByIdDB')
 
 
 const findRecipeByDietDB = async (id) => {

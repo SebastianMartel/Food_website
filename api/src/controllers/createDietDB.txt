@@ -1,0 +1,25 @@
+const { Diet } = require('../db')
+const json = require('../json.json')
+
+const createDietDB = async (results) => {
+
+    try {
+
+        const diets = [...new Set(results.flatMap(item => item.diets))];
+        const dietsDB = []
+        
+        for (const diet of diets) {
+            const createdDiet = await Diet.create({name: diet});
+            dietsDB.push(createdDiet)
+        }
+        
+        return dietsDB
+
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
+
+
+module.exports = createDietDB
