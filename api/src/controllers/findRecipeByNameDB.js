@@ -1,17 +1,28 @@
+const { Sequelize } = require('sequelize')
 const { Recipe } = require('../db')
+
 
 const findRecipeByNameDB = async (name) => {
     
-    const recipe = await Recipe.findOne({
+    const recipe = await Recipe.findAll({
         where: {
-            title: name
+            title: {
+                [Sequelize.Op.iLike]: `%${name}%`,
+              }, 
         }
     })
-
-    // console.log(recipe)
+    
     return recipe
 }
 
-// console.log(findRecipeByNameDB("Asado"))
+// test:
+// (async () => {
+//     try {
+//       const result = await findRecipeByNameDB("LOMO SALTADO");
+//       console.log(result);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   })();
 
 module.exports = findRecipeByNameDB

@@ -61,32 +61,29 @@ const getRecipeByName = async (req, res) => {
 
         const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
 
-        // const response = await axios(ENDPOINT)
-        // const { data } = response
-        // const { results } = data        
-        // // from the API:
-        // const filteredResults = results.filter((recipe) => recipe.title.toLowerCase().includes(name.toLowerCase()));
+        const response = await axios(ENDPOINT)
+        const { data } = response
+        const { results } = data        
+        // from the API:
+        const filteredResults = results.filter((recipe) => recipe.title.toLowerCase().includes(name.toLowerCase()));
         
-        // const recipesAPI = filteredResults.map((recipe) => ({
-        //     title: recipe.title,
-        //     image: recipe.image,
-        //     summary: recipe.summary,
-        //     healthScore: recipe.healthScore,
-        //     stepByStep: recipe.analyzedInstructions[0].steps,
-        //     diets: recipe.diets,
-        //   }));
+        const recipesAPI = filteredResults.map((recipe) => ({
+            title: recipe.title,
+            image: recipe.image,
+            summary: recipe.summary,
+            healthScore: recipe.healthScore,
+            stepByStep: recipe.analyzedInstructions[0].steps,
+            diets: recipe.diets,
+          }));
 
         // now from the db:
 
         const recipesDB = await findRecipeByNameDB(name)
-
         console.log(recipesDB)
-        const allRecipes = [
-            ...recipesAPI, recipesDB // ...recipesDB (not iterable, maybe since it's just one)
-        ]
 
-        // const all = await Recipe.findAll()
-        // console.log(all)
+        const allRecipes = [
+            ...recipesAPI, ...recipesDB // ...recipesDB (not iterable, maybe since it's just one)
+        ]
 
         if (allRecipes.length > 0) {
             return res.status(200).json(allRecipes);
