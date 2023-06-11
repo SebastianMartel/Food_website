@@ -15,13 +15,13 @@ const postRecipe = async (req, res) => {
         const { title, image, summary, healthScore, stepByStep, diet } = req.body        
         // id not needed.
         const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep }, diet)
-        
+
             return res.status(200).json(newRecipe)
 
     } catch (error) {
             return res.status(500).json({error: error.message})
     }
-}   
+}
 
 
 module.exports = postRecipe
