@@ -1,12 +1,11 @@
 const { Diet } = require('../db')
-const json = require('../json.json')
+const json = require('../json.json') // for the test
 
 
 
 const createDietDB = async (results) => {
 
     try {
-
         const allDiets = [...new Set(results.flatMap(item => item.diets))]; // iterates over the axios response passed as parameter, and creates an array with the diets found without repeating.
         const dietsDB = [] // this is going to be sent, this will be the request response.
 
@@ -26,9 +25,14 @@ const createDietDB = async (results) => {
 
 const findAllDietsDB = async () => {
 
-    const allDiets = await Diet.findAll()
+    try {
+        const allDiets = await Diet.findAll()
 
-        return allDiets
+            return allDiets
+
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }
 
 

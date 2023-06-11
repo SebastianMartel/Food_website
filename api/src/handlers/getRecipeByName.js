@@ -7,15 +7,16 @@ require('dotenv').config()
 const { API_KEY } = process.env
 const { findRecipeByNameDB } = require('../controllers/RecipeControllers')
 
+// add diets associated.
 
 const getRecipeByName = async (req, res) => {
 
-    // O: validate name received by query, look in the API and DATABASE and return the correct recipe.
+// O: validate name received by query, looks through the API and DATABASE and returns the correct recipe(s).
     try {
 
         const { name } = req.query
         
-        // API OPTION:
+    // API "QUERY" OPTION:
 
         // const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}` // this is an endpoint provided by the api that search trough the whole api the name that matches the value of 'query'.
 
@@ -59,10 +60,10 @@ const getRecipeByName = async (req, res) => {
 
         const response = await axios(ENDPOINT)
         const { data } = response
-        const { results } = data        
+        const { results } = data
         // from the API:
         const filteredResults = results.filter((recipe) => recipe.title.toLowerCase().includes(name.toLowerCase()));
-        
+
         const recipesAPI = filteredResults.map((recipe) => ({
             title: recipe.title,
             image: recipe.image,

@@ -4,11 +4,13 @@ require('dotenv')
 const { API_KEY } = process.env
 const { createDietDB } = require('../controllers/DietControllers')
 
+// FIX: avoid creating new recipes in the DB when they already has been created.
 
 // API DOC diets: Gluten Free, Ketogenic, Vegetarian, Lacto-Vegetarian, Ovo-Vegetarian, Vegan, Pescetarian, Paleo, Primal, Low FODMAP, Whole30.
 const getDiet = async (req, res) => {
-    // O: create in the DB all the diets of the recipes I'm working with.
-    // diets working with: 'gluten free', 'dairy free', 'lacto ovo vegetarian', 'vegan', 'paleolithic', 'primal', 'whole 30', 'pescatarian', 'ketogenic', fodmap friendly'.
+
+// O: create in the DB all the diets of the recipes I'm working with.
+// diets working with: 'gluten free', 'dairy free', 'lacto ovo vegetarian', 'vegan', 'paleolithic', 'primal', 'whole 30', 'pescatarian', 'ketogenic', fodmap friendly'.
     try {
 
         const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
@@ -19,7 +21,7 @@ const getDiet = async (req, res) => {
 
         const dietsDB = await createDietDB(results) // creates the diets in the DB.
 
-            return res.status(200).send(dietsDB) // send the created records
+            return res.status(200).send(dietsDB) // send the created records.
 
     } catch (error) {
             return res.status(500).json({error: error.message})

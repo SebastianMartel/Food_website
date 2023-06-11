@@ -1,13 +1,12 @@
-// FIX 38
+// FIX 36, 55
 const axios = require('axios')
 require('dotenv').config()
 
 const { API_KEY } = process.env
 const { findRecipeByIdDB } = require('../controllers/RecipeControllers')
-// const findRecipeByDietDB = require('../controllers/findRecipeByDietDB')
 
 
-// *maybe it's better to change the order of the searches, first in the db, since it's very likely to find less items and the in the API, because it holds lots of recipes.
+
 const getRecipeById = async (req, res) => {
 
 // O: get the full recipe info whether it's from the API or the DB.    
@@ -15,15 +14,49 @@ const getRecipeById = async (req, res) => {
 
         const { id } = req.params
 
-        const isValidUUID = (id) => { // checks if the id is a UUID type.
-            const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-            return uuidPattern.test(id);
-          };
+            const isValidUUID = (id) => { // checks if the id is a UUID type.
+                const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+                return uuidPattern.test(id);
+            };
 
-        if (!isValidUUID(id)) {
+        if (isValidUUID(id)) {
+            // in case the id is a UUID type, it will look for the recipe's id that matches the one asked by params through the DB.
+            // FIXED // FIX: it has to include the diet associated to the recipe -----------------------------------------------^^
             
+            const recipe = await findRecipeByIdDB(id)
+
+            if (recipe) { /* this is to check if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
+            
+                {
+                    "error": "recipe.getDiets is not a function"
+                }
+            */
+
+                const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
+
+                const associatedDiets = [] // creates a new array to store the name of the associated diets.
+                for (const diet of dietsDB) {
+                    associatedDiets.push(diet.name)
+                }
+
+                const newRecipe = { // adds the diets to the object.
+                    id: recipe.id,
+                    title: recipe.title,
+                    image: recipe.image,
+                    summary: recipe.summary,
+                    healthScore: recipe.healthScore,
+                    stepByStep: recipe.stepByStep,
+                    diets: associatedDiets // and each, iterate.
+                }
+
+                return res.status(200).json(newRecipe)
+
+            } else return recipe
+
+        } else if (!isValidUUID(id)) {
+
             const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-            // looks for the items id's that matches the one asked in params through the API.
+            // now, in case the id is NOT a UUID type, it will look through the API for the desired recipe.
             // response: { data: { id: ..., title: ..., ... }, ... }
             const response = await axios(ENDPOINT)
             const { data } = response
@@ -34,30 +67,11 @@ const getRecipeById = async (req, res) => {
                 image: data.image,
                 summary: data.summary,
                 healthScore: data.healthScore,
-                stepByStep: data.analyzedInstructions[0].steps, // FIX: it's showing, unnecessary properties.
+                stepByStep: data.analyzedInstructions[0].steps, // FIX (later, working in the front): it's showing, unnecessary properties.
                 diets: data.diets // addded diets.
             }
 
                 return res.status(200).json(recipe)
-
-        } else if (isValidUUID(id)) {
-            // if the item wasn't found in the API, again looks for the items id's that matches the one asked in params, but this time in the DB.
-            // FIX: it has to include the diet associated to the recipe ---------------------------------------------------------------^^
-            const recipe = await findRecipeByIdDB(id)
-            
-            const diets = await recipe.getDiets() // get all the diets associated to the recipe.
-
-            const newRecipe = { // adds the diets to the object.
-                id: recipe.id,
-                title: recipe.title,
-                image: recipe.image,
-                summary: recipe.summary,
-                healthScore: recipe.healthScore,
-                stepByStep: recipe.stepByStep,
-                diets: diets[0].name // and each, iterate.
-            }
-
-                return res.status(200).json(newRecipe)
 
         } else {
             return res.status(404).send('Not found')
