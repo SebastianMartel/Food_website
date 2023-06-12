@@ -1,5 +1,5 @@
 const { Diet } = require('../db')
-const json = require('../json.json') // for the test
+const json = require('../json.json') // to test allDiets const.
 
 
 

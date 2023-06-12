@@ -54,11 +54,18 @@ const findRecipeByIdDB = async (id) => {
 }
 
 
-// add diets, like with the getRecipeById: const dietsDB = await recipe.getDiets()...
 const findRecipeByNameDB = async (name) => {
-
+    
     try {
+        // adds diets, like with the getRecipeById: const dietsDB = await recipe.getDiets()... but using a different approach:
         const recipe = await Recipe.findAll({
+            include: {
+                model: Diet,
+                attributes: ["name"],
+                through: {
+                  attributes: []
+                }
+            },
             where: {
                 title: {
                     [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.

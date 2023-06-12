@@ -22,19 +22,26 @@ const getRecipeById = async (req, res) => {
         if (isValidUUID(id)) {
             // in case the id is a UUID type, it will look for the recipe's id that matches the one asked by params through the DB.
             // FIXED // FIX: it has to include the diet associated to the recipe -----------------------------------------------^^
-            
+
             const recipe = await findRecipeByIdDB(id)
 
             if (recipe) { /* this is to check if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
-            
+
                 {
                     "error": "recipe.getDiets is not a function"
                 }
             */
 
                 const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
-
-                const associatedDiets = [] // creates a new array to store the name of the associated diets.
+                // or... I can use these:
+                // {include: {
+                //     model: type,
+                //     attributes: ["name"],
+                //     through: {
+                //       attributes: []
+                //     }}}
+        
+                const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
                 for (const diet of dietsDB) {
                     associatedDiets.push(diet.name)
                 }
@@ -46,7 +53,7 @@ const getRecipeById = async (req, res) => {
                     summary: recipe.summary,
                     healthScore: recipe.healthScore,
                     stepByStep: recipe.stepByStep,
-                    diets: associatedDiets // and each, iterate.
+                    diets: associatedDiets // array with ONLY the name of the diets.
                 }
 
                 return res.status(200).json(newRecipe)
