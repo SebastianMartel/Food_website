@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import './App.css';
@@ -12,6 +12,7 @@ import Detail from './Components/Detail/Detail';
 
 function App () {
     
+
     const [recipes, setRecipes] = useState({
         recipes: []
     })
@@ -19,21 +20,25 @@ function App () {
     const { pathname } = useLocation()
 
 
-    const getRecipeByName = async (name) => {
+    useEffect(() => {
+        console.log(recipes)
+    }, [recipes])
 
-        try {
 
-            const URL = 'http://localhost:3001/recipes'
-            const { data } = await axios(`${URL}?name=${name}`)
-            const recipesFound = data
-            setRecipes({
-                recipes: recipesFound
-            })
+        const getRecipeByName = async (name) => {
 
-        } catch (error) {
-            throw new Error(error.message)
+            try {
+
+                const URL = 'http://localhost:3001/recipes'
+                const { data } = await axios(`${URL}?name=${name}`)
+                const recipesFound = data
+                setRecipes({
+                    recipes: recipesFound
+                })
+            } catch (error) {
+                throw new Error(error.message)
+            }
         }
-    }
 
 
     return (
@@ -43,7 +48,7 @@ function App () {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home/> }/>
+                <Route path = '/home' element = { <Home /> }/>
                 <Route path = '/form' element = { <Form/> }/>
                 <Route path = '/detail' element = { <Detail/> }/>
             </Routes>

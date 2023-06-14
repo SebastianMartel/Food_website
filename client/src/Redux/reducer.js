@@ -1,4 +1,13 @@
-const reducer = () => {
+
+
+    const initialState = {
+
+    }
+
+
+const reducer = (state = initialState, { type, payload }) => {
+
+
 
 }
 
