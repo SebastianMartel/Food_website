@@ -1,8 +1,8 @@
 const axios = require('axios')
 require('dotenv').config()
 // just in case:
-// const path = require('path');
-// require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const { API_KEY } = process.env
 const { findRecipeByNameDB } = require('../controllers/RecipeControllers')
@@ -15,7 +15,7 @@ const getRecipeByName = async (req, res) => {
     try {
 
         const { name } = req.query
-        
+
     // API "QUERY" OPTION:
 
         // const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}` // this is an endpoint provided by the api that search trough the whole api the name that matches the value of 'query'.
