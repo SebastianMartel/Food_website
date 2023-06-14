@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import CardBox from "../Cardbox/Cardbox"
 
 
@@ -16,13 +15,13 @@ const Headline = styled.div `
 export default function Home () {
 
     return (
-        <>
+        <div>
             <Headline>
                 <h1>HOME</h1>
                 <button>FILTER</button>
             </Headline>
 
             <CardBox/>
-        </>
+        </div>
     )
 }

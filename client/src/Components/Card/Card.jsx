@@ -8,6 +8,7 @@ const StyledCard = styled.div `
 
 
 export default function Card () {
+    
     return (
         <div>
             <StyledCard>Card</StyledCard>

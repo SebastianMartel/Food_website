@@ -10,10 +10,11 @@ const StyledNavBar = styled.div `
     border: 1px solid black;
 `
 
-export default function NavBar () {
+export default function NavBar ( { getRecipeByName } ) {
+
     return (
         <StyledNavBar>
-            <SearchBar/>
+            <SearchBar getRecipeByName = {getRecipeByName}/>
             <h1>NOVA</h1>
             <button>CREATE RECIPE</button>
         </StyledNavBar>

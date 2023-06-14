@@ -9,6 +9,7 @@ const StyledCardBox = styled.div `
 
 
 export default function CardBox () {
+    
     return (
         <StyledCardBox>
             <Card/>
