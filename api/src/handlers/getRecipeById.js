@@ -70,12 +70,12 @@ const getRecipeById = async (req, res) => {
 
             const recipe = {
                 //-/ id: data.id,
-                title: data.title,
-                image: data.image,
-                summary: data.summary,
-                healthScore: data.healthScore,
-                stepByStep: data.analyzedInstructions[0].steps, // FIX (later, working in the front): it's showing, unnecessary properties.
-                diets: data.diets // addded diets.
+                title: data?.title,
+                image: data?.image,
+                summary: data?.summary,
+                healthScore: data?.healthScore,
+                stepByStep: data?.analyzedInstructions[0]?.steps, // FIX (later, working in the front): it's showing, unnecessary properties.
+                diets: data?.diets // addded diets.
             }
 
                 return res.status(200).json(recipe)
