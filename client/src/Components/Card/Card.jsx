@@ -1,17 +1,25 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 
 const StyledCard = styled.div `
     border: 1px solid black;
-    padding: 10rem;
+    width: 20rem;
+    height: 22rem;
 `
 
 
-export default function Card () {
-    
+export default function Card ( {id, title, image, summary, healthScore, steps, diets} ) {
+
     return (
         <div>
-            <StyledCard>Card</StyledCard>
+            <NavLink to = {`detail/${id}`}>
+                <StyledCard>
+                    <img src = {image}></img>
+                    <p>{title}</p>
+                    <p>{diets}</p>
+                </StyledCard>
+            </NavLink>
         </div>
     )
 }

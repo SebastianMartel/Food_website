@@ -25,16 +25,15 @@ function App () {
     }, [recipes])
 
 
-        const getRecipeByName = async (name) => {
+        const getRecipeByName = async (name) => { // asks for the recipes that matches the name.
 
             try {
 
                 const URL = 'http://localhost:3001/recipes'
                 const { data } = await axios(`${URL}?name=${name}`)
-                const recipesFound = data
-                setRecipes({
-                    recipes: recipesFound
-                })
+                const recipesFound = data // recipesFound is an array
+                setRecipes(recipesFound)
+
             } catch (error) {
                 throw new Error(error.message)
             }
@@ -48,9 +47,9 @@ function App () {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home /> }/>
+                <Route path = '/home' element = { <Home recipes = {recipes}/> }/>
                 <Route path = '/form' element = { <Form/> }/>
-                <Route path = '/detail' element = { <Detail/> }/>
+                <Route path = '/detail:id' element = { <Detail/> }/>
             </Routes>
         </div>
     );

@@ -12,7 +12,7 @@ const Headline = styled.div `
 `
 
 
-export default function Home () {
+export default function Home ( { recipes } ) {
 
     return (
         <div>
@@ -21,7 +21,7 @@ export default function Home () {
                 <button>FILTER</button>
             </Headline>
 
-            <CardBox/>
+            <CardBox recipes = {recipes}/>
         </div>
     )
 }
