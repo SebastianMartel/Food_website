@@ -6,7 +6,7 @@ const StyledCardBox = styled.div `
     flex-wrap: wrap;
     flex-direction: row;;
     justify-content: space-evenly;
-    gap: 3rem;
+    gap: 5rem;
 
     margin: 50px;
 `

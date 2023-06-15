@@ -13,9 +13,7 @@ import Detail from './Components/Detail/Detail';
 function App () {
     
 
-    const [recipes, setRecipes] = useState({
-        recipes: []
-    })
+    const [recipes, setRecipes] = useState([])
 
     const { pathname } = useLocation()
 
@@ -48,8 +46,8 @@ function App () {
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
                 <Route path = '/home' element = { <Home recipes = {recipes}/> }/>
+                <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
-                <Route path = '/detail:id' element = { <Detail/> }/>
             </Routes>
         </div>
     );
