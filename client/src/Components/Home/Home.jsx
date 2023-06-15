@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import CardBox from "../Cardbox/Cardbox"
+//__________________________________________________
 
 
 const Headline = styled.div `
@@ -10,6 +11,7 @@ const Headline = styled.div `
 
     padding: 1rem;
 `
+//__________________________________________________
 
 
 export default function Home ( { recipes } ) {

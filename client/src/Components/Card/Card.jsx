@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+//__________________________________________________
 
 
 const StyledCard = styled.div `
@@ -7,6 +8,7 @@ const StyledCard = styled.div `
     width: 312px;
     height: 22rem;
 `
+//__________________________________________________
 
 
 export default function Card ( {id, title, image, summary, healthScore, steps, diets} ) {

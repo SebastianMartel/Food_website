@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+//__________________________________________________
 
 
 export default function Detail () {
@@ -10,7 +11,7 @@ export default function Detail () {
 
 
     const { id } = useParams()
-    const { pathname } = useLocation()
+
 
     useEffect(() => {
 
@@ -20,7 +21,7 @@ export default function Detail () {
             const recipeFound = data
             setDetails(recipeFound)
         }
-        
+        console.log(details)
         getRecipeById()
 
     },[id])
@@ -41,6 +42,7 @@ export default function Detail () {
                 })
             }
             <p>{details?.diets}</p>
+            <p>{typeof(details.diets)}</p>
         </div>
     )
 }

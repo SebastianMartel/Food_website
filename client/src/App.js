@@ -8,6 +8,7 @@ import Home from './Components/Home/Home';
 import NavBar from './Components/NavBar/NavBar';
 import Form from './Components/Form/Form';
 import Detail from './Components/Detail/Detail';
+//__________________________________________________
 
 
 function App () {
@@ -53,4 +54,6 @@ function App () {
     );
 }
 
+
+//__________________________________________________
 export default App;

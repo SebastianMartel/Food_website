@@ -1,5 +1,7 @@
 import Card from "../Card/Card";
 import styled from "styled-components";
+//__________________________________________________
+
 
 const StyledCardBox = styled.div `
     display: flex;
@@ -10,14 +12,23 @@ const StyledCardBox = styled.div `
 
     margin: 50px;
 `
+//__________________________________________________
 
 
 export default function CardBox ( { recipes } ) {
-    
+
+    // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.
+    // const getDiets = (recipe) => {
+    //     const diets = recipe.diets || recipe.Diets || [];
+    //     return Array.isArray(diets) ? diets : [diets];
+    //   };
+    // *NOT NECESSARY FOR NOW.
+
     return (
         <StyledCardBox>
             {
                 recipes?.map((recipe) => {
+                    // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
                     return (
                         <Card
                             id = {recipe?.id}
