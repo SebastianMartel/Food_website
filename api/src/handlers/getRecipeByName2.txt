@@ -10,7 +10,7 @@ const { findRecipeByNameDB } = require('../controllers/RecipeControllers')
 //__________________________________________________
 
 
-        
+
 const getRecipeByName = async (req, res) => {
 
 // O: validate name received by query, looks through the API and DATABASE and returns the correct recipe(s).
@@ -96,5 +96,4 @@ const getRecipeByName = async (req, res) => {
 }
 
 
-//__________________________________________________
 module.exports = getRecipeByName

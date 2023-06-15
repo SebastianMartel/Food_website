@@ -3,6 +3,9 @@ require('dotenv')
 
 const { API_KEY } = process.env
 const { createDietDB } = require('../controllers/DietControllers')
+//__________________________________________________
+
+
 
 // FIX: avoid creating new recipes in the DB when they already has been created.
 
@@ -29,4 +32,5 @@ const getDiet = async (req, res) => {
 }
 
 
+//__________________________________________________
 module.exports = getDiet

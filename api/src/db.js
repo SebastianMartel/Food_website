@@ -5,6 +5,8 @@ const path = require('path');
 // doesn't work: require('dotenv').config();
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+//__________________________________________________
+
 
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
@@ -42,6 +44,7 @@ Recipe.belongsToMany(Diet, {through: 'recipes_diets', timestamps: false})
 Diet.belongsToMany(Recipe, {through: 'recipes_diets', timestamps: false})
 
 
+//__________________________________________________
 module.exports = {
   ...sequelize.models, // const { Product, User } = require('./db.js');
   conn: sequelize,     // const { conn } = require('./db.js');

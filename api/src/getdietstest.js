@@ -1,4 +1,6 @@
 const json = require('./json.json');
+//__________________________________________________
+
 
 const uniqueDiets = [...new Set(json.results.flatMap(item => item.diets))];
 

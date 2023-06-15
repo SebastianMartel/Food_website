@@ -1,5 +1,6 @@
 const { Diet } = require('../db')
-const json = require('../json.json') // to test allDiets const.
+// const json = require('../json.json') // to test allDiets const.
+//__________________________________________________
 
 
 
@@ -37,6 +38,7 @@ const findAllDietsDB = async () => {
 
 
 
+//__________________________________________________
 module.exports = {
     createDietDB,
     findAllDietsDB

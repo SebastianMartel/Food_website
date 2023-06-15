@@ -1,4 +1,6 @@
 const { DataTypes } = require('sequelize');
+//__________________________________________________
+
 
 module.exports = (sequelize) => {
     sequelize.define('Recipe', {

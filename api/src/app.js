@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 require('./db.js');
+//__________________________________________________
+
 
 const server = express();
 
@@ -32,4 +34,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
+
+//__________________________________________________
 module.exports = server;

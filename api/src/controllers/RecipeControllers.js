@@ -1,7 +1,10 @@
 const { Recipe, Diet } = require('../db')
 const { Sequelize } = require('sequelize')
+//__________________________________________________
 
-// handle sensitive cases: diet.toLowCase()
+
+
+// handle sensitive cases; use for instance: diet.toLowCase()...
 
 const createRecipeDB = async (recipe, diet) => { // receive diet from parameters.
 
@@ -27,7 +30,7 @@ const createRecipeDB = async (recipe, diet) => { // receive diet from parameters
 }
 
 
-
+// Do I need this one?
 const findRecipeByDietDB = async (id) => {
 
     // get the diet
@@ -57,7 +60,6 @@ const findRecipeByIdDB = async (id) => {
 const findRecipeByNameDB = async (name) => {
 
     try {
-        // adds diets, like with the getRecipeById: const dietsDB = await recipe.getDiets()... but using a different approach:
         const recipe = await Recipe.findAll({
             include: {
                 model: Diet,
@@ -75,6 +77,41 @@ const findRecipeByNameDB = async (name) => {
 
         return recipe
 
+        // OPTION 2, like the one I use in getRecipesById:
+
+        // const recipe = await Recipe.findAll({
+        //     where: {
+        //         title: {
+        //             [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
+        //         }, 
+        //     }
+        // })
+
+        // if (recipe) { /* this is to check if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
+
+        //     {
+        //             "error": "recipe.getDiets is not a function"
+        //         }
+        //     */
+
+        //     const dietsDB = await recipe.getDiets()
+        //     const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
+        //     for (const diet of dietsDB) {
+        //         associatedDiets.push(diet.name)
+        //     }
+        //     const newRecipe = { // adds the diets to the object.
+        //         id: recipe.id,
+        //         title: recipe.title,
+        //         image: recipe.image,
+        //         summary: recipe.summary,
+        //         healthScore: recipe.healthScore,
+        //         stepByStep: recipe.stepByStep,
+        //         diets: associatedDiets // array with ONLY the name of the diets.
+        //     }
+        // }
+
+        // return newRecipe
+
     } catch (error) {
         throw new Error(error.message)
     }
@@ -82,7 +119,7 @@ const findRecipeByNameDB = async (name) => {
 // test:
 // (async () => {
 //     try {
-//       const result = await findRecipeByNameDB("LOMO SALTADO");
+//       const result = await findRecipeByNameDB("LOMO");
 //       console.log(result);
 //     } catch (error) {
 //       console.error(error);
@@ -91,6 +128,7 @@ const findRecipeByNameDB = async (name) => {
 
 
 
+//__________________________________________________
 module.exports = {
     createRecipeDB,
     findRecipeByDietDB,

@@ -1,9 +1,9 @@
-// FIX 36, 55
 const axios = require('axios')
 require('dotenv').config()
 
 const { API_KEY } = process.env
 const { findRecipeByIdDB } = require('../controllers/RecipeControllers')
+//__________________________________________________
 
 
 
@@ -33,14 +33,15 @@ const getRecipeById = async (req, res) => {
             */
 
                 const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
-                // or... I can use these:
+
+            // or... I can use this option to avoid any possible error like he one above:
                 // {include: {
-                //     model: type,
+                //     model: Diet,
                 //     attributes: ["name"],
                 //     through: {
                 //       attributes: []
                 //     }}}
-        
+
                 const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
                 for (const diet of dietsDB) {
                     associatedDiets.push(diet.name)
@@ -74,8 +75,8 @@ const getRecipeById = async (req, res) => {
                 image: data?.image,
                 summary: data?.summary,
                 healthScore: data?.healthScore,
-                stepByStep: data?.analyzedInstructions[0]?.steps, // FIX (later, working in the front): it's showing, unnecessary properties.
-                diets: data?.diets // addded diets.
+                stepByStep: data?.analyzedInstructions[0]?.steps, //FIXED // FIX (later, working in the front): it's showing, unnecessary properties.
+                diets: data?.diets
             }
 
                 return res.status(200).json(recipe)
@@ -89,4 +90,5 @@ const getRecipeById = async (req, res) => {
 }
 
 
+//__________________________________________________
 module.exports = getRecipeById
