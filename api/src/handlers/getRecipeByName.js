@@ -65,6 +65,7 @@ const getRecipeByName = async (req, res) => {
         const filteredResults = results.filter((recipe) => recipe.title.toLowerCase().includes(name.toLowerCase()));
 
         const recipesAPI = filteredResults.map((recipe) => ({
+            id: recipe.id,
             title: recipe?.title,
             image: recipe?.image,
             summary: recipe?.summary,

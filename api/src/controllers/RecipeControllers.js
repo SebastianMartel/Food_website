@@ -55,7 +55,7 @@ const findRecipeByIdDB = async (id) => {
 
 
 const findRecipeByNameDB = async (name) => {
-    
+
     try {
         // adds diets, like with the getRecipeById: const dietsDB = await recipe.getDiets()... but using a different approach:
         const recipe = await Recipe.findAll({
