@@ -38,8 +38,8 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 reduxAllRecipesCopyHealthScore:
                     payload === 'A'
-                    ? reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => a.healthScore - b.healthScore)
-                    : reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => b.healthScore - a.healthScore)
+                    ? reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => b.healthScore - a.healthScore)
+                    : reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => a.healthScore - b.healthScore)
             }
 
         default:
