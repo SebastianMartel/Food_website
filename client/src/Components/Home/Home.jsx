@@ -1,5 +1,6 @@
-import styled from 'styled-components'
-import CardBox from "../Cardbox/Cardbox"
+import styled from 'styled-components';
+import CardBox from "../Cardbox/Cardbox";
+import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
 
@@ -14,7 +15,7 @@ const Headline = styled.div `
 //__________________________________________________
 
 
-export default function Home ( { recipes } ) {
+export default function Home ( { recipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
 
     return (
         <div>
@@ -23,7 +24,8 @@ export default function Home ( { recipes } ) {
                 <button>FILTER</button>
             </Headline>
 
-            <CardBox recipes = {recipes}/>
+            <CardBox recipes = {recipes} allRecipes = {allRecipes} loading = {loading}/>
+            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/>
         </div>
     )
 }

@@ -15,7 +15,7 @@ const StyledCardBox = styled.div `
 //__________________________________________________
 
 
-export default function CardBox ( { recipes } ) {
+export default function CardBox ( { recipes, allRecipes, loading } ) {
 
     // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.
     // const getDiets = (recipe) => {
@@ -26,7 +26,7 @@ export default function CardBox ( { recipes } ) {
 
     return (
         <StyledCardBox>
-            {
+            {/* {
                 recipes?.map((recipe) => {
                     // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
                     return (
@@ -39,6 +39,21 @@ export default function CardBox ( { recipes } ) {
                             steps = {recipe?.stepByStep}
                             diets = {recipe?.diets}
                         />
+                    )
+                })
+            } */}
+            {
+                allRecipes?.map((recipe) => {
+                    return (
+                        <Card
+                        id = {recipe?.id}
+                        title = {recipe?.title}
+                        summary = {recipe?.summary}
+                        image = {recipe?.image}
+                        healthScore = {recipe?.healthScore}
+                        steps = {recipe?.stepByStep}
+                        diets = {recipe?.diets}
+                    />
                     )
                 })
             }
