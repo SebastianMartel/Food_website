@@ -30,7 +30,7 @@ function App () {
     }, [recipes, allRecipes])
 
     useEffect(() => {
-
+        //RETRIEVES ALL THE DIETS FROM THE API
         const fetchRecipes = async () => {
             setLoading(true);
 
