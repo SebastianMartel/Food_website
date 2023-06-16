@@ -13,7 +13,7 @@ import Form from './Components/Form/Form';
 //__________________________________________________
 
 
-export function App ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } ) {
+export function App ( { reduxAllRecipesCopy } ) {
 
     // const [allRecipes, setAllRecipes] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -87,7 +87,7 @@ export function App ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } ) 
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
                 {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
-                <Route path = '/home' element = { <Home reduxAllRecipesCopy = {reduxAllRecipesCopy} reduxAllRecipesCopyHealthScore = {reduxAllRecipesCopyHealthScore}/>}/>
+                <Route path = '/home' element = { <Home reduxAllRecipesCopy = {reduxAllRecipesCopy} />}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
@@ -99,7 +99,7 @@ export function App ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } ) 
 const mapStateToProps = (state) => {
     return {
         reduxAllRecipesCopy : state.reduxAllRecipesCopy,
-        reduxAllRecipesCopyHealthScore : state.reduxAllRecipesCopyHealthScore
+        // reduxAllRecipesCopyHealthScore : state.reduxAllRecipesCopyHealthScore
     }
 }
 

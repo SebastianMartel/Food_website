@@ -1,5 +1,5 @@
 import { connect, useDispatch } from 'react-redux';
-import { sortByName, sortByHealthScore } from '../../Redux/actions';
+import { sortAllRecipes } from '../../Redux/actions';
 
 import styled from 'styled-components';
 import CardBox from "../Cardbox/Cardbox";
@@ -19,17 +19,13 @@ const Headline = styled.div `
 
 
 // export function Home ( { recipes, onlyRecipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
-export function Home ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } ) {
+export function Home ( { reduxAllRecipesCopy } ) {
 
 
     const dispatch = useDispatch()
 
     const handleOrder = (event) => {
-        dispatch(sortByName(event.target.value))
-    }
-
-    const handleHealthScore = (event) => {
-        dispatch(sortByHealthScore(event.target.value))
+        dispatch(sortAllRecipes(event.target.value))
     }
 
     return (
@@ -38,17 +34,17 @@ export function Home ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } )
                 <h1>HOME</h1>
                 <select onChange = {handleOrder}>
                     <option value = 'A'>Name (A-Z)</option>
-                    <option value = 'D'>Name (Z-A)</option>
+                    <option value = 'B'>Name (Z-A)</option>
                 </select>
-                <select onChange = {handleHealthScore}>
-                    <option value = 'A'>More healthy</option>
+                <select onChange = {handleOrder}>
+                    <option value = 'C'>More healthy</option>
                     <option value = 'D'>Less healthy</option>
                 </select>
             </Headline>
 
             {/* <CardBox recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {allRecipes} loading = {loading}/>
             <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/> */}
-            <CardBox reduxAllRecipesCopy = {reduxAllRecipesCopyHealthScore}/>
+            <CardBox reduxAllRecipesCopy = {reduxAllRecipesCopy}/>
 
         </div>
     )
