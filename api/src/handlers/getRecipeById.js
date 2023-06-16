@@ -1,8 +1,10 @@
-const axios = require('axios')
-require('dotenv').config()
+const axios = require('axios');
 
-const { API_KEY } = process.env
-const { findRecipeByIdDB } = require('../controllers/RecipeControllers')
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
+const { API_KEY } = process.env;
+const { findRecipeByIdDB } = require('../controllers/RecipeControllers');
 //__________________________________________________
 
 
@@ -91,4 +93,4 @@ const getRecipeById = async (req, res) => {
 
 
 //__________________________________________________
-module.exports = getRecipeById
+module.exports = getRecipeById;

@@ -40,8 +40,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Relations:
 // Product.hasMany(Reviews);
 
-Recipe.belongsToMany(Diet, {through: 'recipes_diets', timestamps: false})
-Diet.belongsToMany(Recipe, {through: 'recipes_diets', timestamps: false})
+Recipe.belongsToMany(Diet, {through: 'recipes_diets', timestamps: false});
+Diet.belongsToMany(Recipe, {through: 'recipes_diets', timestamps: false});
 
 
 //__________________________________________________

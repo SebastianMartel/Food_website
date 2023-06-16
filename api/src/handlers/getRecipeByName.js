@@ -1,12 +1,12 @@
-const axios = require('axios')
+const axios = require('axios');
 // require('dotenv').config()
 
 // just in case: to retrieve the API_KEY without problems.
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
-const { API_KEY } = process.env
-const { findRecipeByNameDB } = require('../controllers/RecipeControllers')
+const { API_KEY } = process.env;
+const { findRecipeByNameDB } = require('../controllers/RecipeControllers');
 //__________________________________________________
 
 
@@ -97,4 +97,4 @@ const getRecipeByName = async (req, res) => {
 
 
 //__________________________________________________
-module.exports = getRecipeByName
+module.exports = getRecipeByName;

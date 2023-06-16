@@ -1,4 +1,4 @@
-const { createRecipeDB } = require('../controllers/RecipeControllers')
+const { createRecipeDB } = require('../controllers/RecipeControllers');
 //__________________________________________________
 
 
@@ -23,4 +23,4 @@ const postRecipe = async (req, res) => {
 
 
 //__________________________________________________
-module.exports = postRecipe
+module.exports = postRecipe;

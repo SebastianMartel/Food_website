@@ -1,8 +1,10 @@
-const axios = require('axios')
-require('dotenv')
+const axios = require('axios');
 
-const { API_KEY } = process.env
-const { createDietDB } = require('../controllers/DietControllers')
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
+const { API_KEY } = process.env;
+const { createDietDB } = require('../controllers/DietControllers');
 //__________________________________________________
 
 
@@ -33,4 +35,4 @@ const getDiet = async (req, res) => {
 
 
 //__________________________________________________
-module.exports = getDiet
+module.exports = getDiet;
