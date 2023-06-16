@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
+import { getAllRecipes } from './Redux/actions';
 
 import './App.css';
 import Landing from './Components/Landing/Landing';
@@ -11,18 +13,19 @@ import Form from './Components/Form/Form';
 //__________________________________________________
 
 
-function App () {
+export function App ( { allRecipes } ) {
 
-    const [allRecipes, setAllRecipes] = useState([]);
+    // const [allRecipes, setAllRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [recipesPerPage] = useState(9);
 
     const [recipes, setRecipes] = useState([]);
-    const [onlyRecipes, setOnlyRecipes] = useState(false)
+    const [onlyRecipes, setOnlyRecipes] = useState(false);
 
     const { pathname } = useLocation();
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(recipes);
@@ -31,17 +34,20 @@ function App () {
 
     useEffect(() => {
         //RETRIEVES ALL THE DIETS FROM THE API
-        const fetchRecipes = async () => {
-            setLoading(true);
+        // const fetchRecipes = async () => {
+        //     setLoading(true);
 
-            const URL = 'http://localhost:3001/recipes/all';
-            const { data } = await axios(URL);
+        //     const URL = 'http://localhost:3001/recipes/all';
+        //     const { data } = await axios(URL);
 
-            setAllRecipes(data);
-            setLoading(false);
-        }
+        //     setAllRecipes(data);
+        //     setLoading(false);
+        // }
 
-        fetchRecipes();
+        // fetchRecipes();
+
+        dispatch(getAllRecipes());
+
 
     }, [])
 
@@ -79,7 +85,7 @@ function App () {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/>
+                <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
@@ -87,6 +93,14 @@ function App () {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        allRecipes : state.allRecipes
+    }
+}
 
 //__________________________________________________
-export default App;
+export default connect (
+    mapStateToProps,
+    null
+)(App)

@@ -25,8 +25,8 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 allRecipesCopy: 
                     payload === 'A'
-                    ? allRecipesCopyCopy.sort((a,b)=> a.id - b.id)
-                    : allRecipesCopyCopy.sort((a,b)=> b.id - a.id)
+                    ? allRecipesCopyCopy.sort((a,b)=> a.title - b.title)
+                    : allRecipesCopyCopy.sort((a,b)=> b.title - a.title)
             }
 
         default:

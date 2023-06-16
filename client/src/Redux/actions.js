@@ -7,7 +7,7 @@ export const HEALTH_SCORE_SORT = 'HEALTH_SCORE_SORT';
 //__________________________________________________
 
 
-export const allRecipes = () => {
+export const getAllRecipes = () => {
 
     return async (dispatch) => {
 
