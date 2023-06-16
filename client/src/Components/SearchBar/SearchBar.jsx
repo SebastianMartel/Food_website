@@ -3,7 +3,7 @@ import { useState } from "react"
 //__________________________________________________
 
 
-export default function SearchBar ( { getRecipeByName } ) {
+export default function SearchBar ( { setSearching, getRecipeByName } ) {
 
 
     const [input, setInput] = useState('')
@@ -18,7 +18,7 @@ export default function SearchBar ( { getRecipeByName } ) {
     return (
         <div>
             <input onChange = {syncInput} value = {input}/>
-            <button onClick = { () => getRecipeByName(input) }>Search</button>
+            <button onClick = { () => {getRecipeByName(input); setSearching(true)} }>Search</button>
         </div>
     )
 }

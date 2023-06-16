@@ -19,7 +19,7 @@ const Headline = styled.div `
 
 
 // export function Home ( { recipes, onlyRecipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
-export function Home ( { reduxAllRecipesCopy } ) {
+export function Home ( { searching, setSearching, reduxAllRecipesCopy, recipesFound } ) {
 
 
     const dispatch = useDispatch()
@@ -31,21 +31,24 @@ export function Home ( { reduxAllRecipesCopy } ) {
     const handleFilter = (event) => {
         dispatch(filterAllRecipes(event.target.value))
     }
-// diets working with: 'gluten free', 'dairy free', 'lacto ovo vegetarian', 'vegan', 'paleolithic', 'primal', 'whole 30', 'pescatarian', 'ketogenic', 'fodmap friendly'.
+
+    const onSearch = () => {
+        setSearching(false)
+    }
 
     return (
         <div>
             <Headline>
                 <h1>HOME</h1>
-                <select onChange = {handleOrder}>
+                <select onChange = {(event) => {handleOrder(event); onSearch()}}>
                     <option value = 'A'>Name (A-Z)</option>
                     <option value = 'B'>Name (Z-A)</option>
                 </select>
-                <select onChange = {handleOrder}>
+                <select onChange = {(event) => {handleOrder(event); onSearch()}}>
                     <option value = 'C'>More healthy</option>
                     <option value = 'D'>Less healthy</option>
                 </select>
-                <select onChange = {handleFilter}>
+                <select onChange = {(event) => {handleFilter(event); onSearch()}}>
                     <option value = 'All'>All</option>
                     <option value = 'gluten free'>gluten free</option>
                     <option value = 'dairy free'>dairy free</option>
@@ -58,7 +61,7 @@ export function Home ( { reduxAllRecipesCopy } ) {
                     <option value = 'ketogenic'>ketogenic</option>
                     <option value = 'fodmap friendly'>fodmap friendly</option>
                 </select>
-                <select onChange = {handleFilter}>
+                <select onChange = {(event) => {handleFilter(event); onSearch()}}>
                     <option value = 'DB'>Your own recipes</option>
                     <option value = 'API'>By others</option>
                 </select>
@@ -68,7 +71,7 @@ export function Home ( { reduxAllRecipesCopy } ) {
 
             {/* <CardBox recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {allRecipes} loading = {loading}/>
             <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/> */}
-            <CardBox reduxAllRecipesCopy = {reduxAllRecipesCopy}/>
+            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} recipesFound = {recipesFound} />
 
         </div>
     )

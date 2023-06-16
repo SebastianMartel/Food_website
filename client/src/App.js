@@ -1,3 +1,5 @@
+// uncomment dispatch, to continue working
+
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -20,8 +22,8 @@ export function App ( { reduxAllRecipesCopy } ) {
     // const [currentPage, setCurrentPage] = useState(1);
     // const [recipesPerPage] = useState(9);
 
-    // const [recipes, setRecipes] = useState([]);
-    // const [onlyRecipes, setOnlyRecipes] = useState(false);
+    const [searching, setSearching] = useState(false)
+    const [recipesFound, setRecipesFound] = useState([]);
 
     const { pathname } = useLocation();
 
@@ -48,8 +50,8 @@ export function App ( { reduxAllRecipesCopy } ) {
 
         // REDUX OPTION:
         // dispatch(getAllRecipes());
-
-        }, [])
+        console.log(searching)
+        }, [searching])
 
 
         // // get current posts:
@@ -62,31 +64,31 @@ export function App ( { reduxAllRecipesCopy } ) {
         // }
 
         // asks for the recipes that matches the name:
-        // const getRecipeByName = async (name) => {
+        // maybe send this to an action creator...
+        const getRecipeByName = async (name) => {
 
-        //     try {
+            try {
 
-        //         const URL = 'http://localhost:3001/recipes';
-        //         const { data } = await axios(`${URL}?name=${name}`);
-        //         const recipesFound = data; // recipesFound is an array
-        //         setOnlyRecipes(true)
-        //         setRecipes(recipesFound);
+                const URL = 'http://localhost:3001/recipes';
+                const { data } = await axios(`${URL}?name=${name}`);
+                const recipesFound = data; // recipesFound is an array
+                setRecipesFound(recipesFound);
 
-        //     } catch (error) {
-        //         throw new Error(error.message);
-        //     }
-        // }
+            } catch (error) {
+                throw new Error(error.message);
+            }
+        }
 
 
     return (
         <div className="App">
             {
-                pathname !== '/' && <NavBar /*getRecipeByName = {getRecipeByName} setOnlyRecipes = {setOnlyRecipes}*//>
+                pathname !== '/' && <NavBar setSearching = {setSearching} getRecipeByName = {getRecipeByName} />
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
                 {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
-                <Route path = '/home' element = { <Home reduxAllRecipesCopy = {reduxAllRecipesCopy} />}/>
+                <Route path = '/home' element = { <Home searching = {searching} setSearching = {setSearching} reduxAllRecipesCopy = {reduxAllRecipesCopy} recipesFound = {recipesFound}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
