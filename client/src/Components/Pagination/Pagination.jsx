@@ -3,7 +3,7 @@ export default function Pagination ( { recipesPerPage, totalRecipes, paginate } 
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) {
-        pageNumbers.push(i)
+        pageNumbers.push(i);
     }
 
     return (

@@ -15,7 +15,7 @@ const StyledCardBox = styled.div `
 //__________________________________________________
 
 
-export default function CardBox ( { recipes, allRecipes, loading } ) {
+export default function CardBox ( { recipes, onlyRecipes, allRecipes, loading } ) {
 
     // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.
     // const getDiets = (recipe) => {
@@ -24,13 +24,38 @@ export default function CardBox ( { recipes, allRecipes, loading } ) {
     //   };
     // *NOT NECESSARY FOR NOW.
 
-    return (
-        <StyledCardBox>
-            {/* {
-                recipes?.map((recipe) => {
-                    // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
-                    return (
-                        <Card
+    if (onlyRecipes) {
+        return (
+            <StyledCardBox>
+                {
+                    recipes?.map((recipe) => {
+                        // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
+                        return (
+                            <Card
+                                id = {recipe?.id}
+                                title = {recipe?.title}
+                                summary = {recipe?.summary}
+                                image = {recipe?.image}
+                                healthScore = {recipe?.healthScore}
+                                steps = {recipe?.stepByStep}
+                                diets = {recipe?.diets}
+                            />
+                        )
+                    })
+                }
+            </StyledCardBox>
+        )
+    }
+
+    if (!onlyRecipes) {
+        return (
+            <StyledCardBox>
+                { loading && <h2>Loading...</h2>}
+
+                {
+                    allRecipes?.map((recipe) => {
+                        return (
+                            <Card
                             id = {recipe?.id}
                             title = {recipe?.title}
                             summary = {recipe?.summary}
@@ -39,24 +64,11 @@ export default function CardBox ( { recipes, allRecipes, loading } ) {
                             steps = {recipe?.stepByStep}
                             diets = {recipe?.diets}
                         />
-                    )
-                })
-            } */}
-            {
-                allRecipes?.map((recipe) => {
-                    return (
-                        <Card
-                        id = {recipe?.id}
-                        title = {recipe?.title}
-                        summary = {recipe?.summary}
-                        image = {recipe?.image}
-                        healthScore = {recipe?.healthScore}
-                        steps = {recipe?.stepByStep}
-                        diets = {recipe?.diets}
-                    />
-                    )
-                })
-            }
-        </StyledCardBox>
-    )
-}
+                        )
+                    })
+                }
+            </StyledCardBox>
+        )
+    }
+
+};

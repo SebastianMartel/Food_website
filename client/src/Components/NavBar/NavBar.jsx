@@ -15,12 +15,14 @@ const StyledNavBar = styled.div `
 //__________________________________________________
 
 
-export default function NavBar ( { getRecipeByName } ) {
+export default function NavBar ( { getRecipeByName, setOnlyRecipes } ) {
 
     return (
         <StyledNavBar>
             <SearchBar getRecipeByName = {getRecipeByName}/>
-            <h1>NOVA</h1>
+            <NavLink to = '/home'>
+                <h1 onClick = {() => setOnlyRecipes(false)}>NOVA</h1>
+            </NavLink>
             <NavLink to = '/form'>
                 <button>CREATE RECIPE</button>
             </NavLink>

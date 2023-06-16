@@ -15,7 +15,7 @@ const Headline = styled.div `
 //__________________________________________________
 
 
-export default function Home ( { recipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
+export default function Home ( { recipes, onlyRecipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
 
     return (
         <div>
@@ -24,7 +24,7 @@ export default function Home ( { recipes, allRecipes, loading, recipesPerPage, t
                 <button>FILTER</button>
             </Headline>
 
-            <CardBox recipes = {recipes} allRecipes = {allRecipes} loading = {loading}/>
+            <CardBox recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {allRecipes} loading = {loading}/>
             <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/>
         </div>
     )
