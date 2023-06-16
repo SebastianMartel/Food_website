@@ -32,11 +32,10 @@ function App () {
         const fetchRecipes = async () => {
             setLoading(true);
 
-            const URL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`;
-            const { data } = await axios(URL);
-            const { results } = data;
+            const URL = 'http://localhost:3001/recipes/all'
+            const { data } = await axios(URL)
 
-            setAllRecipes(results);
+            setAllRecipes(data);
             setLoading(false);
         }
 
