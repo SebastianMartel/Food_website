@@ -3,9 +3,14 @@ const { Sequelize } = require('sequelize')
 //__________________________________________________
 
 
+const findAllRecipesDB = async () => {
+
+    const recipesDB = await Recipe.findAll()
+
+        return recipesDB
+}
 
 // handle sensitive cases; use for instance: diet.toLowCase()...
-
 const createRecipeDB = async (recipe, diet) => { // receive diet from parameters.
 
     try {
@@ -130,6 +135,7 @@ const findRecipeByNameDB = async (name) => {
 
 //__________________________________________________
 module.exports = {
+    findAllRecipesDB,
     createRecipeDB,
     findRecipeByDietDB,
     findRecipeByIdDB,
