@@ -4,63 +4,74 @@ import { ALL_RECIPES ,FILTER, SORT } from "./actions";
 
     const initialState = {
         reduxAllRecipes : [],
-        reduxAllRecipesCopy: [],
-        // reduxAllRecipesCopyHealthScore: []
+        reduxAllRecipesCopy: []
     }
 
 
 const reducer = (state = initialState, { type, payload }) => {
 
     switch (type) {
+
         case ALL_RECIPES:
             return {
                 ...state,
                 reduxAllRecipes: payload,
                 reduxAllRecipesCopy: payload,
-                // reduxAllRecipesCopyHealthScore: payload
             }
 
         case SORT:
-            const reduxAllRecipesCopyName = [...state.reduxAllRecipesCopy]
+            const reduxAllRecipesCopyOrder = [...state.reduxAllRecipesCopy];
 
             switch (payload) {
                 case 'A':
-                    return {
-                        ...state,
-                        reduxAllRecipesCopy: reduxAllRecipesCopyName.sort((a, b) => a.title.localeCompare(b.title))
-                    }
+                return {
+                    ...state,
+                    reduxAllRecipes: reduxAllRecipesCopyOrder.sort((a, b) => a.title.localeCompare(b.title))
+                }
                 case 'B':
                     return {
                         ...state,
-                        reduxAllRecipesCopy: reduxAllRecipesCopyName.sort((a, b) => b.title.localeCompare(a.title))
+                        reduxAllRecipes: reduxAllRecipesCopyOrder.sort((a, b) => b.title.localeCompare(a.title))
                     }
                 case 'C':
                     return {
                         ...state,
-                        reduxAllRecipesCopy: reduxAllRecipesCopyName.sort((a, b) => b.healthScore - a.healthScore)
+                        reduxAllRecipes: reduxAllRecipesCopyOrder.sort((a, b) => b.healthScore - a.healthScore)
                     }
                 case 'D':
                     return {
                         ...state,
-                        reduxAllRecipesCopy: reduxAllRecipesCopyName.sort((a, b) => a.healthScore - b.healthScore)
+                        reduxAllRecipes: reduxAllRecipesCopyOrder.sort((a, b) => a.healthScore - b.healthScore)
                     }
                 default:
                     return {
                         ...state,
-                        reduxAllRecipesCopyName
                     }
-                }
+            }
 
-        // case HEALTH_SCORE_SORT:
-        //     const reduxAllRecipesCopyHealthScoreCopy = [...state.reduxAllRecipesCopyHealthScore]
+        case FILTER:
+            const reduxAllRecipesCopyFilter = state.reduxAllRecipesCopy.filter((recipe) => recipe.diets.includes(payload)); // recipes.diets is an array.
 
-        //     return {
-        //         ...state,
-        //         reduxAllRecipesCopyHealthScore:
-        //             payload === 'A'
-        //             ? reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => b.healthScore - a.healthScore)
-        //             : reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => a.healthScore - b.healthScore)
-        //     }
+            return {
+                ...state,
+                reduxAllRecipes:
+                payload === 'All'
+                ? [...state.reduxAllRecipesCopy]
+                : reduxAllRecipesCopyFilter
+            }
+
+            // const reduxAllRecipesCopyFilter = [...state.reduxAllRecipesCopy].filter((recipe) => recipe.diets.includes(payload))
+            // switch (payload) {
+            //     case 'All':
+            //         return {
+            //             ...state,
+            //         }
+            //     default:
+            //         return {
+            //             ...state,
+            //             reduxAllRecipesCopy: reduxAllRecipesCopyFilter
+            //         }
+            // }
 
         default:
             return {

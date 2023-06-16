@@ -33,8 +33,7 @@ export function App ( { reduxAllRecipesCopy } ) {
     }, [/*recipes,*/ reduxAllRecipesCopy])
 
     useEffect(() => {
-        // REACT STATE OPTION:
-        //RETRIEVES ALL THE DIETS FROM THE API
+        // REACT STATE OPTION: RETRIEVES ALL THE DIETS FROM THE API
         // const fetchRecipes = async () => {
         //     setLoading(true);
 
@@ -98,8 +97,7 @@ export function App ( { reduxAllRecipesCopy } ) {
 
 const mapStateToProps = (state) => {
     return {
-        reduxAllRecipesCopy : state.reduxAllRecipesCopy,
-        // reduxAllRecipesCopyHealthScore : state.reduxAllRecipesCopyHealthScore
+        reduxAllRecipesCopy : state.reduxAllRecipes,
     }
 }
 

@@ -27,13 +27,6 @@ export const getAllRecipes = () => {
     };
   };
 
-export const filter = (filter) => {
-    return {
-        type: FILTER,
-        payload: filter
-    }
-}
-
 export const sortAllRecipes = (name) => {
     return {
         type: SORT,
@@ -41,12 +34,12 @@ export const sortAllRecipes = (name) => {
     }
 }
 
-// export const sortByHealthScore = (healthScore) => {
-//     return {
-//         type: HEALTH_SCORE_SORT,
-//         payload: healthScore
-//     }
-// }
+export const filterAllRecipes = (filter) => {
+    return {
+        type: FILTER,
+        payload: filter
+    }
+}
 
 
 //__________________________________________________
