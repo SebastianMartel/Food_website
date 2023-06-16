@@ -47,7 +47,7 @@ export function App ( { reduxAllRecipesCopy } ) {
         // fetchRecipes();
 
         // REDUX OPTION:
-        dispatch(getAllRecipes());
+        // dispatch(getAllRecipes());
 
         }, [])
 

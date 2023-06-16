@@ -13,12 +13,12 @@ export const getAllRecipes = () => {
     return async (dispatch) => {
 
         try {
-            // const URL = 'http://localhost:3001/recipes/all';
-            // const { data } = await axios(URL);
+            const URL = 'http://localhost:3001/recipes/all';
+            const { data } = await axios(URL);
 
         dispatch({
             type: ALL_RECIPES,
-            payload: json.results
+            payload: data
         });
 
         } catch (error) {

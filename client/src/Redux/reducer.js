@@ -7,7 +7,7 @@ import { ALL_RECIPES ,FILTER, SORT } from "./actions";
         reduxAllRecipesCopy: [],
         filterCriteria: "All",
     };
-  
+
 
 const reducer = (state = initialState, { type, payload }) => {
 
@@ -65,7 +65,7 @@ const reducer = (state = initialState, { type, payload }) => {
             } else if (payload === "DB") {
                 filterRecipes = state.reduxAllRecipesCopy.filter((recipe) => typeof recipe.id === "string");
             } else {
-                filterRecipes = state.reduxAllRecipesCopy.filter((recipe) =>recipe.diets.includes(payload));
+                filterRecipes = state.reduxAllRecipesCopy.filter((recipe) =>recipe.diets?.includes(payload));
             }
 
             return {
