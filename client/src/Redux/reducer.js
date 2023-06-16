@@ -3,8 +3,9 @@ import { ALL_RECIPES ,FILTER, NAME_SORT, HEALTH_SCORE_SORT } from "./actions";
 
 
     const initialState = {
-        allRecipes : [],
-        allRecipesCopy: []
+        reduxAllRecipes : [],
+        reduxAllRecipesCopy: [],
+        reduxAllRecipesCopyHealthScore: []
     }
 
 
@@ -14,19 +15,31 @@ const reducer = (state = initialState, { type, payload }) => {
         case ALL_RECIPES:
             return {
                 ...state,
-                allRecipes: payload,
-                allRecipesCopy: payload
+                reduxAllRecipes: payload,
+                reduxAllRecipesCopy: payload,
+                reduxAllRecipesCopyHealthScore: payload
             }
 
         case NAME_SORT:
-            const allRecipesCopyCopy = [...state.allRecipesCopy]
+            const reduxAllRecipesCopyName = [...state.reduxAllRecipesCopy]
 
             return {
                 ...state,
-                allRecipesCopy: 
+                reduxAllRecipesCopy:
                     payload === 'A'
-                    ? allRecipesCopyCopy.sort((a,b)=> a.title - b.title)
-                    : allRecipesCopyCopy.sort((a,b)=> b.title - a.title)
+                    ? reduxAllRecipesCopyName.sort((a, b) => a.title.localeCompare(b.title))
+                    : reduxAllRecipesCopyName.sort((a, b) => b.title.localeCompare(a.title))
+            }
+
+        case HEALTH_SCORE_SORT:
+            const reduxAllRecipesCopyHealthScoreCopy = [...state.reduxAllRecipesCopyHealthScore]
+
+            return {
+                ...state,
+                reduxAllRecipesCopyHealthScore:
+                    payload === 'A'
+                    ? reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => a.healthScore - b.healthScore)
+                    : reduxAllRecipesCopyHealthScoreCopy.sort((a, b) => b.healthScore - a.healthScore)
             }
 
         default:

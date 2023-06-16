@@ -13,26 +13,27 @@ import Form from './Components/Form/Form';
 //__________________________________________________
 
 
-export function App ( { allRecipes } ) {
+export function App ( { reduxAllRecipesCopy, reduxAllRecipesCopyHealthScore } ) {
 
     // const [allRecipes, setAllRecipes] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [recipesPerPage] = useState(9);
+    // const [loading, setLoading] = useState(false);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [recipesPerPage] = useState(9);
 
-    const [recipes, setRecipes] = useState([]);
-    const [onlyRecipes, setOnlyRecipes] = useState(false);
+    // const [recipes, setRecipes] = useState([]);
+    // const [onlyRecipes, setOnlyRecipes] = useState(false);
 
     const { pathname } = useLocation();
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(recipes);
-        console.log(allRecipes);
-    }, [recipes, allRecipes])
+        // console.log(recipes);
+        console.log(reduxAllRecipesCopy);
+    }, [/*recipes,*/ reduxAllRecipesCopy])
 
     useEffect(() => {
+        // REACT STATE OPTION:
         //RETRIEVES ALL THE DIETS FROM THE API
         // const fetchRecipes = async () => {
         //     setLoading(true);
@@ -46,46 +47,47 @@ export function App ( { allRecipes } ) {
 
         // fetchRecipes();
 
+        // REDUX OPTION:
         dispatch(getAllRecipes());
 
+        }, [])
 
-    }, [])
 
-
-        // get current posts:
-        const indexOfLastRecipe = currentPage * recipesPerPage;
-        const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-        const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-        // changes the page:
-        const paginate = (pageNumber) => {
-            setCurrentPage(pageNumber);
-        }
+        // // get current posts:
+        // const indexOfLastRecipe = currentPage * recipesPerPage;
+        // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+        // const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+        // // changes the page:
+        // const paginate = (pageNumber) => {
+        //     setCurrentPage(pageNumber);
+        // }
 
         // asks for the recipes that matches the name:
-        const getRecipeByName = async (name) => {
+        // const getRecipeByName = async (name) => {
 
-            try {
+        //     try {
 
-                const URL = 'http://localhost:3001/recipes';
-                const { data } = await axios(`${URL}?name=${name}`);
-                const recipesFound = data; // recipesFound is an array
-                setOnlyRecipes(true)
-                setRecipes(recipesFound);
+        //         const URL = 'http://localhost:3001/recipes';
+        //         const { data } = await axios(`${URL}?name=${name}`);
+        //         const recipesFound = data; // recipesFound is an array
+        //         setOnlyRecipes(true)
+        //         setRecipes(recipesFound);
 
-            } catch (error) {
-                throw new Error(error.message);
-            }
-        }
+        //     } catch (error) {
+        //         throw new Error(error.message);
+        //     }
+        // }
 
 
     return (
         <div className="App">
             {
-                pathname !== '/' && <NavBar getRecipeByName = {getRecipeByName} setOnlyRecipes = {setOnlyRecipes}/>
+                pathname !== '/' && <NavBar /*getRecipeByName = {getRecipeByName} setOnlyRecipes = {setOnlyRecipes}*//>
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/>
+                {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
+                <Route path = '/home' element = { <Home reduxAllRecipesCopy = {reduxAllRecipesCopy} reduxAllRecipesCopyHealthScore = {reduxAllRecipesCopyHealthScore}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
@@ -93,11 +95,14 @@ export function App ( { allRecipes } ) {
     );
 }
 
+
 const mapStateToProps = (state) => {
     return {
-        allRecipes : state.allRecipes
+        reduxAllRecipesCopy : state.reduxAllRecipesCopy,
+        reduxAllRecipesCopyHealthScore : state.reduxAllRecipesCopyHealthScore
     }
 }
+
 
 //__________________________________________________
 export default connect (
