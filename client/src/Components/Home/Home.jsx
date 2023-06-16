@@ -11,7 +11,7 @@ const Headline = styled.div `
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20rem;
+    gap: 10rem;
 
     padding: 1rem;
 `
@@ -57,6 +57,10 @@ export function Home ( { reduxAllRecipesCopy } ) {
                     <option value = 'pescatarian'>pescatarian</option>
                     <option value = 'ketogenic'>ketogenic</option>
                     <option value = 'fodmap friendly'>fodmap friendly</option>
+                </select>
+                <select onChange = {handleFilter}>
+                    <option value = 'DB'>Your own recipes</option>
+                    <option value = 'API'>By others</option>
                 </select>
             </Headline>
 
