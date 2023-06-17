@@ -1,4 +1,4 @@
-// uncomment dispatch, to continue working
+// uncomment dispatch, to continue working.
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -87,7 +87,7 @@ export function App ( { reduxAllRecipesCopy } ) {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} asdf = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
+                {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} currentRecipes = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
                 <Route path = '/home' element = { <Home searching = {searching} setSearching = {setSearching} reduxAllRecipesCopy = {reduxAllRecipesCopy} recipesFound = {recipesFound}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>

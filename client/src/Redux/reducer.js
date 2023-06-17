@@ -1,4 +1,4 @@
-import { ALL_RECIPES ,FILTER, SORT } from "./actions";
+import { ALL_RECIPES, SEARCH, FILTER, SORT } from "./actions";
 //__________________________________________________
 
 
@@ -12,14 +12,45 @@ import { ALL_RECIPES ,FILTER, SORT } from "./actions";
 const reducer = (state = initialState, { type, payload }) => {
 
     switch (type) {
-        case ALL_RECIPES:
+        
+    /**/case ALL_RECIPES:
             return {
                 ...state,
                 reduxAllRecipes: payload,
                 reduxAllRecipesCopy: payload,
             };
 
-        case SORT:
+    /**/case SEARCH:
+            let filteredRecipesSearch = [...state.reduxAllRecipesCopy];
+
+            if (state.filterCriteria !== "All") {
+                if (state.filterCriteria === "API") {
+                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => typeof recipe.id === "number");
+                } else if (state.filterCriteria === "DB") {
+                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => typeof recipe.id === "string");
+                } else {
+                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => recipe.diets?.includes(state.filterCriteria));
+                }
+            }
+          
+            let sortedRecipesSearch = filteredRecipesSearch;
+          
+            if (payload === "A") {
+                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (payload === "B") {
+                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => b.title.localeCompare(a.title));
+            } else if (payload === "C") {
+                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => b.healthScore - a.healthScore);
+            } else if (payload === "D") {
+                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => a.healthScore - b.healthScore);
+            }
+          
+            return {
+              ...state,
+              reduxAllRecipes: sortedRecipesSearch,
+          };
+
+    /**/case SORT:
             const reduxAllRecipesCopyOrder = [...state.reduxAllRecipesCopy];
             let sortedRecipes;
 
@@ -54,7 +85,7 @@ const reducer = (state = initialState, { type, payload }) => {
                 reduxAllRecipes: filteredRecipes,
             };
 
-        case FILTER:
+    /**/case FILTER:
             let filterCriteria = payload;
             let filterRecipes = [...state.reduxAllRecipesCopy];
 
@@ -74,7 +105,7 @@ const reducer = (state = initialState, { type, payload }) => {
                 filterCriteria,
             };
 
-        default:
+    /**/default:
             return state;
     }
 };

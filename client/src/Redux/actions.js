@@ -1,9 +1,11 @@
 import axios from 'axios';
-const json = require('../json.json')
+const json = require('../json.json');
 
 export const ALL_RECIPES = 'ALL_RECIPES';
+export const SEARCH = 'SEARCH';
 export const FILTER = 'FILTER';
 export const SORT = 'SORT';
+export const POST = 'POST';
 // export const HEALTH_SCORE_SORT = 'HEALTH_SCORE_SORT';
 //__________________________________________________
 
@@ -22,10 +24,30 @@ export const getAllRecipes = () => {
         });
 
         } catch (error) {
-            console.error(error);
+            throw new Error(error.message);
         }
     };
-  };
+};
+
+export const getRecipesByName = (name) => {
+
+    return async (dispatch) => {
+
+        try {
+
+            const URL = 'http://localhost:3001/recipes';
+            const { data } = await axios(`${URL}?name=${name}`);
+
+        dispatch({
+            type: SEARCH,
+            payload: data
+        })
+
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
 
 export const sortAllRecipes = (name) => {
     return {
@@ -41,5 +63,23 @@ export const filterAllRecipes = (filter) => {
     }
 }
 
+export const postRecipes = (recipe) => {
+    
+    return async (dispatch) => {
+
+        try {
+            const URL = 'http://localhost:3001/recipes';
+            const { data } = axios.post(URL, recipe)
+            
+            dispatch({
+                type: POST,
+                payload: data
+            })
+
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
 
 //__________________________________________________
