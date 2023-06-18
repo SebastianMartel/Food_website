@@ -18,8 +18,8 @@ const Headline = styled.div `
 //__________________________________________________
 
 
-// export function Home ( { recipes, onlyRecipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
-export function Home ( { searching, reduxAllRecipesCopy, searchResults } ) {
+// export function Home ( { loading, recipesPerPage, totalRecipes, paginate } ) {
+export function Home ( { searching, reduxAllRecipesCopy, currentAllRecipes, searchResults, currentSearchResults, recipesPerPage, paginate } ) {
 
 
     const dispatch = useDispatch()
@@ -67,9 +67,8 @@ export function Home ( { searching, reduxAllRecipesCopy, searchResults } ) {
             <p>{reduxAllRecipesCopy?.length}</p>
             <p>{searchResults?.length}</p>
 
-            {/* <CardBox recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {allRecipes} loading = {loading}/>
-            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/> */}
-            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults}/>
+            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {reduxAllRecipesCopy.length} paginate = {paginate}/>
+            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
 
         </div>
     )
