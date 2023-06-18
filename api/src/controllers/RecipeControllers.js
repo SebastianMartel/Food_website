@@ -2,12 +2,44 @@ const { Recipe, Diet } = require('../db')
 const { Sequelize } = require('sequelize')
 //__________________________________________________
 
-
+// add diets:
 const findAllRecipesDB = async () => {
 
-    const recipesDB = await Recipe.findAll()
+    try {
 
-        return recipesDB
+        const recipes = await Recipe.findAll()
+
+        if (recipes) { 
+
+            const recipesDB = []
+
+            for (const recipe of recipes) {
+                const dietsDB = await recipe.getDiets() // retrieves all the diets of each recipe found...
+                
+                const associatedDiets = []
+
+                for (const diet of dietsDB) {
+                    associatedDiets.push(diet.dataValues.name) // all the 'diets found' is actually a series of arrays with and object 'Diet'
+                }
+
+                recipeAndDiet = {
+                    id: recipe.id,
+                    title: recipe.title,
+                    image: recipe.image,
+                    summary: recipe.summary,
+                    healthScore: recipe.healthScore,
+                    stepByStep: recipe.stepByStep,
+                    diets: associatedDiets
+                }
+                recipesDB.push(recipeAndDiet)
+            }
+
+            return recipesDB
+        }
+
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }
 
 // handle sensitive cases; use for instance: diet.toLowCase()...
