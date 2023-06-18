@@ -1,6 +1,12 @@
+@font-face {
+  font-family: 'source-sans-pro';
+  src: url('./Media//source-sans-pro/SourceSansPro-Regular.otf') format('opentype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'source-sans-pro', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

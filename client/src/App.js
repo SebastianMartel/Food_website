@@ -40,6 +40,8 @@ export function App ( { allRecipes, searchResults } ) {
     }
 
 
+
+
     useEffect(() => {
         console.log(allRecipes);
     }, [allRecipes])

@@ -21,7 +21,7 @@ export default function NavBar ( { setSearching } ) {
         <StyledNavBar>
             <SearchBar setSearching = {setSearching}/>
             <NavLink to = '/home'>
-                <h1 onClick = {() => {setSearching(false)}}>NOVA</h1>
+                <h1 onClick = {() => {setSearching(false)}}>recipes</h1>
             </NavLink>
             <NavLink to = '/form'>
                 <button>CREATE RECIPE</button>

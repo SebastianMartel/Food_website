@@ -1,0 +1,87 @@
+.Landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url("../../Media/landing.jpg");
+    height: 100vh;
+    margin: 0;
+}
+
+.welcome {
+    color: black;
+
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.mainButton {
+    height: 70px;
+    width: 25rem;
+    padding: 5px;
+
+    font-family: inherit;
+    font-size: 25px;
+    font-weight: 900;
+    color: #EFE6DD;
+
+    border:#85BAA1;
+    border-radius: 7px;
+    background-color: #85BAA1;
+    animation: bgColor 7000ms infinite;
+}
+
+@keyframes bgColor {
+    0% {
+        background-color: #85BAA1;
+    }
+    20% {
+        background-color: #1D7874;
+    }
+    40% {
+        background-color: #F28F3B;
+    }
+    60% {
+        background-color: #BBCE8A;
+    }
+    80% {
+        background-color: #C8553D;
+
+    }
+    100% {
+        background-color: #85BAA1;
+    }
+}
+
+/* @keyframes bgColor {
+    0% {
+        background-color: #85BAA1;
+    }
+    20% {
+        background-color: #C8FFBE;
+    }
+    40% {
+        background-color: #F28F3B;
+    }
+    60% {
+        background-color: #FFD5C2;
+    }
+    80% {
+        background-color: #C8553D;
+
+    }
+    100% {
+        background-color: #85BAA1;
+    }
+} */
+
+.mainButton:hover {
+    cursor: pointer;
+    animation-name: hoverAnimation;
+    background-color: #659157;
+}
+
+body {
+    padding: 0
+}
