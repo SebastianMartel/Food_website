@@ -3,112 +3,115 @@ import { ALL_RECIPES, SEARCH, FILTER, SORT } from "./actions";
 
 
     const initialState = {
-        reduxAllRecipes: [],
-        reduxAllRecipesCopy: [],
-        filterCriteria: "All",
+        allRecipes: [],
+        allRecipesCopy: [],
+        searchResults: [],
+        searchResultsCopy: [],
     };
 
 
 const reducer = (state = initialState, { type, payload }) => {
 
+    let sortedRecipes;
+    let sortedSearchResults;
+
     switch (type) {
-        
-    /**/case ALL_RECIPES:
+        case ALL_RECIPES:
             return {
                 ...state,
-                reduxAllRecipes: payload,
-                reduxAllRecipesCopy: payload,
+                allRecipes: payload,
+                allRecipesCopy: payload,
             };
-
-    /**/case SEARCH:
-            let filteredRecipesSearch = [...state.reduxAllRecipesCopy];
-
-            if (state.filterCriteria !== "All") {
-                if (state.filterCriteria === "API") {
-                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => typeof recipe.id === "number");
-                } else if (state.filterCriteria === "DB") {
-                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => typeof recipe.id === "string");
-                } else {
-                    filteredRecipesSearch = filteredRecipesSearch.filter((recipe) => recipe.diets?.includes(state.filterCriteria));
-                }
-            }
-          
-            let sortedRecipesSearch = filteredRecipesSearch;
-          
-            if (payload === "A") {
-                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => a.title.localeCompare(b.title));
-            } else if (payload === "B") {
-                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => b.title.localeCompare(a.title));
-            } else if (payload === "C") {
-                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => b.healthScore - a.healthScore);
-            } else if (payload === "D") {
-                sortedRecipesSearch = filteredRecipesSearch.sort((a, b) => a.healthScore - b.healthScore);
-            }
-          
+    //__________________________________________________
+        case SEARCH:
             return {
-              ...state,
-              reduxAllRecipes: sortedRecipesSearch,
-          };
-
-    /**/case SORT:
-            const reduxAllRecipesCopyOrder = [...state.reduxAllRecipesCopy];
-            let sortedRecipes;
+                ...state,
+                searchResults: [...payload],
+                searchResultsCopy: [...payload],
+            };
+    //__________________________________________________
+        case SORT:
+            sortedRecipes = [...state.allRecipes];
+            sortedSearchResults = [...state.searchResults];
 
             if (payload === "A") {
-                sortedRecipes = reduxAllRecipesCopyOrder.sort((a, b) =>a.title.localeCompare(b.title));
+                sortedRecipes.sort((a, b) => a.title.localeCompare(b.title));
+                sortedSearchResults.sort((a, b) => a.title.localeCompare(b.title));
             } else if (payload === "B") {
-                sortedRecipes = reduxAllRecipesCopyOrder.sort((a, b) =>b.title.localeCompare(a.title));
+                sortedRecipes.sort((a, b) => b.title.localeCompare(a.title));
+                sortedSearchResults.sort((a, b) => b.title.localeCompare(a.title));
             } else if (payload === "C") {
-                sortedRecipes = reduxAllRecipesCopyOrder.sort((a, b) => b.healthScore - a.healthScore);
+                sortedRecipes.sort((a, b) => b.healthScore - a.healthScore);
+                sortedSearchResults.sort((a, b) => b.healthScore - a.healthScore);
             } else if (payload === "D") {
-                sortedRecipes = reduxAllRecipesCopyOrder.sort((a, b) => a.healthScore - b.healthScore);
-            } else {
-                sortedRecipes = reduxAllRecipesCopyOrder;
-            }
-
-            let filteredRecipes = sortedRecipes;
-
-            if (state.filterCriteria !== "All") {
-                if (state.filterCriteria === "API") {
-                    filteredRecipes = sortedRecipes.filter((recipe) => typeof recipe.id === "number");
-
-                } else if (state.filterCriteria === "DB") {
-                    filteredRecipes = sortedRecipes.filter((recipe) => typeof recipe.id === "string");
-
-                } else {
-                    filteredRecipes = sortedRecipes.filter((recipe) =>recipe.diets.includes(state.filterCriteria));
-                }
+                sortedRecipes.sort((a, b) => a.healthScore - b.healthScore);
+                sortedSearchResults.sort((a, b) => a.healthScore - b.healthScore);
             }
 
             return {
                 ...state,
-                reduxAllRecipes: filteredRecipes,
+                allRecipes: sortedRecipes,
+                searchResults: sortedSearchResults,
             };
+    //__________________________________________________
+        case FILTER:
+            const filterCriteria = payload;
+            let filteredRecipes = [...state.allRecipesCopy];
+            let filteredSearchResults = [...state.searchResultsCopy];
 
-    /**/case FILTER:
-            let filterCriteria = payload;
-            let filterRecipes = [...state.reduxAllRecipesCopy];
+            if (filterCriteria !== "All") {
+                filteredRecipes = state.allRecipesCopy.filter((recipe) => {
+                    if (filterCriteria === "API") {
+                        return typeof recipe.id === "number";
+                    } else if (filterCriteria === "DB") {
+                        return typeof recipe.id === "string";
+                    } else {
+                        return recipe.diets?.includes(filterCriteria);
+                    }
+                });
 
-            if (payload === "All") {
-                filterRecipes = state.reduxAllRecipesCopy;
-            } else if (payload === "API") {
-                filterRecipes = state.reduxAllRecipesCopy.filter((recipe) => typeof recipe.id === "number");
-            } else if (payload === "DB") {
-                filterRecipes = state.reduxAllRecipesCopy.filter((recipe) => typeof recipe.id === "string");
-            } else {
-                filterRecipes = state.reduxAllRecipesCopy.filter((recipe) =>recipe.diets?.includes(payload));
+                filteredSearchResults = state.searchResultsCopy.filter((recipe) => {
+                    if (filterCriteria === "API") {
+                        return typeof recipe.id === "number";
+                    } else if (filterCriteria === "DB") {
+                        return typeof recipe.id === "string";
+                    } else {
+                        return recipe.diets?.includes(filterCriteria);
+                    }
+                });
+            }
+
+            sortedRecipes = [...filteredRecipes];
+            sortedSearchResults = [...filteredSearchResults];
+
+            if (payload === "A") {
+                sortedRecipes.sort((a, b) => a.title.localeCompare(b.title));
+                sortedSearchResults.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (payload === "B") {
+                sortedRecipes.sort((a, b) => b.title.localeCompare(a.title));
+                sortedSearchResults.sort((a, b) => b.title.localeCompare(a.title));
+            } else if (payload === "C") {
+                sortedRecipes.sort((a, b) => b.healthScore - a.healthScore);
+                sortedSearchResults.sort((a, b) => b.healthScore - a.healthScore);
+            } else if (payload === "D") {
+                sortedRecipes.sort((a, b) => a.healthScore - b.healthScore);
+                sortedSearchResults.sort((a, b) => a.healthScore - b.healthScore);
             }
 
             return {
                 ...state,
-                reduxAllRecipes: filterRecipes,
-                filterCriteria,
+                allRecipes: sortedRecipes,
+                searchResults: sortedSearchResults,
             };
-
-    /**/default:
+    //__________________________________________________
+        default:
             return state;
     }
 };
+
+
+//__________________________________________________
+export default reducer;
 
 
 
@@ -199,4 +202,4 @@ const reducer = (state = initialState, { type, payload }) => {
 
 
 //__________________________________________________
-export default reducer;
+// export default reducer;

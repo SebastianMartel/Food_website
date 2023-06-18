@@ -16,7 +16,7 @@ const StyledCardBox = styled.div `
 
 
 // export default function CardBox ( { recipes, onlyRecipes, allRecipes, loading } ) {
-export default function CardBox ( { searching, reduxAllRecipesCopy, recipesFound } ) {
+export default function CardBox ( { searching, reduxAllRecipesCopy, searchResults } ) {
 
 
     // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.
@@ -30,7 +30,7 @@ export default function CardBox ( { searching, reduxAllRecipesCopy, recipesFound
         return (
             <StyledCardBox>
                 {
-                    recipesFound?.map((recipe) => {
+                    searchResults?.map((recipe) => {
                         // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
                         return (
                             <Card

@@ -19,7 +19,7 @@ const Headline = styled.div `
 
 
 // export function Home ( { recipes, onlyRecipes, allRecipes, loading, recipesPerPage, totalRecipes, paginate } ) {
-export function Home ( { searching, setSearching, reduxAllRecipesCopy, recipesFound } ) {
+export function Home ( { searching, reduxAllRecipesCopy, searchResults } ) {
 
 
     const dispatch = useDispatch()
@@ -32,23 +32,20 @@ export function Home ( { searching, setSearching, reduxAllRecipesCopy, recipesFo
         dispatch(filterAllRecipes(event.target.value))
     }
 
-    const onSearch = () => {
-        setSearching(false)
-    }
 
     return (
         <div>
             <Headline>
                 <h1>HOME</h1>
-                <select onChange = {(event) => {handleOrder(event); onSearch()}}>
+                <select onChange = {(event) => {handleOrder(event)}}>
                     <option value = 'A'>Name (A-Z)</option>
                     <option value = 'B'>Name (Z-A)</option>
                 </select>
-                <select onChange = {(event) => {handleOrder(event); onSearch()}}>
+                <select onChange = {(event) => {handleOrder(event)}}>
                     <option value = 'C'>More healthy</option>
                     <option value = 'D'>Less healthy</option>
                 </select>
-                <select onChange = {(event) => {handleFilter(event); onSearch()}}>
+                <select onChange = {(event) => {handleFilter(event)}}>
                     <option value = 'All'>All</option>
                     <option value = 'gluten free'>gluten free</option>
                     <option value = 'dairy free'>dairy free</option>
@@ -61,17 +58,18 @@ export function Home ( { searching, setSearching, reduxAllRecipesCopy, recipesFo
                     <option value = 'ketogenic'>ketogenic</option>
                     <option value = 'fodmap friendly'>fodmap friendly</option>
                 </select>
-                <select onChange = {(event) => {handleFilter(event); onSearch()}}>
+                <select onChange = {(event) => {handleFilter(event)}}>
                     <option value = 'DB'>Your own recipes</option>
                     <option value = 'API'>By others</option>
                 </select>
             </Headline>
 
-            <p>{reduxAllRecipesCopy.length}</p>
+            <p>{reduxAllRecipesCopy?.length}</p>
+            <p>{searchResults?.length}</p>
 
             {/* <CardBox recipes = {recipes} onlyRecipes = {onlyRecipes} allRecipes = {allRecipes} loading = {loading}/>
             <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {totalRecipes} paginate = {paginate}/> */}
-            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} recipesFound = {recipesFound} />
+            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults}/>
 
         </div>
     )

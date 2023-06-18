@@ -15,7 +15,7 @@ import Form from './Components/Form/Form';
 //__________________________________________________
 
 
-export function App ( { reduxAllRecipesCopy } ) {
+export function App ( { reduxAllRecipesCopy, searchResults } ) {
 
     // const [allRecipes, setAllRecipes] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export function App ( { reduxAllRecipesCopy } ) {
     // const [recipesPerPage] = useState(9);
 
     const [searching, setSearching] = useState(false)
-    const [recipesFound, setRecipesFound] = useState([]);
+    // const [recipesFound, setRecipesFound] = useState([]);
 
     const { pathname } = useLocation();
 
@@ -65,30 +65,30 @@ export function App ( { reduxAllRecipesCopy } ) {
 
         // asks for the recipes that matches the name:
         // maybe send this to an action creator...
-        const getRecipeByName = async (name) => {
+        // const getRecipeByName = async (name) => {
 
-            try {
+        //     try {
 
-                const URL = 'http://localhost:3001/recipes';
-                const { data } = await axios(`${URL}?name=${name}`);
-                const recipesFound = data; // recipesFound is an array
-                setRecipesFound(recipesFound);
+        //         const URL = 'http://localhost:3001/recipes';
+        //         const { data } = await axios(`${URL}?name=${name}`);
+        //         const recipesFound = data; // recipesFound is an array
+        //         setRecipesFound(recipesFound);
 
-            } catch (error) {
-                throw new Error(error.message);
-            }
-        }
+        //     } catch (error) {
+        //         throw new Error(error.message);
+        //     }
+        // }
 
 
     return (
         <div className="App">
             {
-                pathname !== '/' && <NavBar setSearching = {setSearching} getRecipeByName = {getRecipeByName} />
+                pathname !== '/' && <NavBar setSearching = {setSearching}/>
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
                 {/* <Route path = '/home' element = { <Home allRecipes = {allRecipes} onlyRecipes = {onlyRecipes} currentRecipes = {currentRecipes} loading = {loading} recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>}/> */}
-                <Route path = '/home' element = { <Home searching = {searching} setSearching = {setSearching} reduxAllRecipesCopy = {reduxAllRecipesCopy} recipesFound = {recipesFound}/>}/>
+                <Route path = '/home' element = { <Home searching = {searching} setSearching = {setSearching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
@@ -99,7 +99,8 @@ export function App ( { reduxAllRecipesCopy } ) {
 
 const mapStateToProps = (state) => {
     return {
-        reduxAllRecipesCopy : state.reduxAllRecipes,
+        reduxAllRecipesCopy : state.allRecipes,
+        searchResults: state.searchResults
     }
 }
 

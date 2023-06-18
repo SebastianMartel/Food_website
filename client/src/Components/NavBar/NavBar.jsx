@@ -15,11 +15,11 @@ const StyledNavBar = styled.div `
 //__________________________________________________
 
 
-export default function NavBar ( { setSearching, getRecipeByName } ) {
+export default function NavBar ( { setSearching } ) {
 
     return (
         <StyledNavBar>
-            <SearchBar setSearching = {setSearching} getRecipeByName = {getRecipeByName}/>
+            <SearchBar setSearching = {setSearching}/>
             <NavLink to = '/home'>
                 <h1 onClick = {() => {setSearching(false)}}>NOVA</h1>
             </NavLink>
