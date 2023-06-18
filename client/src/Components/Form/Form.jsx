@@ -23,13 +23,30 @@ export default function Form () {
             summary: '',
             healthScore: 0,
             stepByStep: [],
-            diet: ''
+            diets: []
         })
 
         const [errors, setErrors] = useState({});
         const [steps, setSteps] = useState([]);
 
 
+        const syncSteps = (event, index) => {
+            if (event.target.name.includes('stepByStep')) {
+                const updatedSteps = [...recipe.stepByStep];
+                updatedSteps[index] = event.target.value;
+
+                setRecipe({
+                    ...recipe,
+                    stepByStep: updatedSteps,
+                });}
+            else {
+                setRecipe({
+                    ...recipe,
+                    [event.target.name]: event.target.value,
+                });
+            }
+        }
+ 
         const syncChange = (event, index) => {
             if (event.target.name.includes('stepByStep')) {
                 const updatedSteps = [...recipe.stepByStep];
@@ -38,7 +55,23 @@ export default function Form () {
                 setRecipe({
                     ...recipe,
                     stepByStep: updatedSteps,
-                });
+                });}
+
+            if (event.target.name.includes('diet')) {
+                const updatedDiets = [...recipe.diets]
+                const isChecked = event.target.checked // whether it has been ticked or not.
+
+                if (isChecked) {
+                    setRecipe({
+                        ...recipe,
+                        diets: [...updatedDiets, event.target.value]
+                    })
+                } else if (!isChecked) {
+                    setRecipe({
+                        ...recipe,
+                        diets: updatedDiets.filter((diet) => diet !== event.target.value)
+                    })
+                }
 
             } else {
                 setRecipe({
@@ -54,7 +87,6 @@ export default function Form () {
             stepByStep: [...recipe.stepByStep, '']
         });
         setSteps([...steps, '']);
-
     }
 
     const handleSubmit = (event) => {
@@ -82,6 +114,11 @@ export default function Form () {
     useEffect(() => {
         console.log(recipe.stepByStep);
     }, [recipe.stepByStep])
+
+    useEffect(() => {
+        console.log(recipe.diets);
+    }, [recipe.diets])
+
 
     return (
         <div>
@@ -117,7 +154,7 @@ export default function Form () {
                     }
 
                 <label>Instructions</label>
-                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncChange(event, index)}/>)}
+                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
                     {
                         errors !== {} && <p>{errors?.steps}</p>
                     }
@@ -125,14 +162,40 @@ export default function Form () {
                     <p>{recipe?.stepByStep[0]}</p>
 
 
-                <label>Select diets</label>
-                    <input name = 'diet' value = {recipe.diet} onChange = {syncChange}/>
-                    <p>{recipe?.diet}</p>
-                    {
-                        errors !== {} && <p>{errors?.diet}</p>
-                    }
+                <label>Select dietss</label>
+
+                    <label >gluten free</label>
+                    <input type = 'checkbox' value = 'gluten free' name = 'diet01' onChange = {syncChange}/>
+
+                    <label >dairy free</label>
+                    <input type = 'checkbox' value = 'dairy free' name = 'diet02' onChange = {syncChange}/>
+
+                    <label >lacto ovo vegetarian</label>
+                    <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'diet03' onChange = {syncChange}/>
+
+                    <label >vegan</label>
+                    <input type = 'checkbox' value = 'vegan' name = 'diet04' onChange = {syncChange}/>
+
+                    <label >paleolithic</label>
+                    <input type = 'checkbox' value = 'paleolithic' name = 'diet05' onChange = {syncChange}/>
+
+                    <label >primal</label>
+                    <input type = 'checkbox' value = 'primal' name = 'diet06' onChange = {syncChange}/>
+
+                    <label >whole 30</label>
+                    <input type = 'checkbox' value = 'whole 30' name = 'diet07' onChange = {syncChange}/>
+
+                    <label >pescatarian</label>
+                    <input type = 'checkbox' value = 'pescatarian' name = 'diet08' onChange = {syncChange}/>
+
+                    <label >ketogenic</label>
+                    <input type = 'checkbox' value = 'ketogenic' name = 'diet09' onChange = {syncChange}/>
+
+                    <label >fodmap friendly</label>
+                    <input type = 'checkbox' value = 'fodmap friendly' name = 'diet10' onChange = {syncChange}/>
 
                 <button type = 'submit'>POST!</button>
+
             </StyledForm>
         </div>
     )

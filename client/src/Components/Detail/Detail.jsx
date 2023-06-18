@@ -43,9 +43,11 @@ export default function Detail () {
             {
                 isValidUUID(details?.id)
                 ? (details?.stepByStep?.map((step) => {
-                    return (
-                        <p>{step}</p>
-                    )
+                    if (step !== '') {
+                        return (
+                            <p>{step}</p>
+                            )
+                        }
                 }))
                 : (
                     details?.stepByStep?.map((step) => {
