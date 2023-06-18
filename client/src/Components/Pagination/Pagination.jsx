@@ -1,16 +1,34 @@
-export default function Pagination ( { recipesPerPage, totalRecipes, paginate } ) {
+export default function Pagination ( { searching, recipesPerPage, totalAllRecipes, totalSearchResults, paginate } ) {
 
-    const pageNumbers = [];
+    const pageNumbersAllRecipes = [];
 
-    for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) {
-        pageNumbers.push(i);
+    const pageNumbersSearchResults = [];
+
+    for (let i = 1; i <= Math.ceil(totalAllRecipes / recipesPerPage); i++) {
+        pageNumbersAllRecipes.push(i);
+    }
+
+    for (let i = 1 ; i <= Math.ceil(totalSearchResults / recipesPerPage); i++) {
+        pageNumbersSearchResults.push(i);
     }
 
     return (
         <nav>
             <ul>
                 {
-                    pageNumbers.map((number) => {
+                    searching === true
+                    ? (
+                        pageNumbersSearchResults.map((number) => {
+                            return (
+                                <li>
+                                    <a href = '#!' onClick = {() => {paginate(number)}}>
+                                        {number}
+                                    </a>
+                                </li>
+                            )
+                        })
+                    )
+                    : pageNumbersAllRecipes.map((number) => {
                         return (
                             <li>
                                 <a href = '#!' onClick = {() => {paginate(number)}}>
@@ -20,6 +38,7 @@ export default function Pagination ( { recipesPerPage, totalRecipes, paginate } 
                         )
                     })
                 }
+               
             </ul>
         </nav>
     )

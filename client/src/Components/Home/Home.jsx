@@ -68,7 +68,7 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
             <p>{searchResults?.length}</p>
 
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
-            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>
+            <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
 
         </div>
     )

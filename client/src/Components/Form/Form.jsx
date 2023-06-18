@@ -1,3 +1,5 @@
+// uncheck diets
+
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -26,6 +28,32 @@ export default function Form () {
             diets: []
         })
 
+        const [boxes, setBoxes] = useState([
+            'gluten free',
+            'dairy free',
+            'lacto ovo vegetarian',
+            'vegan',
+            'paleolithic',
+            'primal',
+            'whole 30',
+            'pescatarian',
+            'ketogenic',
+            'fodmap friendly'
+        ])
+
+        const [mode, setMode] = useState({
+            glutenFree: false,
+            dairyFree: false,
+            lactoOvoVegetarian: false,
+            vegan: false,
+            paleolithic: false,
+            primal: false,
+            whole30: false,
+            pescatarian: false,
+            ketogenic: false,
+            fodmapFriendly: false
+        })
+
         const [errors, setErrors] = useState({});
         const [steps, setSteps] = useState([]);
 
@@ -46,18 +74,16 @@ export default function Form () {
                 });
             }
         }
- 
-        const syncChange = (event, index) => {
-            if (event.target.name.includes('stepByStep')) {
-                const updatedSteps = [...recipe.stepByStep];
-                updatedSteps[index] = event.target.value;
 
-                setRecipe({
-                    ...recipe,
-                    stepByStep: updatedSteps,
-                });}
+        const toggleCheckbox = (event) => {
+            setMode({
+                ...mode,
+                [event.target.name]: !mode[event.target.name]
+            })
+        }
 
-            if (event.target.name.includes('diet')) {
+        const syncChange = (event) => {
+            if (event.target.type === 'checkbox') {
                 const updatedDiets = [...recipe.diets]
                 const isChecked = event.target.checked // whether it has been ticked or not.
 
@@ -81,31 +107,53 @@ export default function Form () {
             }
         };
 
-    const addStep = () => {
-        setRecipe({
-            ...recipe,
-            stepByStep: [...recipe.stepByStep, '']
-        });
-        setSteps([...steps, '']);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        post(recipe);
-    }
-
-    const post = async (recipe) => {
-
-        try {
-            const URL = `http://localhost:3001/recipes`;
-
-            const newRecipe = await axios.post(URL, recipe);
-            console.log(newRecipe);
-
-        } catch (error) {
-            throw new Error (error.message);
+        const addStep = () => {
+            setRecipe({
+                ...recipe,
+                stepByStep: [...recipe.stepByStep, '']
+            });
+            setSteps([...steps, '']);
         }
-    }
+
+        const handleSubmit = (event) => {
+            event.preventDefault();
+            // post(recipe);
+            setRecipe({
+                title: '',
+                image: '',
+                summary: '',
+                healthScore: 0,
+                stepByStep: [],
+                diets: []
+            })
+            setSteps([])
+            setMode({
+                glutenFree: false,
+                dairyFree: false,
+                lactoOvoVegetarian: false,
+                vegan: false,
+                paleolithic: false,
+                primal: false,
+                whole30: false,
+                pescatarian: false,
+                ketogenic: false,
+                fodmapFriendly: false
+            })
+        }
+
+        const post = async (recipe) => {
+
+            try {
+                const URL = `http://localhost:3001/recipes`;
+
+                const newRecipe = await axios.post(URL, recipe);
+                console.log(newRecipe);
+
+            } catch (error) {
+                throw new Error (error.message);
+            }
+        }
+
 
     useEffect(() => {
         setErrors(validation(recipe));
@@ -165,34 +213,34 @@ export default function Form () {
                 <label>Select dietss</label>
 
                     <label >gluten free</label>
-                    <input type = 'checkbox' value = 'gluten free' name = 'diet01' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
 
                     <label >dairy free</label>
-                    <input type = 'checkbox' value = 'dairy free' name = 'diet02' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
 
                     <label >lacto ovo vegetarian</label>
-                    <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'diet03' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
 
                     <label >vegan</label>
-                    <input type = 'checkbox' value = 'vegan' name = 'diet04' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
 
                     <label >paleolithic</label>
-                    <input type = 'checkbox' value = 'paleolithic' name = 'diet05' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
 
                     <label >primal</label>
-                    <input type = 'checkbox' value = 'primal' name = 'diet06' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
 
                     <label >whole 30</label>
-                    <input type = 'checkbox' value = 'whole 30' name = 'diet07' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
 
                     <label >pescatarian</label>
-                    <input type = 'checkbox' value = 'pescatarian' name = 'diet08' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
 
                     <label >ketogenic</label>
-                    <input type = 'checkbox' value = 'ketogenic' name = 'diet09' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
 
                     <label >fodmap friendly</label>
-                    <input type = 'checkbox' value = 'fodmap friendly' name = 'diet10' onChange = {syncChange}/>
+                    <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmap friendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
 
                 <button type = 'submit'>POST!</button>
 
