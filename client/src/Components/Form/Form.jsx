@@ -86,6 +86,8 @@ export default function Form () {
     return (
         <div>
             <StyledForm onSubmit = {handleSubmit}>
+
+                <img/>
                 <label>Name</label>
                     <input name = 'title' value = {recipe.title} onChange = {syncChange}/>
                     <p>{recipe?.title}</p>

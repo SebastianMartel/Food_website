@@ -13,6 +13,12 @@ export default function Detail () {
         const { id } = useParams()
 
 
+        const isValidUUID = (id) => { // checks if the id is a UUID type.
+            const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+            return uuidPattern.test(id);
+        };
+
+
     useEffect(() => {
 
         const getRecipeById = async () => {
@@ -35,11 +41,19 @@ export default function Detail () {
             <p>{details?.summary}</p>
             <p>{details?.healthScore}</p>
             {
-                details?.stepByStep?.map((step) => {
+                isValidUUID(details?.id)
+                ? (details?.stepByStep?.map((step) => {
                     return (
-                        <p>{step.step}</p>
+                        <p>{step}</p>
                     )
-                })
+                }))
+                : (
+                    details?.stepByStep?.map((step) => {
+                        return (
+                            <p>{step.step}</p>
+                        )
+                    })
+                )
             }
             <p>{details?.diets}</p>
             <p>{typeof(details.diets)}</p>

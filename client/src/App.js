@@ -49,7 +49,7 @@ export function App ( { allRecipes, searchResults } ) {
     }, [searchResults])
 
     useEffect(() => {
-        // dispatch(getAllRecipes());
+        dispatch(getAllRecipes());
         console.log(searching)
     }, [searching])
 
