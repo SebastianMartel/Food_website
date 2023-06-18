@@ -8,9 +8,9 @@ const postRecipe = async (req, res) => {
 // O: creates a new recipe in the DB and associates it with a diet.
     try {
 
-        const { title, image, summary, healthScore, stepByStep, diet } = req.body        
+        const { title, image, summary, healthScore, stepByStep, diets } = req.body        
         // id not needed.
-        const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep }, diet)
+        const newRecipe = await createRecipeDB({ title, image, summary, healthScore, stepByStep }, diets)
 
         if (typeof(newRecipe) !== 'string') return res.status(200).json(newRecipe)
 

@@ -42,27 +42,27 @@ const findAllRecipesDB = async () => {
     }
 }
 
-// handle sensitive cases; use for instance: diet.toLowCase()...
-const createRecipeDB = async (recipe, diet) => { // receive diet from parameters.
+
+const createRecipeDB = async (recipe, diets) => { // receive diet from parameters.
 
     try {
         const newRecipe = await Recipe.create(recipe) // creates a recipe with only the recipe parameter - omitting diet.
 
-        const dietDB = await Diet.findAll({
-            where: {name: diet}
-        }) // find the diet in the db where the name matches the one passed in the body (postRecipe.js).
-        // Do I need to create a new diet?
+        for (const diet of diets) { // iterates over the diets array.
 
-        if (dietDB.length > 0) { // if the diet has been found in the DB...
+            const dietDB = await Diet.findAll({
+                where: {name: diet}
+            }) // find the diet in the db where the name matches the one passed in the body (postRecipe.js).
 
-            await newRecipe.addDiet(dietDB[0]) // associates the new recipe with the diet in the database.
+            if (dietDB.length > 0) { // if the diet has been found in the DB...
 
-                return newRecipe
+                await newRecipe.addDiet(dietDB[0]) // associates the new recipe with each diet from diets in the database.
+            }
+        };
+            return newRecipe
 
-        } else return 'Diet not valid' // if the diet doesn't exist in the DB...
-
-    } catch (error) {
-        throw new Error(error.message)
+        } catch (error) {
+            throw new Error(error.message)
     }
 }
 
@@ -76,7 +76,6 @@ const findRecipeByDietDB = async (id) => {
     const diet = await Diet.findAll({where: {Recipe}})
 
 }
-
 
 
 const findRecipeByIdDB = async (id) => {
