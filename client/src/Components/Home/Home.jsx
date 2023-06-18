@@ -67,8 +67,8 @@ export function Home ( { searching, reduxAllRecipesCopy, currentAllRecipes, sear
             <p>{reduxAllRecipesCopy?.length}</p>
             <p>{searchResults?.length}</p>
 
-            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {reduxAllRecipesCopy.length} paginate = {paginate}/>
             <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
+            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {reduxAllRecipesCopy.length} paginate = {paginate}/>
 
         </div>
     )
