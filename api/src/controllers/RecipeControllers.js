@@ -97,26 +97,14 @@ const findRecipeByIdDB = async (id) => {
 const findRecipeByNameDB = async (name) => {
 
     try {
-        const recipe = await Recipe.findAll({
-            include: {
-                model: Diet,
-                attributes: ["name"],
-                through: {
-                  attributes: []
-                }
-            },
-            where: {
-                title: {
-                    [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
-                }, 
-            }
-        })
-
-        return recipe
-
-        // OPTION 2, like the one I use in getRecipesById:
-
         // const recipe = await Recipe.findAll({
+        //     include: {
+        //         model: Diet,
+        //         attributes: ["name"],
+        //         through: {
+        //           attributes: []
+        //         }
+        //     },
         //     where: {
         //         title: {
         //             [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
@@ -124,30 +112,46 @@ const findRecipeByNameDB = async (name) => {
         //     }
         // })
 
-        // if (recipe) { /* this is to check if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
+        // return recipe
 
-        //     {
-        //             "error": "recipe.getDiets is not a function"
-        //         }
-        //     */
+        // OPTION 2, like the one I use in getRecipesById:
 
-        //     const dietsDB = await recipe.getDiets()
-        //     const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
-        //     for (const diet of dietsDB) {
-        //         associatedDiets.push(diet.name)
-        //     }
-        //     const newRecipe = { // adds the diets to the object.
-        //         id: recipe.id,
-        //         title: recipe.title,
-        //         image: recipe.image,
-        //         summary: recipe.summary,
-        //         healthScore: recipe.healthScore,
-        //         stepByStep: recipe.stepByStep,
-        //         diets: associatedDiets // array with ONLY the name of the diets.
-        //     }
-        // }
+        const recipes = await Recipe.findAll({
+            where: {
+                title: {
+                    [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
+                }, 
+            }
+        })
 
-        // return newRecipe
+        if (recipes) {
+
+            const recipesDB = []
+
+            for (const recipe of recipes) {
+                const dietsDB = await recipe.getDiets()
+                
+                const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
+                
+                for (const diet of dietsDB) {
+                    associatedDiets.push(diet.name)
+                }
+                
+                const recipeAndDiet = { // adds the diets to the object.
+                    id: recipe.id,
+                    title: recipe.title,
+                    image: recipe.image,
+                    summary: recipe.summary,
+                    healthScore: recipe.healthScore,
+                    stepByStep: recipe.stepByStep,
+                    diets: associatedDiets // array with ONLY the name of the diets.
+                }
+                recipesDB.push(recipeAndDiet)
+            }
+
+            return recipesDB
+        }
+
 
     } catch (error) {
         throw new Error(error.message)
