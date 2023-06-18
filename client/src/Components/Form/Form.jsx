@@ -5,21 +5,33 @@ import { useState } from 'react';
 
 export default function Form () {
 
-    const [recipe, setRecipe] = useState({
-        title: '',
-        image: '',
-        summary: '',
-        healthScore: 0,
-        stepByStep: [],
-        diet: ''
-    })
 
-//        const { title, image, summary, healthScore, stepByStep, diet } = req.body        
+        const [recipe, setRecipe] = useState({
+            title: '',
+            image: '',
+            summary: '',
+            healthScore: 0,
+            stepByStep: [],
+            diet: ''
+        })
+
+
+    const syncChange = (event) => {
+            setRecipe({
+            ...recipe,
+            [event.target.name]: event.target.value
+        })
+    }
+    
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        post(recipe)
+    }
+
 
     const post = async (recipe) => {
 
         try {
-
             const URL = `http://localhost:3001/recipes`
 
             const newRecipe = await axios.post(URL, recipe)
@@ -28,19 +40,6 @@ export default function Form () {
         } catch (error) {
             throw new Error (error.message)
         }
-
-    }
-
-    const syncChange = (event) => {
-        setRecipe({
-            ...recipe,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        post(recipe)
     }
 
 

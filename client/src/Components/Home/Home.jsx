@@ -18,11 +18,11 @@ const Headline = styled.div `
 //__________________________________________________
 
 
-// export function Home ( { loading, recipesPerPage, totalRecipes, paginate } ) {
-export function Home ( { searching, reduxAllRecipesCopy, currentAllRecipes, searchResults, currentSearchResults, recipesPerPage, paginate } ) {
+export function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate } ) {
 
 
     const dispatch = useDispatch()
+
 
     const handleOrder = (event) => {
         dispatch(sortAllRecipes(event.target.value))
@@ -64,15 +64,16 @@ export function Home ( { searching, reduxAllRecipesCopy, currentAllRecipes, sear
                 </select>
             </Headline>
 
-            <p>{reduxAllRecipesCopy?.length}</p>
+            <p>{allRecipes?.length}</p>
             <p>{searchResults?.length}</p>
 
-            <CardBox searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
-            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {reduxAllRecipesCopy.length} paginate = {paginate}/>
+            <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
+            <Pagination recipesPerPage = {recipesPerPage} totalRecipes = {allRecipes.length} paginate = {paginate}/>
 
         </div>
     )
 }
+
 
 export default connect(
     null,

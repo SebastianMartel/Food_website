@@ -63,23 +63,21 @@ export const filterAllRecipes = (filter) => {
     }
 }
 
-export const postRecipes = (recipe) => {
+// export const postRecipes = (recipe) => {
     
-    return async (dispatch) => {
+//     return async (dispatch) => {
 
-        try {
-            const URL = 'http://localhost:3001/recipes';
-            const { data } = axios.post(URL, recipe)
+//         try {
+//             const URL = 'http://localhost:3001/recipes';
+//             const { data } = axios.post(URL, recipe)
             
-            dispatch({
-                type: POST,
-                payload: data
-            })
+//             dispatch({
+//                 type: POST,
+//                 payload: data
+//             })
 
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-}
-
-//__________________________________________________
+//         } catch (error) {
+//             throw new Error(error.message);
+//         }
+//     }
+// }

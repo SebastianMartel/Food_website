@@ -1,5 +1,5 @@
-import Card from "../Card/Card";
 import styled from "styled-components";
+import Card from "../Card/Card";
 //__________________________________________________
 
 
@@ -15,8 +15,7 @@ const StyledCardBox = styled.div `
 //__________________________________________________
 
 
-// export default function CardBox ( { recipes, onlyRecipes, allRecipes, loading } ) {
-export default function CardBox ( { searching, reduxAllRecipesCopy, currentAllRecipes, currentSearchResults, searchResults } ) {
+export default function CardBox ( { searching, currentAllRecipes, currentSearchResults } ) {
 
 
     // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.

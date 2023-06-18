@@ -15,43 +15,44 @@ import Form from './Components/Form/Form';
 //__________________________________________________
 
 
-export function App ( { reduxAllRecipesCopy, searchResults } ) {
+export function App ( { allRecipes, searchResults } ) {
 
-    // const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [recipesPerPage] = useState(9);
 
-    const [searching, setSearching] = useState(false)
+        // const [loading, setLoading] = useState(false);
+        const [currentPage, setCurrentPage] = useState(1);
+        const [recipesPerPage] = useState(9);
+
+        const [searching, setSearching] = useState(false)
+
 
     const { pathname } = useLocation();
 
     const dispatch = useDispatch();
 
-    
+
+    // // get current posts:
+    const indexOfLastRecipe = currentPage * recipesPerPage;
+    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+    const currentAllRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+    const currentSearchResults = searchResults.slice(indexOfFirstRecipe, indexOfLastRecipe)
+    // changes the page:
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
+
     useEffect(() => {
-        console.log(reduxAllRecipesCopy);
-    }, [reduxAllRecipesCopy])
+        console.log(allRecipes);
+    }, [allRecipes])
 
     useEffect(() => {
         console.log(searchResults)
     }, [searchResults])
 
     useEffect(() => {
-        // REDUX OPTION:
         // dispatch(getAllRecipes());
         console.log(searching)
     }, [searching])
-
-
-        // // get current posts:
-        const indexOfLastRecipe = currentPage * recipesPerPage;
-        const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-        const currentAllRecipes = reduxAllRecipesCopy.slice(indexOfFirstRecipe, indexOfLastRecipe);
-        const currentSearchResults = searchResults.slice(indexOfFirstRecipe, indexOfLastRecipe)
-        // changes the page:
-        const paginate = (pageNumber) => {
-            setCurrentPage(pageNumber);
-        }
 
 
     return (
@@ -61,7 +62,7 @@ export function App ( { reduxAllRecipesCopy, searchResults } ) {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home searching = {searching} reduxAllRecipesCopy = {reduxAllRecipesCopy} currentAllRecipes = {currentAllRecipes} searchResults = {searchResults} currentSearchResults = {currentSearchResults} recipesPerPage = {recipesPerPage} paginate = {paginate}/>}/>
+                <Route path = '/home' element = { <Home searching = {searching} allRecipes = {allRecipes} currentAllRecipes = {currentAllRecipes} searchResults = {searchResults} currentSearchResults = {currentSearchResults} recipesPerPage = {recipesPerPage} paginate = {paginate}/>}/>
                 <Route path = '/detail/:id' element={ <Detail /> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
@@ -72,13 +73,11 @@ export function App ( { reduxAllRecipesCopy, searchResults } ) {
 
 const mapStateToProps = (state) => {
     return {
-        reduxAllRecipesCopy : state.allRecipes,
+        allRecipes : state.allRecipes,
         searchResults: state.searchResults
     }
 }
 
-
-//__________________________________________________
 export default connect (
     mapStateToProps,
     null

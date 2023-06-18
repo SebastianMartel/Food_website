@@ -7,10 +7,10 @@ import { useParams } from "react-router-dom";
 export default function Detail () {
 
 
-    const [details, setDetails] = useState({})
+        const [details, setDetails] = useState({})
 
 
-    const { id } = useParams()
+        const { id } = useParams()
 
 
     useEffect(() => {
