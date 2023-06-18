@@ -1,6 +1,5 @@
 // uncomment dispatch, to continue working.
 
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';

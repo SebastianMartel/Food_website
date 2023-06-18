@@ -29,7 +29,7 @@ export default function Detail () {
 
     return (
         <div>
-            <img src = {details?.image}/>
+            <img src = {details?.image} alt = {details?.title}/>
             <p>{details?.title}</p>
             <p>{details?.id}</p>
             <p>{details?.summary}</p>

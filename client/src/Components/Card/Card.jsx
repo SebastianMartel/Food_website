@@ -18,7 +18,7 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
         <div>
             <NavLink to = {`/detail/${id}`}>
                 <StyledCard>
-                    <img src = {image}></img>
+                    <img src = {image} alt = {title}></img>
                     <p>{title}</p>
                     <p>{diets}</p>
                 </StyledCard>

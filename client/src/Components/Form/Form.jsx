@@ -1,6 +1,17 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import validation from '../Validation/validation';
+
+import styled from "styled-components";
 //__________________________________________________
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 35%;
+`
 
 
 export default function Form () {
@@ -15,55 +26,112 @@ export default function Form () {
             diet: ''
         })
 
+        const [errors, setErrors] = useState({})
+        const [steps, setSteps] = useState([])
+
 
     const syncChange = (event) => {
-            setRecipe({
+        if (event.target.name === 'stepByStep') {
+
+            for (let i = 0; i < steps.length; i++) {
+                let step = [...recipe.stepByStep, event.target.value]
+                
+                setRecipe({
+                    ...recipe,
+                    stepByStep: [...recipe.stepByStep, step]
+                })
+            } 
+        }
+
+        setRecipe({
             ...recipe,
             [event.target.name]: event.target.value
         })
     }
-    
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        post(recipe)
+
+    const addStep = () => {
+        setSteps([...steps, ''])
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        post(recipe);
+    }
 
     const post = async (recipe) => {
 
         try {
-            const URL = `http://localhost:3001/recipes`
+            const URL = `http://localhost:3001/recipes`;
 
-            const newRecipe = await axios.post(URL, recipe)
-            console.log(newRecipe)
+            const newRecipe = await axios.post(URL, recipe);
+            console.log(newRecipe);
 
         } catch (error) {
-            throw new Error (error.message)
+            throw new Error (error.message);
         }
     }
 
+    useEffect(() => {
+        setErrors(validation(recipe))
+    }, [recipe])
+
+    useEffect(() => {
+        console.log(steps)
+    }, [steps])
+
+    useEffect(() => {
+        console.log(recipe.stepByStep[0])
+    }, [recipe.stepByStep])
 
     return (
         <div>
-            <form onSubmit = {handleSubmit}>
+            <StyledForm onSubmit = {handleSubmit}>
                 <label>Name</label>
-                    <input name = 'title' value = {recipe.title} onChange = {syncChange}></input>
-                    <p>{recipe.title}</p>
-                    <p>{recipe.image}</p>
-                    <p>{recipe.summary}</p>
-                <label>Summary</label>
-                    <input name = 'summary' value = {recipe.summary} onChange = {syncChange}></input>
-                <label>HealthScore</label>
-                    <input name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange}></input>
-                <label>Add a photo</label>
-                    <input name = 'image' value = {recipe.image} onChange = {syncChange}></input>
-                <label>Steps</label>
-                    <input name = 'stepByStep' value = {recipe.stepByStep} onChange = {syncChange}></input>
-                <label>Select diets</label>
-                    <input name = 'diet' value = {recipe.diet} onChange = {syncChange}></input>
+                    <input name = 'title' value = {recipe.title} onChange = {syncChange}/>
+                    <p>{recipe?.title}</p>
+                    {
+                        errors !== {} && <p>{errors?.title}</p>
+                    }
 
-                <button>POST!</button>
-            </form>
+                <label>Description</label>
+                <textarea name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
+                    <p>{recipe?.summary}</p>
+                    {
+                        errors !== {} && <p>{errors?.summary}</p>
+                    }
+
+                <label>HealthScore</label>
+                    <input name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange}/>
+                    <p>{recipe?.healthScore}</p>
+                    {
+                        errors !== {} && <p>{errors?.healthScore}</p>
+                    }
+
+                <label>Add a photo</label>
+                    <input name = 'image' value = {recipe.image} onChange = {syncChange}/>
+                    <p>{recipe?.image}</p>
+                    {
+                        errors !== {} && <p>{errors?.image}</p>
+                    }
+
+                <label>Instructions</label>
+                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep${index}`} value = {recipe.stepByStep[index]} onChange = {syncChange}/>)}
+                    {
+                        errors !== {} && <p>{errors?.steps}</p>
+                    }
+                    <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
+                    <p>{recipe?.stepByStep[0]}</p>
+
+
+                <label>Select diets</label>
+                    <input name = 'diet' value = {recipe.diet} onChange = {syncChange}/>
+                    <p>{recipe?.diet}</p>
+                    {
+                        errors !== {} && <p>{errors?.diet}</p>
+                    }
+
+                <button type = 'submit'>POST!</button>
+            </StyledForm>
         </div>
     )
 }
