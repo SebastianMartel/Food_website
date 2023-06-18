@@ -26,31 +26,35 @@ export default function Form () {
             diet: ''
         })
 
-        const [errors, setErrors] = useState({})
-        const [steps, setSteps] = useState([])
+        const [errors, setErrors] = useState({});
+        const [steps, setSteps] = useState([]);
 
 
-    const syncChange = (event) => {
-        if (event.target.name === 'stepByStep') {
+        const syncChange = (event, index) => {
+            if (event.target.name.includes('stepByStep')) {
+                const updatedSteps = [...recipe.stepByStep];
+                updatedSteps[index] = event.target.value;
 
-            for (let i = 0; i < steps.length; i++) {
-                let step = [...recipe.stepByStep, event.target.value]
-                
                 setRecipe({
                     ...recipe,
-                    stepByStep: [...recipe.stepByStep, step]
-                })
-            } 
-        }
+                    stepByStep: updatedSteps,
+                });
 
-        setRecipe({
-            ...recipe,
-            [event.target.name]: event.target.value
-        })
-    }
+            } else {
+                setRecipe({
+                    ...recipe,
+                    [event.target.name]: event.target.value,
+                });
+            }
+        };
 
     const addStep = () => {
-        setSteps([...steps, ''])
+        setRecipe({
+            ...recipe,
+            stepByStep: [...recipe.stepByStep, '']
+        });
+        setSteps([...steps, '']);
+
     }
 
     const handleSubmit = (event) => {
@@ -72,15 +76,11 @@ export default function Form () {
     }
 
     useEffect(() => {
-        setErrors(validation(recipe))
+        setErrors(validation(recipe));
     }, [recipe])
 
     useEffect(() => {
-        console.log(steps)
-    }, [steps])
-
-    useEffect(() => {
-        console.log(recipe.stepByStep[0])
+        console.log(recipe.stepByStep);
     }, [recipe.stepByStep])
 
     return (
@@ -115,7 +115,7 @@ export default function Form () {
                     }
 
                 <label>Instructions</label>
-                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep${index}`} value = {recipe.stepByStep[index]} onChange = {syncChange}/>)}
+                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncChange(event, index)}/>)}
                     {
                         errors !== {} && <p>{errors?.steps}</p>
                     }
