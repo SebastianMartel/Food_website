@@ -13,7 +13,7 @@ for (let word of titleArr) {
     }
 }
 
-if (regexTitle.test(title) === true ) {
+if (regexTitle.test(title) === true || title.length < 5 || title.length > 40) {
     errors.title = [errors.title, "the title can't contain more than 3 numbers and must have at least 8 characters"]
 }
 

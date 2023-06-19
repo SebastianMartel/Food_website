@@ -15,7 +15,7 @@ const StyledCardBox = styled.div `
 //__________________________________________________
 
 
-export default function CardBox ( { searching, currentAllRecipes, currentSearchResults } ) {
+export default function CardBox ( { searching, currentAllRecipes, currentSearchResults, deleteSuccess } ) {
 
 
     // handles lowercase and uppercase diets, if comes fron the API, or Diets, if comes from the DB) property.
@@ -52,7 +52,11 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
         return (
             <StyledCardBox>
                 {/* { loading && <h2>Loading...</h2>} */}
-
+                {
+                    deleteSuccess && (
+                        <p>you have successfully deleted your recipe</p>
+                    )
+                }
                 {
                     currentAllRecipes?.map((recipe) => {
                         return (

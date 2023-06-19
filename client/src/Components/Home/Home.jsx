@@ -10,7 +10,7 @@ import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
 
-export function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate } ) {
+export function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, deleteSuccess } ) {
 
 
     const dispatch = useDispatch()
@@ -59,7 +59,7 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
             </div>
 
 
-            <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
+            <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults} deleteSuccess = {deleteSuccess}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
 
         </div>
