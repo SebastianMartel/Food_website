@@ -1,21 +1,12 @@
 import { connect, useDispatch } from 'react-redux';
 import { sortAllRecipes, filterAllRecipes } from '../../Redux/actions';
 
+import './Home.css'
 import styled from 'styled-components';
 import CardBox from "../Cardbox/Cardbox";
 import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
-
-const Headline = styled.div `
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5rem;
-    margin-top: 15rem;
-
-    padding: 1rem;
-`
 //__________________________________________________
 
 
@@ -36,7 +27,7 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
 
     return (
         <div>
-            <Headline>
+            <div className = 'headline'>
                 <h1>HOME</h1>
                 <select onChange = {(event) => {handleOrder(event)}}>
                     <option value = 'A'>Name (A-Z)</option>
@@ -65,7 +56,7 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
                 </select>
             <p>ALL {allRecipes?.length}</p>
             <p>SEARCH {searchResults?.length}</p>
-            </Headline>
+            </div>
 
 
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>

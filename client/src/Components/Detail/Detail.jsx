@@ -37,13 +37,13 @@ export default function Detail () {
 
     return (
         <div className = "detail">
-            <div className = "detailSection">
+            <div className = "detailSection1">
                 <h1 className = "recipeTitle">{details?.title}</h1>{/* Screws the width of the first section when the title has a word really long */}
                 <p>{details?.diets}</p>
                 <p>{details?.summary}</p>
             </div>
 
-            <div className = "detailSection">
+            <div className = "detailSection2">
                 <h2>Preparation</h2 >
                 {
                     isValidUUID(details?.id)
@@ -64,7 +64,7 @@ export default function Detail () {
                 }
             </div>
 
-            <div className = "detailSection">
+            <div className = "detailSection3">
                 <img src = {details?.image} alt = {details?.title}/>
                 <p>{details?.id}</p>
                 <p>{details?.healthScore}</p>

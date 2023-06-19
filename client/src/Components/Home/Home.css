@@ -1,0 +1,10 @@
+.headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 115px;
+    /* margin-top: 15vh; */
+
+    padding: 1rem;
+}

@@ -1,14 +1,28 @@
 .detail {
     display: flex;
-    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    
     
 
     border: 1px solid red;
-    height: 84.5vh;
-    margin-top : 15vh;
+    height: 100%;
+    /* margin-top : 15vh; */
+    margin-top: 115px;
 }
 
-.detailSection {
+.detailSection1 {
+    align-self: center;
+    width: 33.3%;
+    max-width: 33.3%;
+}
+
+.detailSection2 {
+    align-self: center;
+    width: 33.3%;
+    max-width: 33.3%;
+}
+
+.detailSection3 {
     align-self: center;
     width: 33.3%;
     max-width: 33.3%;

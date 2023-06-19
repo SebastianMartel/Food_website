@@ -1,17 +1,9 @@
+import './Pagination.css'
 import styled from "styled-components";
 //__________________________________________________
 
 const StyledDiv = styled.div`
 `
-
-const StyledSpan = styled.span`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    gap: 3rem;
-`
-
 
 //__________________________________________________
 export default function Pagination ( { searching, recipesPerPage, totalAllRecipes, totalSearchResults, paginate } ) {
@@ -30,31 +22,31 @@ export default function Pagination ( { searching, recipesPerPage, totalAllRecipe
 
     return (
         <StyledDiv>
-            <StyledSpan>
+            <div className = 'navPage'>
                 {
                     searching === true
                     ? (
                         pageNumbersSearchResults.map((number) => {
                             return (
-                                <p>
-                                    <a href = '#!' onClick = {() => {paginate(number)}}>
-                                        {number}
+                                    <a className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
+                                        <div className = 'pageNumber'>
+                                                {number}
+                                        </div>
                                     </a>
-                                </p>
                             )
                         })
                     )
                     : pageNumbersAllRecipes.map((number) => {
                         return (
-                            <p>
-                                <a href = '#!' onClick = {() => {paginate(number)}}>
-                                    {number}
+                                <a className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
+                                    <div className = 'pageNumber'>
+                                            {number}
+                                    </div>
                                 </a>
-                            </p>
                         )
                     })
                 }
-            </StyledSpan>
+            </div>
         </StyledDiv>
     )
 }
