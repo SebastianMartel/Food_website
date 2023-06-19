@@ -1,3 +1,19 @@
+import styled from "styled-components";
+//__________________________________________________
+
+const StyledDiv = styled.div`
+`
+
+const StyledSpan = styled.span`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 3rem;
+`
+
+
+//__________________________________________________
 export default function Pagination ( { searching, recipesPerPage, totalAllRecipes, totalSearchResults, paginate } ) {
 
     const pageNumbersAllRecipes = [];
@@ -13,33 +29,32 @@ export default function Pagination ( { searching, recipesPerPage, totalAllRecipe
     }
 
     return (
-        <nav>
-            <ul>
+        <StyledDiv>
+            <StyledSpan>
                 {
                     searching === true
                     ? (
                         pageNumbersSearchResults.map((number) => {
                             return (
-                                <li>
+                                <p>
                                     <a href = '#!' onClick = {() => {paginate(number)}}>
                                         {number}
                                     </a>
-                                </li>
+                                </p>
                             )
                         })
                     )
                     : pageNumbersAllRecipes.map((number) => {
                         return (
-                            <li>
+                            <p>
                                 <a href = '#!' onClick = {() => {paginate(number)}}>
                                     {number}
                                 </a>
-                            </li>
+                            </p>
                         )
                     })
                 }
-               
-            </ul>
-        </nav>
+            </StyledSpan>
+        </StyledDiv>
     )
 }

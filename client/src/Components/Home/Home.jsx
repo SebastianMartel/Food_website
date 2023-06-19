@@ -11,7 +11,8 @@ const Headline = styled.div `
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10rem;
+    gap: 5rem;
+    margin-top: 15rem;
 
     padding: 1rem;
 `
@@ -62,10 +63,10 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
                     <option value = 'DB'>Your own recipes</option>
                     <option value = 'API'>By others</option>
                 </select>
+            <p>ALL {allRecipes?.length}</p>
+            <p>SEARCH {searchResults?.length}</p>
             </Headline>
 
-            <p>{allRecipes?.length}</p>
-            <p>{searchResults?.length}</p>
 
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>

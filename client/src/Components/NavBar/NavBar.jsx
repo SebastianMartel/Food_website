@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-import SearchBar from "../SearchBar/SearchBar";
+import './NavBar.css';
 import styled from "styled-components";
+import SearchBar from "../SearchBar/SearchBar";
 //__________________________________________________
 
 
@@ -18,7 +19,7 @@ const StyledNavBar = styled.div `
 export default function NavBar ( { setSearching } ) {
 
     return (
-        <StyledNavBar>
+        <div className = "menu">
             <SearchBar setSearching = {setSearching}/>
             <NavLink to = '/home'>
                 <h1 onClick = {() => {setSearching(false)}}>recipes</h1>
@@ -26,6 +27,6 @@ export default function NavBar ( { setSearching } ) {
             <NavLink to = '/form'>
                 <button>CREATE RECIPE</button>
             </NavLink>
-        </StyledNavBar>
+        </div>
     )
 }

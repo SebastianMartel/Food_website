@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import './Detail.css'
 //__________________________________________________
 
 
@@ -34,31 +36,40 @@ export default function Detail () {
 
 
     return (
-        <div>
-            <img src = {details?.image} alt = {details?.title}/>
-            <p>{details?.title}</p>
-            <p>{details?.id}</p>
-            <p>{details?.summary}</p>
-            <p>{details?.healthScore}</p>
-            {
-                isValidUUID(details?.id)
-                ? (details?.stepByStep?.map((step) => {
-                    if (step !== '') {
-                        return (
-                            <p>{step}</p>
+        <div className = "detail">
+            <div className = "detailSection">
+                <p className = "recipeTitle">{details?.title}</p>
+                <p>{details?.diets}</p>
+                <p>{details?.summary}</p>
+            </div>
+
+            <div className = "detailSection">
+                <h2>Preparation</h2>
+                {
+                    isValidUUID(details?.id)
+                    ? (details?.stepByStep?.map((step) => {
+                        if (step !== '') {
+                            return (
+                                <p>{step}</p>
+                                )
+                            }
+                    }))
+                    : (
+                        details?.stepByStep?.map((step) => {
+                            return (
+                                <p>{step.step}</p>
                             )
-                        }
-                }))
-                : (
-                    details?.stepByStep?.map((step) => {
-                        return (
-                            <p>{step.step}</p>
-                        )
-                    })
-                )
-            }
-            <p>{details?.diets}</p>
-            <p>{typeof(details.diets)}</p>
+                        })
+                    )
+                }
+            </div>
+
+            <div className = "detailSection">
+                <img src = {details?.image} alt = {details?.title}/>
+                <p>{details?.id}</p>
+                <p>{details?.healthScore}</p>
+                <p>{typeof(details.diets)}</p>
+            </div>
         </div>
     )
 }

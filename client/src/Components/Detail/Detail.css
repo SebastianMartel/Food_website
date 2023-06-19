@@ -1,0 +1,24 @@
+.detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+
+    border: 1px solid red;
+    height: 84.5vh;
+    margin-top : 15vh;
+}
+
+.detailSection {
+    align-self: center;
+}
+
+.recipeTitle {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+body {
+    border: 1px solid black;
+    height: auto;
+    margin: 0
+}
