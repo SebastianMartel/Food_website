@@ -6,6 +6,7 @@ const getRecipeById = require('../handlers/getRecipeById');
 const getRecipeByName = require('../handlers/getRecipeByName');
 const postRecipe = require('../handlers/postRecipe');
 const getDiet = require('../handlers/getDiet');
+const deleteRecipe = require('../handlers/deleteRecipe')
 //__________________________________________________
 
 
@@ -24,6 +25,7 @@ router.post('/recipes', postRecipe);
 
 router.get('/diets', getDiet);
 
+router.delete('/recipes/:id', deleteRecipe)
 
 //__________________________________________________
 module.exports = router;

@@ -66,15 +66,20 @@ const createRecipeDB = async (recipe, diets) => { // receive diet from parameter
     }
 }
 
+const deleteRecipeDB = async (id) => {
+    try {
 
-// Do I need this one?
-const findRecipeByDietDB = async (id) => {
+        const removed = await Recipe.findByPk(id)
 
-    // get the diet
-    const recipe = await Recipe.findByPk(id)
+        await Recipe.destroy({
+            where: {id: id}
+        })
 
-    const diet = await Diet.findAll({where: {Recipe}})
+            return removed
 
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }
 
 
@@ -172,7 +177,7 @@ const findRecipeByNameDB = async (name) => {
 module.exports = {
     findAllRecipesDB,
     createRecipeDB,
-    findRecipeByDietDB,
+    deleteRecipeDB,
     findRecipeByIdDB,
     findRecipeByNameDB
 }
