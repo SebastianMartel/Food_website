@@ -38,13 +38,13 @@ export default function Detail () {
     return (
         <div className = "detail">
             <div className = "detailSection">
-                <p className = "recipeTitle">{details?.title}</p>
+                <h1 className = "recipeTitle">{details?.title}</h1>{/* Screws the width of the first section when the title has a word really long */}
                 <p>{details?.diets}</p>
                 <p>{details?.summary}</p>
             </div>
 
             <div className = "detailSection">
-                <h2>Preparation</h2>
+                <h2>Preparation</h2 >
                 {
                     isValidUUID(details?.id)
                     ? (details?.stepByStep?.map((step) => {

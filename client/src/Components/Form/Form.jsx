@@ -1,18 +1,23 @@
-// uncheck diets
-
+// uncheck diets.
+// words of title can't have more than 12 characters.
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import validation from '../Validation/validation';
 
 import styled from "styled-components";
+import './Form.css'
 //__________________________________________________
 
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin: 0 35%;
+    margin: 0 33%;
+`
+
+const SubmitButton = styled.button`
+    
 `
 
 
@@ -117,7 +122,7 @@ export default function Form () {
 
         const handleSubmit = (event) => {
             event.preventDefault();
-            // post(recipe);
+            post(recipe);
             setRecipe({
                 title: '',
                 image: '',
@@ -169,7 +174,7 @@ export default function Form () {
 
 
     return (
-        <div>
+        <div className = 'mainDiv'>
             <StyledForm onSubmit = {handleSubmit}>
 
                 <img/>
@@ -209,40 +214,55 @@ export default function Form () {
                     <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
                     <p>{recipe?.stepByStep[0]}</p>
 
+                    <label>Select diets</label>
+                <div className = 'checkboxes'>
+                    <div className = 'checkboxC'>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
+                            <label >gluten free</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
+                            <label >dairy free</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
+                            <label >lacto ovo vegetarian</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
+                            <label >vegan</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
+                            <label >paleolithic</label>
+                        </div>
+                    </div>
+                    <div className = 'checkboxC'>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
+                            <label >primal</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
+                            <label >whole 30</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
+                            <label >pescatarian</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
+                            <label >ketogenic</label>
+                        </div>
+                        <div className = 'checkboxR'>
+                            <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmapFriendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
+                            <label >fodmap friendly</label>
+                        </div>
+                    </div>
+                </div>
 
-                <label>Select dietss</label>
-
-                    <label >gluten free</label>
-                    <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
-
-                    <label >dairy free</label>
-                    <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
-
-                    <label >lacto ovo vegetarian</label>
-                    <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
-
-                    <label >vegan</label>
-                    <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
-
-                    <label >paleolithic</label>
-                    <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
-
-                    <label >primal</label>
-                    <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
-
-                    <label >whole 30</label>
-                    <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
-
-                    <label >pescatarian</label>
-                    <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
-
-                    <label >ketogenic</label>
-                    <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
-
-                    <label >fodmap friendly</label>
-                    <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmap friendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
-
-                <button type = 'submit'>POST!</button>
+                <SubmitButton type = 'submit'>POST!</SubmitButton>
 
             </StyledForm>
         </div>

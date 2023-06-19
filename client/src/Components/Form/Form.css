@@ -1,0 +1,18 @@
+.mainDiv {
+    margin-top: 15vh;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkboxC {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkboxR {
+    display: flex;
+    flex-direction: row;
+}
