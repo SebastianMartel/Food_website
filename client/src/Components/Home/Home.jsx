@@ -30,14 +30,17 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
             <div className = 'headline'>
                 <h1>HOME</h1>
                 <select onChange = {(event) => {handleOrder(event)}}>
+                    <option disabled hidden>Sort by name</option>
                     <option value = 'A'>Name (A-Z)</option>
                     <option value = 'B'>Name (Z-A)</option>
                 </select>
                 <select onChange = {(event) => {handleOrder(event)}}>
+                    <option value = '' disabled hidden>Sort by health score</option>
                     <option value = 'C'>More healthy</option>
                     <option value = 'D'>Less healthy</option>
                 </select>
                 <select onChange = {(event) => {handleFilter(event)}}>
+                    <option value = '' disabled hidden>Explore through diets</option>
                     <option value = 'All'>All</option>
                     <option value = 'gluten free'>gluten free</option>
                     <option value = 'dairy free'>dairy free</option>
@@ -51,15 +54,20 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
                     <option value = 'fodmap friendly'>fodmap friendly</option>
                 </select>
                 <select onChange = {(event) => {handleFilter(event)}}>
+                    <option value = '' disabled hidden>Filter by origin</option>
                     <option value = 'DB'>Your own recipes</option>
                     <option value = 'API'>By others</option>
                 </select>
-            <p>ALL {allRecipes?.length}</p>
-            <p>SEARCH {searchResults?.length}</p>
+                <p>ALL {allRecipes?.length}</p>
+                <p>SEARCH {searchResults?.length}</p>
             </div>
 
-
-            <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults} deleteSuccess = {deleteSuccess}/>
+            {
+                deleteSuccess && (
+                    <p>you have successfully deleted your recipe</p>
+                )
+            }
+            <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
 
         </div>

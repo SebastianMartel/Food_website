@@ -11,8 +11,8 @@
     padding: 0 2%;
     margin: 0;
 
-    background-color: aquamarine;
-    border: 1px solid black;    
+    background-color: #FFF4ED;
+    /* border: 1px solid black;     */
     z-index: 9999;
 }
 
@@ -20,4 +20,19 @@
     text-decoration: none;
     font-size: 50px;
     margin: 0
+}
+
+.createRecipe {
+    background-color: #588B8B;
+    border: none;
+    color: #FFD5C2;
+    width: 204px;
+    height:65px;
+    font-weight: 900;
+    font-size: 17px;
+}
+.createRecipe:hover {
+    background-color: #FFD5C2;
+    color: #C8553D;
+    cursor: pointer;
 }

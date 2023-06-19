@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import './NavBar.css';
 import styled from "styled-components";
 import SearchBar from "../SearchBar/SearchBar";
+import log2 from '../../Media/log2.png'
 //__________________________________________________
 
 
@@ -17,12 +18,13 @@ export default function NavBar ( { setSearching } ) {
 
     return (
         <div className = "menu">
-            <SearchBar setSearching = {setSearching}/>
             <StyledNavLink to = '/home'>
-                <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1>
+                {/* <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1> */}
+                <img src = {log2}/>
             </StyledNavLink>
+            <SearchBar setSearching = {setSearching}/>
             <NavLink to = '/form'>
-                <button>CREATE RECIPE</button>
+                <button className = 'createRecipe'>ADD YOUR RECIPE</button>
             </NavLink>
         </div>
     )

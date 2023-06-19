@@ -112,19 +112,17 @@ export default function Detail ( { setDeleteSuccess } ) {
 
             <div className = "detailSection3">
                 <img src = {details?.image} alt = {details?.title}/>
-                <p>{details?.id}</p>
-                {/* <div className = "line"> */}
-                    <div className = 'healthScore'>
-                        <div className = 'healthScoreCircle'>
-                            <span className = 'healthScoreValue'>
-                                {details?.healthScore}
-                            </span>
-                            <span class="diagonalLine"></span>
+                <div className = 'healthScore'>
+                    <div className = 'healthScoreCircle'>
+                        <span className = 'healthScoreValue'>
+                            {details?.healthScore}
+                        </span>
+                        <span class="diagonalLine"></span>
 
-                            <span class="healthScoreLabel">Health Score</span>
-                        </div>
+                        <span class="healthScoreLabel">Health Score</span>
                     </div>
-                {/* </div> */}
+                </div>
+                <p>{details?.id}</p>
                 {
                     isValidUUID(details?.id) && (
                         <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>
