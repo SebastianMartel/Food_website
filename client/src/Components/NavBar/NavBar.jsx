@@ -6,12 +6,9 @@ import SearchBar from "../SearchBar/SearchBar";
 //__________________________________________________
 
 
-const StyledNavBar = styled.div `
-    display: flex;
-    justify-content: space-between;
-
-    padding: 2rem;
-    border: 1px solid black;
+const StyledNavLink = styled(NavLink)`
+    text-decoration: none;
+    color: black;
 `
 //__________________________________________________
 
@@ -21,9 +18,9 @@ export default function NavBar ( { setSearching } ) {
     return (
         <div className = "menu">
             <SearchBar setSearching = {setSearching}/>
-            <NavLink to = '/home'>
-                <h1 onClick = {() => {setSearching(false)}}>recipes</h1>
-            </NavLink>
+            <StyledNavLink to = '/home'>
+                <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1>
+            </StyledNavLink>
             <NavLink to = '/form'>
                 <button>CREATE RECIPE</button>
             </NavLink>

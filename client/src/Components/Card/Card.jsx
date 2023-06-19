@@ -1,14 +1,16 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
+import './Card.css'
 //__________________________________________________
 
 
-const StyledCard = styled.div `
-    border: 1px solid black;
-    width: 312px;
-    height: 22rem;
+const StyledNavLink = styled(NavLink)`
+    text-decoration: none;
+    color: black
 `
+
 //__________________________________________________
 
 
@@ -16,13 +18,26 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
 
     return (
         <div>
-            <NavLink to = {`/detail/${id}`}>
-                <StyledCard>
-                    <img src = {image} alt = {title}></img>
-                    <p>{title}</p>
-                    <p>{diets}</p>
-                </StyledCard>
-            </NavLink>
+            <StyledNavLink to = {`/detail/${id}`}>
+                <div className = 'card'>
+
+                    <div style = {{border : '1px solid black', height : '231px', width: '312px'}}></div>
+                    {/* <img src={image} alt={title} /> */}
+                    <p className = 'cardTitle'>{title}</p>
+
+                    <div className = 'cardInner'>
+                        <div className = 'diets'>
+                            {
+                                diets.map((diet) => {
+                                    return (
+                                        <p class = 'diet'>{diet}</p>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </StyledNavLink>
         </div>
-    )
-}
+    );
+  }
