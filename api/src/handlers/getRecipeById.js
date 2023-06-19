@@ -75,7 +75,7 @@ const getRecipeById = async (req, res) => {
                 //-/ id: data.id,
                 title: data?.title,
                 image: data?.image,
-                summary: data?.summary,
+                summary: data?.summary.replace(/<[^>]+>/g, ''),
                 healthScore: data?.healthScore,
                 stepByStep: data?.analyzedInstructions[0]?.steps, //FIXED // FIX (later, working in the front): it's showing, unnecessary properties.
                 diets: data?.diets
