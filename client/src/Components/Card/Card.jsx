@@ -21,8 +21,8 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
             <StyledNavLink to = {`/detail/${id}`}>
                 <div className = 'card'>
 
-                    <div style = {{border : '1px solid black', height : '231px', width: '312px'}}></div>
-                    {/* <img src={image} alt={title} /> */}
+                    {/* <div style = {{border : '1px solid black', height : '231px', width: '312px'}}></div> */}
+                    <img src={image} alt={title} />
                     <p className = 'cardTitle'>{title}</p>
 
                     <div className = 'cardInner'>

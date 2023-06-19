@@ -15,6 +15,8 @@ export default function Detail ( { setDeleteSuccess } ) {
 
         const [showConfirm, setShowConfirm] = useState(false)
 
+        const [updatedDiets, setUpdatedDiets] = useState({})
+
 
         const { id } = useParams()
 
@@ -35,9 +37,6 @@ export default function Detail ( { setDeleteSuccess } ) {
             }, 8000)
             navigate('/home')
         }
-
-        // const deleteConfirm = () => {
-        // }
 
         const confirmDelete = () => {
             setShowConfirm(!showConfirm)
@@ -68,12 +67,21 @@ export default function Detail ( { setDeleteSuccess } ) {
         <div className = "detail">
             <div className = "detailSection1">
                 <h1 className = "recipeTitle">{details?.title}</h1>{/* Screws the width of the first section when the title has a word really long */}
-                <p>{details?.diets}</p>
                 <p>{details?.summary}</p>
+                <div className = 'detailDietsList'>
+                    {
+                        details?.diets && Object.keys(details?.diets).map((dietKey) => {
+                            return (
+                                <p>{details?.diets[dietKey]}</p>
+                            )
+                        })
+                    }
+                    <p>{details?.diets?.length}</p>
+                </div>
             </div>
 
             <div className = "detailSectionSteps">
-                <h2>Preparation</h2 >
+                <h2 className = 'preparationTitle'>P R E P A R A T I O N</h2>
                 {
                     isValidUUID(details?.id)
                     ? (
@@ -105,8 +113,18 @@ export default function Detail ( { setDeleteSuccess } ) {
             <div className = "detailSection3">
                 <img src = {details?.image} alt = {details?.title}/>
                 <p>{details?.id}</p>
-                <p>health score: {details?.healthScore}</p>
-                <p>{typeof(details.diets)}</p>
+                {/* <div className = "line"> */}
+                    <div className = 'healthScore'>
+                        <div className = 'healthScoreCircle'>
+                            <span className = 'healthScoreValue'>
+                                {details?.healthScore}
+                            </span>
+                            <span class="diagonalLine"></span>
+
+                            <span class="healthScoreLabel">Health Score</span>
+                        </div>
+                    </div>
+                {/* </div> */}
                 {
                     isValidUUID(details?.id) && (
                         <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>
@@ -116,9 +134,13 @@ export default function Detail ( { setDeleteSuccess } ) {
             {
                 showConfirm && (
                     <div className = 'confirmBox'>
-                        <p>Are you sure you want to delete your recipe? This action is irreversible</p>
-                        <button className = 'deleteRecipe' onClick = {deleteRecipe}>YES I'M SURE</button>
-                        <button className = 'dontDeleteRecipe' onClick = {confirmDelete}>No</button>
+                        <div className = 'confirmBoxContent'>
+                            <p className = 'confirmQuestion'>Are you sure you want to delete your recipe? This action is irreversible</p>
+                            <div className = 'confirmDeleteButtons'>
+                                <button className = 'deleteRecipe' onClick = {deleteRecipe}>YES, I'M SURE</button>
+                                <button className = 'dontDeleteRecipe' onClick = {confirmDelete}>NO</button>
+                            </div>
+                        </div>
                     </div>
                 )
             }

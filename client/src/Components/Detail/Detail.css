@@ -1,31 +1,17 @@
 .detail {
     display: flex;
-    grid-template-columns: 1fr 1fr 1fr;
-
-    border: 1px solid red;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    
+    /* border: 1px solid red; */
     height: 100%;
     /* margin-top : 15vh; */
     margin-top: 115px;
 }
 
 .detailSection1 {
-    width: 33.3%;
-    max-width: 33.3%;
+    width: 30%;
+    max-width: 30%;
     padding: 40px 40px 0;
-}
-
-.detailSectionSteps {
-    align-self: center;
-    width: 33.3%;
-    max-width: 33.3%;
-    padding: 0 40px;
-
-}
-
-.detailSection3 {
-    width: 33.3%;
-    max-width: 33.3%;
-    padding: 40px 40px 40px;
 }
 
 .recipeTitle {
@@ -33,8 +19,82 @@
     font-weight: 900;
 }
 
+.detailDietsList {
+    margin: 50px 0 0
+}
+
+.detailSectionSteps {
+    align-self: center;
+    width: 30%;
+    max-width: 30%;
+    padding: 0 40px;
+
+}
+
+.preparationTitle {
+    font-size: 30px;
+}
+
+.detailSection3 {
+    width: 40%;
+    max-width: 40;
+    padding: 40px 40px 40px;
+}
+
+.line {
+    height: 30px
+}
+.healthScore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-size: 40px;
+}
+.healthScoreCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #FFD700;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFF
+}
+.healthScoreValue {
+    font-size: 36px;
+}
+.healthScoreLabel {
+    font-size: 18px;
+    color: #555
+}
+
+
+
+.confirmDelete {
+    height: 40px;
+    width: 200px;
+
+    margin-top: 50px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 900;
+    background-color: red;
+    border: 3px solid darkred;
+    border-radius: 7px;
+}
+.confirmDelete:hover {
+    cursor: pointer;
+    background-color: darkred;
+}
+
+
 .confirmBox {
-    position: absolute;
+    position: fixed; /*to keep it centered when scrolling*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,23 +102,61 @@
     left: 0;
     right: 0;
     bottom: 0;
-    backdrop-filter: blur(5px); /* Apply a blur effect */
+    backdrop-filter: blur(5px);
 }
 
-.confirmDelete {
-    height: 40px;
-    width: 200px;
+.confirmBoxContent {
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    border: 1px solid black;
+    gap: 30px
 }
 
+.confirmQuestion {
+    margin: 0;
+    font-size: 20px;
+}
+
+.confirmDeleteButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
 .deleteRecipe {
     height: 40px;
     width: 200px;
-}
 
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 900;
+    background-color: red;
+    border: 3px solid darkred;
+    border-radius: 7px;
+}
+.deleteRecipe:hover {
+    cursor: pointer;
+    background-color: darkred;
+}
 .dontDeleteRecipe {
     height: 40px;
     width: 200px;
+    
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 900;
+    background-color: lime;
+    border: 3px solid green;
+    border-radius: 7px;
 }
+.dontDeleteRecipe:hover {
+    cursor: pointer;
+    background-color: green;
+}
+
 
 body {
     /* border: 1px solid black; */
