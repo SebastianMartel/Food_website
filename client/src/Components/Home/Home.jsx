@@ -16,8 +16,8 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
     const dispatch = useDispatch()
 
 
-    const handleOrder = (event) => {
-        dispatch(sortAllRecipes(event.target.value))
+    const handleOrder = (value) => {
+        dispatch(sortAllRecipes(value))
     }
 
 
@@ -25,16 +25,24 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
         <div>
             <div className = 'headline'>
                 <h1 className = 'sortTitle'>SORT BY</h1>
-                <select onChange = {(event) => {handleOrder(event)}}>
-                    <option disabled hidden>Sort by name</option>
-                    <option value = 'A'>Name (A-Z)</option>
-                    <option value = 'B'>Name (Z-A)</option>
-                </select>
-                <select onChange = {(event) => {handleOrder(event)}}>
-                    <option value = '' disabled hidden>Sort by health score</option>
-                    <option value = 'C'>More healthy</option>
-                    <option value = 'D'>Less healthy</option>
-                </select>
+                <div className = 'selectWrapperSort'>
+                    <div className = 'selectLabelSort'>
+                        N A M E
+                    </div>
+                    <div className = 'selectListSort'>
+                        <li onClick = {() => {handleOrder('A')}}>Ascending (A-Z)</li>
+                        <li onClick = {() => {handleOrder('B')}}>Descending (Z-A)</li>
+                    </div>
+                </div>
+                <div className = 'selectWrapperSort'>
+                    <div className = 'selectLabelSort'>
+                        H E A L T H . S C O R E
+                    </div>
+                    <div className = 'selectListSort'>
+                            <li onClick = {() => {handleOrder('C')}}>More healthy</li>
+                            <li onClick = {() => {handleOrder('D')}}>Less healthy</li>
+                    </div>
+                </div>
                 {/* <p>ALL {allRecipes?.length}</p>
                 <p>SEARCH {searchResults?.length}</p> */}
             </div>

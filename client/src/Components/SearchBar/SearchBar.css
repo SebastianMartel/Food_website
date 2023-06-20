@@ -2,20 +2,24 @@
     display: flex;
     align-items: center;
 }
+/*____________________________________________________________*/
 
 .searchButton {
     border: none
 }
+/*____________________________________________________________*/
 
 .searchTitle {
     margin: 0;
     font-size: 30px;
     font-weight: 900 !important;
     background-color: #FFF4ED;
-    color: #C8553D;
+    color: #545454;
     padding: 0;
     cursor: pointer;
+    width: 283px;
 }
+/*____________________________________________________________*/
 
 .searchSection {
     display: flex;
@@ -40,7 +44,6 @@
     background-color: #FFF4ED;
     outline: none;
 }
-
 
 .searchButtonIconContainer {
     background-color: #FFF4ED;

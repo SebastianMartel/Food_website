@@ -3,23 +3,82 @@
     src: url('../../Media/proxima-nova/Proxima-nova-extrabold.otf') format('opentype');
 }
 
+/*____________________________________________________________*/
 .headline {
     display: flex;
-    flex-direction: row;
     justify-content: center;
+    align-items: center;
+
     gap: 5rem;
     margin-top: 115px;
+    height: 50px;
     /* margin-top: 15vh; */
 
     padding: 1rem;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 }
 
+/*____________________________________________________________*/
 .sortTitle {
     margin:0;
     font-family: 'proxima-nova';
+    color: #C8553D;
 }
 
+/*____________________________________________________________*/
+.selectWrapperSort {
+    position: relative;
+    font-family: 'proxima-nova';
+
+}
+
+.selectLabelSort {
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+    color: #C8553D;
+    font-size: 20px;
+    cursor: pointer;
+}
+.selectLabelSort:hover {
+    background-color: #588B8B;
+    color: #FFF4ED;
+    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,.5)
+}
+
+.selectListSort {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    margin:0;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #FFF4ED;
+    list-style: none;
+}
+
+.selectWrapperSort:hover .selectListSort {
+    display: block;
+}
+.selectWrapperSort:hover .selectLabelSort {
+    border-bottom: 5px solid #C8553D;
+}
+
+.selectListSort li {
+    padding: 5px 10px;
+    color: #545454;
+    text-align: start;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 192.7px;
+}
+.selectListSort li:hover {
+    background-color: #e6e6e6;
+}
+
+/*____________________________________________________________*/
 .deleteSuccessMessage {
     position: fixed;
     z-index: 1; /*behind filter list*/

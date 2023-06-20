@@ -33,7 +33,7 @@ export default function NavBar ( { setSearching } ) {
         dispatch(filterAllRecipes(value))
     }
 
-    // const handleDietsClick = () => {
+    // const handleDietsCliFilterck = () => {
     //     setShowDietsFilter(!showDietsFilter);
     //     setShowOriginFilter(false);
     // };
@@ -48,15 +48,15 @@ export default function NavBar ( { setSearching } ) {
         <div className = "menu">
             <StyledNavLink to = '/home'>
                 {/* <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1> */}
-                <img src = {mainLogo} onClick = {() => {setSearching(false)}}/>
+                <img src = {mainLogo} alt = 'NOVA logo' onClick = {() => {setSearching(false)}}/>
             </StyledNavLink>
             <SearchBar setSearching = {setSearching}/>
 
-            <div className = 'selectWrapper'>
-                <div className = 'selectLabel'>
+            <div className = 'selectWrapperFilter'>
+                <div className = 'selectLabelFilter'>
                     EXPLORE BY DIETS
                 </div>
-                <ul className = 'selectList'>
+                <ul className = 'selectListFilter'>
                     <li onClick = {() => {handleFilter('All')}}>All</li>{/*maybe remove this and only use the one in Show all. Makes no sense having two*/}
                     <li onClick = {() => {handleFilter('gluten free')}}>Gluten free</li>
                     <li onClick = {() => {handleFilter('dairy free')}}>Dairy free</li>
@@ -71,11 +71,11 @@ export default function NavBar ( { setSearching } ) {
                 </ul>
             </div>
 
-            <div className = 'selectWrapper'>
-                <div className = 'selectLabel'>
+            <div className = 'selectWrapperFilter'>
+                <div className = 'selectLabelFilter'>
                     EXPLORE BY CREATOR
                 </div>
-                <ul className = 'selectList'>
+                <ul className = 'selectListFilter'>
                     <li onClick = {() => {handleFilter('All')}}>Both</li>
                     <li onClick = {() => {handleFilter('DB')}}>Your own recipes</li>
                     <li onClick = {() => {handleFilter('API')}}>By others</li>
