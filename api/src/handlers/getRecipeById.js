@@ -72,7 +72,7 @@ const getRecipeById = async (req, res) => {
             const { data } = response
 
             const recipe = {
-                //-/ id: data.id,
+                id: data.id,
                 title: data?.title,
                 image: data?.image,
                 summary: data?.summary.replace(/<[^>]+>/g, ''),
