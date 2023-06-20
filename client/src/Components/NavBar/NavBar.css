@@ -37,3 +37,57 @@
     color: #EFE6DD;
     cursor: pointer;
 }
+
+
+
+.selectWrapper {
+    position: relative;
+}
+
+.selectLabel {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 25px;
+}
+.selectLabel:hover {
+    background-color: #588B8B;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+}
+
+/* .select-label:hover + .select-list,
+.select-list:hover {
+  display: block;
+} */
+/* uncomment and remove states */
+
+.selectList {
+    position: absolute;
+    top: 100%;
+    margin:0;
+    left: 0;
+    display: none;
+    background-color: #FFF4ED;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 1;
+    list-style: none;
+}
+.selectList:hover {
+    display: block;
+}
+
+.selectWrapper:hover .selectList {
+    display: block;
+}
+
+.selectList li {
+    padding: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.selectList li:hover {
+    background-color: #e6e6e6;
+}
