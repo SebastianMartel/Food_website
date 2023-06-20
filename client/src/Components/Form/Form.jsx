@@ -7,18 +7,8 @@ import validation from '../Validation/validation';
 
 import styled from "styled-components";
 import './Form.css'
+import formImage from '../../Media/formImage.png'
 //__________________________________________________
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 0 33%;
-`
-
-const SubmitButton = styled.button`
-    
-`
 
 
 export default function Form () {
@@ -175,96 +165,114 @@ export default function Form () {
 
     return (
         <div className = 'mainDiv'>
-            <StyledForm onSubmit = {handleSubmit}>
-
-                <img/>
-                <label>Name</label>
-                    <input name = 'title' value = {recipe.title} onChange = {syncChange}/>
-                    <p>{recipe?.title}</p>
-                    {
-                        errors !== {} && <p>{errors?.title}</p>
-                    }
-
-                <label>Description</label>
-                <textarea name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
-                    <p>{recipe?.summary}</p>
-                    {
-                        errors !== {} && <p>{errors?.summary}</p>
-                    }
-
-                <label>HealthScore</label>
-                    <input name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange}/>
-                    <p>{recipe?.healthScore}</p>
-                    {
-                        errors !== {} && <p>{errors?.healthScore}</p>
-                    }
-
-                <label>Add a photo</label>
-                    <input name = 'image' value = {recipe.image} onChange = {syncChange}/>
-                    <p>{recipe?.image}</p>
-                    {
-                        errors !== {} && <p>{errors?.image}</p>
-                    }
-
-                <label>Instructions</label>
-                    {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
-                    {
-                        errors !== {} && <p>{errors?.steps}</p>
-                    }
-                    <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
-                    <p>{recipe?.stepByStep[0]}</p>
-
-                    <label>Select diets</label>
-                <div className = 'checkboxes'>
-                    <div className = 'checkboxC'>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
-                            <label >gluten free</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
-                            <label >dairy free</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
-                            <label >lacto ovo vegetarian</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
-                            <label >vegan</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
-                            <label >paleolithic</label>
-                        </div>
+            <div className = 'formImageContainer'>
+                <img src = {formImage}/>
+            </div>
+            <form className = 'form' onSubmit = {handleSubmit}>
+                <h1>Create your recipe</h1>
+                <div className = 'formSection1'>
+                    <div className = 'formTitle'>
+                        <label>Name</label>
+                            <input name = 'title' value = {recipe.title} onChange = {syncChange}/>
+                            <p>{recipe?.title}</p>
+                            {
+                                errors !== {} && <p>{errors?.title}</p>
+                            }
                     </div>
-                    <div className = 'checkboxC'>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
-                            <label >primal</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
-                            <label >whole 30</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
-                            <label >pescatarian</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
-                            <label >ketogenic</label>
-                        </div>
-                        <div className = 'checkboxR'>
-                            <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmapFriendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
-                            <label >fodmap friendly</label>
-                        </div>
+                    <div className = 'formHealthScore'>
+                        <label>HealthScore</label>
+                            <input name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange}/>
+                            <p>{recipe?.healthScore}</p>
+                            {
+                                errors !== {} && <p>{errors?.healthScore}</p>
+                            }
                     </div>
                 </div>
 
-                <SubmitButton type = 'submit'>POST!</SubmitButton>
+                <div className = 'formSection2'>
+                    <div className = 'formSection2-1'>
+                        <div className = 'formDescription'>
+                            <label>Description</label>
+                                <textarea name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
+                                <p>{recipe?.summary}</p>
+                                {
+                                    errors !== {} && <p>{errors?.summary}</p>
+                                }
+                        </div>
+                        <div className = 'formInstructions'>
+                            <label>Instructions</label>
+                                {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
+                                {
+                                    errors !== {} && <p>{errors?.steps}</p>
+                                }
+                                <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
+                                <p>{recipe?.stepByStep[0]}</p>
+                        </div>
+                    </div>
 
-            </StyledForm>
+                    <div className = 'formSection2-2'>
+                        <div className = 'formPhoto'>
+                            <label>Add a photo</label>
+                                <input name = 'image' value = {recipe.image} onChange = {syncChange}/>
+                                <p>{recipe?.image}</p>
+                                {
+                                    errors !== {} && <p>{errors?.image}</p>
+                                }
+                        </div>
+                        <div className = 'formDiets'>
+                            <label>Select diets</label>
+                                <div className = 'checkboxes'>
+                                    <div className = 'checkboxC'>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
+                                            <label >gluten free</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
+                                            <label >dairy free</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
+                                            <label >lacto ovo vegetarian</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
+                                            <label >vegan</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
+                                            <label >paleolithic</label>
+                                        </div>
+                                    </div>
+                                    <div className = 'checkboxC'>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
+                                            <label >primal</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
+                                            <label >whole 30</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
+                                            <label >pescatarian</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
+                                            <label >ketogenic</label>
+                                        </div>
+                                        <div className = 'checkboxR'>
+                                            <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmapFriendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
+                                            <label >fodmap friendly</label>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <button type = 'submit'>POST!</button>
+                </div>
+
+            </form>
         </div>
     )
 }

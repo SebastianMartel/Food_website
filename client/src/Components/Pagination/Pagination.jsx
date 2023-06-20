@@ -26,19 +26,19 @@ export default function Pagination ( { searching, recipesPerPage, totalAllRecipe
                 {
                     searching === true
                     ? (
-                        pageNumbersSearchResults.map((number) => {
+                        pageNumbersSearchResults.map((number, index) => {
                             return (
-                                    <a className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
-                                        <div className = 'pageNumber'>
-                                                {number}
-                                        </div>
-                                    </a>
+                                <a  key = {index} className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
+                                    <div className = 'pageNumber'>
+                                            {number}
+                                    </div>
+                                </a>
                             )
                         })
                     )
-                    : pageNumbersAllRecipes.map((number) => {
+                    : pageNumbersAllRecipes.map((number, index) => {
                         return (
-                                <a className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
+                                <a key = {index} className = 'pageBox' href = '#!' onClick = {() => {paginate(number)}}>
                                     <div className = 'pageNumber'>
                                             {number}
                                     </div>

@@ -1,19 +1,30 @@
+@font-face {
+    font-family: 'proxima-nova';
+    src: url('../../Media/proxima-nova/Proxima-nova-extrabold.otf') format('opentype');
+}
+/*____________________________________________________________*/
+
 .navPage {
+    font-family: 'proxima-nova';
     display: flex;
     flex-direction: row;
     justify-content: center;
 
     margin: 5rem auto 2rem;
-    min-width: 2rem;
+    /* min-width: 2rem; */
 }
 
 .pageNumber {
-    color: black;
-    margin: 5px
+    color: #FFFFFF;
+    margin: 7px;
 }
 
 .pageBox {
     text-decoration: none;
-    border: 1px solid black;
+    /* border: 1px solid #C8553D; */
+    background-color: #545454;
     padding: 7px 12px
+}
+.pageBox:hover .pageNumber {
+    color: #C8553D;
 }
