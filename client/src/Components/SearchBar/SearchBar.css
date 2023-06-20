@@ -1,3 +1,24 @@
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+
+.searchButton {
+    border: none
+}
+
+.searchTitle {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900 !important;
+    background-color: #FFF4ED;
+    color: #C8553D;
+    padding: 0;
+}
+.searchTitle:hover {
+    cursor: pointer;
+}
+
 .searchSection {
     display: flex;
     align-items: center;
@@ -11,8 +32,8 @@
 
 .searchInput {
     height: 50px;
-    width: 220px;
-    padding: 0 10px;
+    width: 204px;
+    padding: 0 0 0 18px;
     margin: 0;
 
     border: none;
@@ -23,17 +44,17 @@
 }
 
 
-.searchButtonContainer {
+.searchButtonIconContainer {
     background-color: #FFF4ED;
     padding: 0;
     border: none;
 }
-.searchButtonContainer:hover {
+.searchButtonIconContainer:hover {
     cursor: pointer;
 }
 
-.searchButton {
-    width: 38px;
+.searchButtonIcon {
+    width: 58px;
     font-size: 25px;
     fill: #545454;
     align-self: center;

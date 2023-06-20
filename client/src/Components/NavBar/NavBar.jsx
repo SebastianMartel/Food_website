@@ -32,11 +32,11 @@ export default function NavBar ( { setSearching } ) {
         <div className = "menu">
             <StyledNavLink to = '/home'>
                 {/* <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1> */}
-                <img src = {mainLogo}/>
+                <img src = {mainLogo} onClick = {() => {setSearching(false)}}/>
             </StyledNavLink>
             <SearchBar setSearching = {setSearching}/>
-            <select onChange = {(event) => {handleFilter(event)}}>
-                    <option disabled hidden>Explore through diets</option>
+                <select onChange = {(event) => {handleFilter(event)}}>
+                    <option disabled>Explore through diets</option>
                     <option value = 'All'>All</option>
                     <option value = 'gluten free'>gluten free</option>
                     <option value = 'dairy free'>dairy free</option>
@@ -50,7 +50,7 @@ export default function NavBar ( { setSearching } ) {
                     <option value = 'fodmap friendly'>fodmap friendly</option>
                 </select>
                 <select onChange = {(event) => {handleFilter(event)}}>
-                    <option value = '' disabled hidden>Filter by origin</option>
+                    <option value = '' disabled>Filter by origin</option>
                     <option value = 'DB'>Your own recipes</option>
                     <option value = 'API'>By others</option>
                 </select>
