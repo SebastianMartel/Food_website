@@ -24,12 +24,7 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
     return (
         <div>
             <div className = 'headline'>
-                <h1>HOME</h1>
-                {
-                    true && (
-                        <div className = 'deleteSuccessMessage'>you have successfully deleted your recipe</div>
-                    )
-                }
+                <h1 className = 'sortTitle'>SORT BY</h1>
                 <select onChange = {(event) => {handleOrder(event)}}>
                     <option disabled hidden>Sort by name</option>
                     <option value = 'A'>Name (A-Z)</option>
@@ -43,6 +38,11 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
                 {/* <p>ALL {allRecipes?.length}</p>
                 <p>SEARCH {searchResults?.length}</p> */}
             </div>
+            {
+                deleteSuccess && (
+                    <div className = 'deleteSuccessMessage'>you have successfully deleted your recipe</div>
+                )
+            }
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
 

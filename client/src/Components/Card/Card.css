@@ -34,7 +34,7 @@
     /* background-color: #588B8B; */
     /* background-color: #F28F3B; */
 }
-  
+
 .card:hover .cardInner {
     transform: translateY(0%);
 }
