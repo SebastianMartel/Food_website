@@ -7,4 +7,20 @@
     /* margin-top: 15vh; */
 
     padding: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.deleteSuccessMessage {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    height: 40px;
+    width: 300px;
+    padding: 0 20px;
+    color: green;
+    background-color:lightgreen;
+    border-radius: 5px;
+
+    border: 3px solid green;
 }

@@ -25,6 +25,7 @@
 .createRecipe {
     background-color: #588B8B;
     border: none;
+    border-radius: 7px;
     color: #FFD5C2;
     width: 204px;
     height:65px;
@@ -32,7 +33,7 @@
     font-size: 17px;
 }
 .createRecipe:hover {
-    background-color: #FFD5C2;
-    color: #C8553D;
+    background-color: #659157;
+    color: #EFE6DD;
     cursor: pointer;
 }
