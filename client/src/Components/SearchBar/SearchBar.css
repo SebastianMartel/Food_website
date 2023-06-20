@@ -14,8 +14,6 @@
     background-color: #FFF4ED;
     color: #C8553D;
     padding: 0;
-}
-.searchTitle:hover {
     cursor: pointer;
 }
 
@@ -48,8 +46,6 @@
     background-color: #FFF4ED;
     padding: 0;
     border: none;
-}
-.searchButtonIconContainer:hover {
     cursor: pointer;
 }
 

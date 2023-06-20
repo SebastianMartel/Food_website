@@ -28,7 +28,6 @@
     width: 30%;
     max-width: 30%;
     padding: 0 40px;
-
 }
 
 .preparationTitle {
@@ -84,9 +83,9 @@
     background-color: red;
     border: 3px solid darkred;
     border-radius: 7px;
+    cursor: pointer;
 }
 .confirmDelete:hover {
-    cursor: pointer;
     background-color: darkred;
 }
 
@@ -134,9 +133,9 @@
     background-color: red;
     border: 3px solid darkred;
     border-radius: 7px;
+    cursor: pointer;
 }
 .deleteRecipe:hover {
-    cursor: pointer;
     background-color: darkred;
 }
 .dontDeleteRecipe {
@@ -149,9 +148,9 @@
     background-color: lime;
     border: 3px solid green;
     border-radius: 7px;
+    cursor: pointer;
 }
 .dontDeleteRecipe:hover {
-    cursor: pointer;
     background-color: green;
 }
 

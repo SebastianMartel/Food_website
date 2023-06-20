@@ -21,9 +21,9 @@ const StyledNavLink = styled(NavLink)`
 export default function NavBar ( { setSearching } ) {
 
 
-        const [showDietsFilter, setShowDietsFilter] = useState(false)
+        // const [showDietsFilter, setShowDietsFilter] = useState(false)
 
-        const [showOriginFilter, setShowOriginFilter] = useState(false)
+        // const [showOriginFilter, setShowOriginFilter] = useState(false)
 
 
     const dispatch = useDispatch()
@@ -33,15 +33,15 @@ export default function NavBar ( { setSearching } ) {
         dispatch(filterAllRecipes(value))
     }
 
-    const handleDietsClick = () => {
-        setShowDietsFilter(!showDietsFilter);
-        setShowOriginFilter(false);
-    };
+    // const handleDietsClick = () => {
+    //     setShowDietsFilter(!showDietsFilter);
+    //     setShowOriginFilter(false);
+    // };
 
-    const handleOriginClick = () => {
-        setShowOriginFilter(!showOriginFilter);
-        setShowDietsFilter(false);
-    };
+    // const handleOriginClick = () => {
+    //     setShowOriginFilter(!showOriginFilter);
+    //     setShowDietsFilter(false);
+    // };
 
 
     return (
@@ -53,40 +53,35 @@ export default function NavBar ( { setSearching } ) {
             <SearchBar setSearching = {setSearching}/>
 
             <div className = 'selectWrapper'>
-                <div className = {`selectLabel ${showDietsFilter ? 'active' : ''}`} onClick = {handleDietsClick}>
-                    Explore by diets
+                <div className = 'selectLabel'>
+                    EXPLORE BY DIETS
                 </div>
-                {
-                    showDietsFilter && (
-                        <ul className = 'selectList'>
-                            <li value = 'All' onClick = {() => {handleFilter('All')}}>All</li>{/*maybe remove this and only use the one in Show all. Makes no sense having two*/}
-                            <li value = 'gluten free' onClick = {() => {handleFilter('gluten free')}}>gluten free</li>
-                            <li value = 'dairy free' onClick = {() => {handleFilter('dairy free')}}>dairy free</li>
-                            <li value = 'lacto ovo vegetarian' onClick = {() => {handleFilter('lacto ovo vegetarian')}}>lacto ovo vegetarian</li>
-                            <li value = 'vegan' onClick = {() => {handleFilter('vegan')}}>vegan</li>
-                            <li value = 'paleolithic' onClick = {() => {handleFilter('paleolithic')}}>paleolithic</li>
-                            <li value = 'primal' onClick = {() => {handleFilter('primal')}}>primal</li>
-                            <li value = 'whole 30' onClick = {() => {handleFilter('whole 30')}}>whole 30</li>
-                            <li value = 'pescatarian' onClick = {() => {handleFilter('pescatarian')}}>pescatarian</li>
-                            <li value = 'ketogenic' onClick = {() => {handleFilter('ketogenic')}}>ketogenic</li>
-                            <li value = 'fodmap friendly' onClick = {() => {handleFilter('fodmap friendly')}}>fodmap friendly</li>
-                        </ul>
-                    )
-                }
+                <ul className = 'selectList'>
+                    <li onClick = {() => {handleFilter('All')}}>All</li>{/*maybe remove this and only use the one in Show all. Makes no sense having two*/}
+                    <li onClick = {() => {handleFilter('gluten free')}}>Gluten free</li>
+                    <li onClick = {() => {handleFilter('dairy free')}}>Dairy free</li>
+                    <li onClick = {() => {handleFilter('lacto ovo vegetarian')}}>Lacto ovo vegetarian</li>
+                    <li onClick = {() => {handleFilter('vegan')}}>Vegan</li>
+                    <li onClick = {() => {handleFilter('paleolithic')}}>Paleolithic</li>
+                    <li onClick = {() => {handleFilter('primal')}}>Primal</li>
+                    <li onClick = {() => {handleFilter('whole 30')}}>Whole 30</li>
+                    <li onClick = {() => {handleFilter('pescatarian')}}>Pescatarian</li>
+                    <li onClick = {() => {handleFilter('ketogenic')}}>Ketogenic</li>
+                    <li onClick = {() => {handleFilter('fodmap friendly')}}>Fodmap friendly</li>
+                </ul>
             </div>
+
             <div className = 'selectWrapper'>
-                <div className = {`selectLabel ${showOriginFilter ? 'active' : ''}`} onClick = {handleOriginClick}>
-                    Explore by creator
+                <div className = 'selectLabel'>
+                    EXPLORE BY CREATOR
                 </div>
-                {
-                    showOriginFilter && (
-                        <ul className = 'selectList'>
-                            <li value = 'DB' onClick = {() => {handleFilter('DB')}}>Your own recipes</li>
-                            <li value = 'API' onClick = {() => {handleFilter('API')}}>By others</li>
-                        </ul>
-                    )
-                }
+                <ul className = 'selectList'>
+                    <li onClick = {() => {handleFilter('All')}}>Both</li>
+                    <li onClick = {() => {handleFilter('DB')}}>Your own recipes</li>
+                    <li onClick = {() => {handleFilter('API')}}>By others</li>
+                </ul>
             </div>
+
             <NavLink to = '/form'>
                 <button className = 'createRecipe'>ADD YOUR RECIPE</button>
             </NavLink>
