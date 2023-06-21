@@ -200,19 +200,21 @@ export default function Form () {
                     <div className = 'formSection2-1'>
                         <div className = 'formDescription'>
                             <label className = 'formLabel'>Description</label>
-                                <textarea name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
+                                <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
                                 {/* <p>{recipe?.summary}</p> */}
                                 {
                                     errors !== {} && <p className = 'errorMessage'>{errors?.summary}</p>
                                 }
                         </div>
                         <div className = 'formInstructions'>
-                            <label className = 'formLabel'>Instructions</label>
-                                {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
-                                {
-                                    errors !== {} && <p className = 'errorMessage'>{errors?.steps}</p>
-                                }
-                                <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
+                            <label className = 'formLabel'>Directions</label>
+                                <div className = 'formInstructionsSteps'>
+                                    {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
+                                    {
+                                        errors !== {} && <p className = 'errorMessage'>{errors?.steps}</p>
+                                    }
+                                </div>
+                                <button className = 'formAddStepButton' type = 'button' onClick = {addStep}>+ ADD STEP</button>
                                 {/* <p>{recipe?.stepByStep[0]}</p> */}
                         </div>
                     </div>

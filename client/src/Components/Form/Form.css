@@ -28,8 +28,8 @@
     display: flex;
     flex-direction: column;
 
-    gap: 20px;
-    margin: 250px 27% 100px;
+    gap: 40px;
+    margin: 250px 25% 100px;
     padding: 0 50px 50px;
     background-color: bisque;
     font-family: 'proxima-nova';
@@ -44,7 +44,7 @@
 }
 
 .formLabel {
-    margin: 0 0 10px;
+    margin: 0 0 15px;
     font-size: 25px;
 }
 /*____________________*/
@@ -58,12 +58,15 @@
 .formInputTitle{
     min-width: 50%;
     height: 30px;
+    padding: 6px 15px;
+    font-size: 18px;
+    border-radius: 7px;
+    font-family: 'source-sans-pro';
 }
 .formInputTitle:focus {
     outline: none;
     box-shadow: 0 0 1px 1px green;
     border: 2px solid white;
-
 }
 /*____________________*/
 .formHealthScore {
@@ -124,23 +127,78 @@
     display: flex;
     flex-direction: column;
 
-    border: 1px solid yellow;
-    width: 50%;
+    gap: 20px;
+    /* border: 1px solid green; */
+    width: 48%;
 }
 
 .formDescription {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
+}
+.formTextareaDescription {
+    width: 85%;
+    max-width: 85%;
+    min-width: 85%;
+    height: 110px;
+    max-height: 260px;
+    min-height: 110px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 7px;
+    border: 1px solid black;
+    font-family: 'source-sans-pro';
+}
+.formTextareaDescription:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px green;
+    border: 2px solid white;
 }
 
 .formInstructions {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
 }
+.formInstructionsSteps {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+    width: 100%;
+}
+.formTextAreaInstructions {
+    width: 85%;
+    max-width: 85%;
+    min-width: 85%;
+    height: 80px;
+    max-height: 300px;
+    min-height: 80px;
+    height: 70px;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 7px;
+    font-family: 'source-sans-pro';
+}
+.formTextAreaInstructions:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px green;
+    border: 2px solid white;
+}
+.formAddStepButton {
+    height: 30px;
+    width: 120px;
+    font-size: 18px;
+    color: #FFF;
+    background-color: #C8553D;
+    border: none;
+    border-radius: 7px;
+    font-family: 'proxima-nova';
+    cursor: pointer;
+}
+
 
 /*____________________________________________________________*/
 .formSection2-2 {
@@ -148,7 +206,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    width: 50%;
+    width: 48%;
     border: 1px solid yellow;
 }
 
