@@ -19,7 +19,7 @@ export default function Form () {
             title: '',
             image: '',
             summary: '',
-            healthScore: 0,
+            healthScore: '',
             stepByStep: [],
             diets: []
         })
@@ -122,7 +122,7 @@ export default function Form () {
                 stepByStep: [],
                 diets: []
             })
-            setSteps([])
+            setSteps([1])
             setMode({
                 glutenFree: false,
                 dairyFree: false,
@@ -173,23 +173,23 @@ export default function Form () {
                 <h1>CREATE YOUR RECIPE</h1>
                 <div className = 'formSection1'>
                     <div className = 'formTitle'>
+                        {/* TITLE */}
                         <label className = 'formLabel'>Name your recipe</label>
                             <input className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange} placeholder = 'Juicy grilled sirloin with...'/>
-                            {/* <p>{recipe?.title}</p> */}
                             {
-                                errors !== {} && <p className = 'errorMessage'>{errors?.title}</p>
+                                errors.title && <p className = 'errorMessage'>{errors.title}</p>
                             }
                     </div>
                     <div className = 'formHealthScore'>
                         <div className = 'healthScoreCircle'>
-                            <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3"/>
+                            <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3" placeholder = "?"/>
                         </div>
+                        {/* HEALTH SCORE */}
                         <div className = 'formHealthScoreLabel-Errors'>
                             <label className = 'formLabel' style = {{textAlign: 'start'}}>Health score</label>
-                                {/* <p>{recipe?.healthScore}</p> */}
                                 <div>
                                 {
-                                    errors !== {} && <p className = 'errorMessage'>{errors?.healthScore}</p>
+                                    errors.healthScore && <p className = 'errorMessage'>{errors?.healthScore}</p>
                                 }
 
                                 </div>
@@ -200,35 +200,37 @@ export default function Form () {
                 <div className = 'formSection2'>
                     <div className = 'formSection2-1'>
                         <div className = 'formDescription'>
+                            {/* DESCRIPTION */}
                             <label className = 'formLabel'>Description</label>
                                 <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
-                                {/* <p>{recipe?.summary}</p> */}
                                 {
-                                    errors !== {} && <p className = 'errorMessage'>{errors?.summary}</p>
+                                    errors.message && <p className = 'errorMessage'>{errors?.summary}</p>
                                 }
                         </div>
                         <div className = 'formInstructions'>
+                            {/* DIRECTIONS */}
                             <label className = 'formLabel'>Directions</label>
                                 <div className = 'formInstructionsSteps'>
                                     {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)} placeholder = 'Preheat the grill...'/>)}
                                     {
-                                        errors !== {} && <p className = 'errorMessage'>{errors?.steps}</p>
+                                        errors.steps && <p className = 'errorMessage'>{errors?.steps}</p>
                                     }
                                 </div>
                                 <button className = 'formAddStepButton' type = 'button' onClick = {addStep}>+ ADD STEP</button>
-                                {/* <p>{recipe?.stepByStep[0]}</p> */}
                         </div>
                     </div>
 
                     <div className = 'formSection2-2'>
+                        {/* IMAGE */}
                         <div className = 'formImage'>
                             <label className = 'formLabel'>Add a photo</label>
+                                <p style = {{margin: '0 0 10px'}}>*Supported file extensions: .PNG | .JPG</p>
                                 <input className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange} placeholder = 'https://spoonacular.com/image/312x231.jpg'/>
-                                {/* <p>{recipe?.image}</p> */}
                                 {
-                                    errors !== {} && <p className = 'errorMessage'>{errors?.image}</p>
+                                    errors.image && <p className = 'errorMessage'>{errors?.image}</p>
                                 }
                         </div>
+                        {/* DIETS */}
                         <div className = 'formDiets'>
                             <label className = 'formLabel'>Select diets</label>
                                 <div className = 'checkboxes'>
@@ -254,7 +256,6 @@ export default function Form () {
                                             <label >paleolithic</label>
                                         </div>
                                     </div>
-                                    {/* <div style = {{border: '1px solid black'}}></div> */}
                                     <div className = 'checkboxC'>
                                         <div className = 'checkboxR'>
                                             <input type = 'checkbox' className = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
