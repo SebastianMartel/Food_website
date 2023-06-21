@@ -39,6 +39,7 @@
 /*____________________________________________________________*/
 .formSection1 {
     display: flex;
+    justify-content: space-between;
     /* border: 1px solid red; */
 }
 
@@ -52,7 +53,7 @@
     flex-direction: column;
     align-items: flex-start;
 
-    width: 50%;
+    width: 48%;
 }
 .formInputTitle{
     min-width: 50%;
@@ -68,11 +69,26 @@
 .formHealthScore {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    width: 50%;
+    width: 48%;
+    gap: 20px;
     /* border: 1px solid red; */
 }
+/* FROM DETAILS.CSS: */
+/* .healthScoreCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #FFD700;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFF
+} */
 .formInputHealthScore {
     width: 80px;
     height: 50px;
@@ -86,16 +102,21 @@
 .formInputHealthScore:focus {
     outline: none;
 }
-/* .formInputHealthScore::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-} */
+
+.formHealthScoreLabel-Errors {
+    display: flex;
+    flex-direction: column;
+
+    /* height: 100%; */
+    width: 50%;
+}
 
 /*____________________________________________________________*/
 .formSection2 {
     display: flex;
     justify-content: space-between;
 
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 /*____________________________________________________________*/

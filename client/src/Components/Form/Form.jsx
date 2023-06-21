@@ -180,14 +180,19 @@ export default function Form () {
                             }
                     </div>
                     <div className = 'formHealthScore'>
-                            <div className = 'healthScoreCircle'>
-                                <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3"/>
-                            </div>
-                        <label className = 'formLabel'>Health score</label>
-                            {/* <p>{recipe?.healthScore}</p> */}
-                            {/* {
-                                errors !== {} && <p className = 'errorMessage'>{errors?.healthScore}</p>
-                            } */}
+                        <div className = 'healthScoreCircle'>
+                            <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3"/>
+                        </div>
+                        <div className = 'formHealthScoreLabel-Errors'>
+                            <label className = 'formLabel' style = {{textAlign: 'start'}}>Health score</label>
+                                {/* <p>{recipe?.healthScore}</p> */}
+                                <div>
+                                {
+                                    errors !== {} && <p className = 'errorMessage'>{errors?.healthScore}</p>
+                                }
+
+                                </div>
+                        </div>
                     </div>
                 </div>
 
