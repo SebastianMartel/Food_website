@@ -2,8 +2,8 @@
     font-family: 'proxima-nova';
     src: url('../../Media/proxima-nova/Proxima-nova-extrabold.otf') format('opentype');
 }
-/*____________________________________________________________*/
 
+/*____________________________________________________________*/
 .menu {
     font-family: 'proxima-nova';
 
@@ -24,32 +24,8 @@
     z-index: 9999;
     box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,.3);
 }
-/*____________________________________________________________*/
 
-.title {
-    text-decoration: none;
-    font-size: 50px;
-    margin: 0
-}
 /*____________________________________________________________*/
-
-.createRecipe {
-    background-color: #588B8B;
-    border: none;
-    border-radius: 7px;
-    color: #FFD5C2;
-    width: 204px;
-    height:65px;
-    font-weight: 900;
-    font-size: 17px;
-    cursor: pointer;
-}
-.createRecipe:hover {
-    background-color: #659157;
-    color: #EFE6DD;
-}
-/*____________________________________________________________*/
-
 .selectWrapperFilter {
     position: relative; /*aligns the list with the label*/
 }
@@ -89,7 +65,7 @@
     display: block;
 }
 .selectWrapperFilter:hover .selectLabelFilter {
-    border-bottom: 5px solid #545454;
+    border-bottom: 5px solid black;
 }
 
 .selectListFilter li {
@@ -103,4 +79,23 @@
 }
 .selectListFilter li:hover {
     background-color: #e6e6e6;
+}
+
+/*____________________________________________________________*/
+.createRecipe {
+    background-color: #FFD5C2;
+    border: none;
+    border-radius: 7px;
+    color: black;
+    width: 204px;
+    height:65px;
+    font-weight: 900;
+    font-size: 17px;
+    cursor: pointer;
+    font-family: 'proxima-nova';
+    font-size: 20px;
+}
+.createRecipe:hover {
+    background-color: #545454;
+    color: #EFE6DD;
 }

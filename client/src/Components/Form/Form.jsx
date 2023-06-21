@@ -170,7 +170,7 @@ export default function Form () {
                 <img src = {formImage}/>
             </div>
             <form className = 'form' onSubmit = {handleSubmit}>
-                <h1>Create your recipe</h1>
+                <h1>CREATE YOUR RECIPE</h1>
                 <div className = 'formSection1'>
                     <div className = 'formTitle'>
                         <label className = 'formLabel'>Name your recipe</label>
@@ -234,51 +234,52 @@ export default function Form () {
                                 <div className = 'checkboxes'>
                                     <div className = 'checkboxC'>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'gluten free' name = 'glutenFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.glutenFree}/>
                                             <label >gluten free</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'dairy free' name = 'dairyFree' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.dairyFree}/>
                                             <label >dairy free</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'lacto ovo vegetarian' name = 'lactoOvoVegetarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.lactoOvoVegetarian}/>
                                             <label >lacto ovo vegetarian</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'vegan' name = 'vegan' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.vegan}/>
                                             <label >vegan</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'paleolithic' name = 'paleolithic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.paleolithic}/>
                                             <label >paleolithic</label>
                                         </div>
                                     </div>
+                                    {/* <div style = {{border: '1px solid black'}}></div> */}
                                     <div className = 'checkboxC'>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'primal' name = 'primal' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.primal}/>
                                             <label >primal</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'whole 30' name = 'whole30' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.whole30}/>
                                             <label >whole 30</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'pescatarian' name = 'pescatarian' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.pescatarian}/>
                                             <label >pescatarian</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
+                                            <input type = 'checkbox' className = 'checkbox' svalue = 'ketogenic' name = 'ketogenic' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.ketogenic}/>
                                             <label >ketogenic</label>
                                         </div>
                                         <div className = 'checkboxR'>
-                                            <input type = 'checkbox' value = 'fodmap friendly' name = 'fodmapFriendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
+                                            <input type = 'checkbox' className = 'checkbox' value = 'fodmap friendly' name = 'fodmapFriendly' onChange = {(event) => {syncChange (event); toggleCheckbox (event)}} checked = {mode.fodmapFriendly}/>
                                             <label >fodmap friendly</label>
                                         </div>
                                     </div>
                                 </div>
                         </div>
-                        <button className = 'formSubmitButton' type = 'submit'>POST!</button>
+                        <button className = 'formSubmitButton' type = 'submit'>S U B M I T</button>
                     </div>
                 </div>
 

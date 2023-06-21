@@ -83,7 +83,7 @@ export default function NavBar ( { setSearching } ) {
             </div>
 
             <NavLink to = '/form'>
-                <button className = 'createRecipe'>ADD YOUR RECIPE</button>
+                <button className = 'createRecipe'>POST YOUR RECIPE</button>
             </NavLink>
         </div>
     )
