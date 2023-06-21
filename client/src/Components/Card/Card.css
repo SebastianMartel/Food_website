@@ -5,14 +5,22 @@
 
 .card {
     position: relative;
-    min-height: 17rem;
+    min-height: 281px;
+    /* height: 231px; */
     width: 312px;
 
     transition: transform 0.5s;
     overflow: hidden;
 
     font-size: 20px;
-    border-radius: 7px;
+    /* border-radius: 7px; */
+}
+
+.cardImage {
+    height: 231px;
+}
+.card:hover .cardImage {
+    box-shadow: 0  0.4rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 .cardInner {
@@ -25,26 +33,26 @@
     transition: transform 0.7s;
     transform: translateY(-100%);
     width: 100%;
-    height: 100%;
+    height: 231px;
     top: 0;
     left: 0;
+    border-radius: 0 0 7px 7px;
     color: #E6E6E6;
     font-size: 17px;
     background-color: #C8553D;
     font-family: 'proxima-nova';
 }
-
 .card:hover .cardInner {
-    transform: translateY(-15%);
+    transform: translateY(0%);
 }
 
 .cardTitle {
-    margin: 0;
+    margin: 10px 0 0 0;
     text-align: start;
+
     font-size: 20px;
     font-family: 'proxima-nova';
 }
-
 
 .diet {
     margin: 5px

@@ -20,21 +20,14 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
         <div>
             <StyledNavLink to = {`/detail/${id}`}>
                 <div className = 'card'>
-
-                    {/* <div style = {{border : '1px solid black', height : '231px', width: '312px'}}></div> */}
-                    <div style = {{height : '231px'}}>
-                        <img src = {image} alt = {title}/>
+                    <div className = 'cardImage'>
+                        <img src = {image} alt = {title} style = {{borderRadius : '7px'}}/>
                     </div>
-
                     <div className = 'cardInner'>
                         <div className = 'diets'>
                             {
-                                diets.map((diet) => {
-                                    return (
-                                        <p class = 'diet'>{diet}</p>
-                                        )
-                                    })
-                                }
+                                diets.map((diet) => <p class = 'diet'>{diet}</p>)
+                            }
                         </div>
                     </div>
                     <p className = 'cardTitle'>{title}</p>
