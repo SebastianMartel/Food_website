@@ -174,7 +174,7 @@ export default function Form () {
                 <div className = 'formSection1'>
                     <div className = 'formTitle'>
                         <label className = 'formLabel'>Name your recipe</label>
-                            <input className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange}/>
+                            <input className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange} placeholder = 'Juicy grilled sirloin with...'/>
                             {/* <p>{recipe?.title}</p> */}
                             {
                                 errors !== {} && <p className = 'errorMessage'>{errors?.title}</p>
@@ -201,7 +201,7 @@ export default function Form () {
                     <div className = 'formSection2-1'>
                         <div className = 'formDescription'>
                             <label className = 'formLabel'>Description</label>
-                                <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
+                                <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
                                 {/* <p>{recipe?.summary}</p> */}
                                 {
                                     errors !== {} && <p className = 'errorMessage'>{errors?.summary}</p>
@@ -210,7 +210,7 @@ export default function Form () {
                         <div className = 'formInstructions'>
                             <label className = 'formLabel'>Directions</label>
                                 <div className = 'formInstructionsSteps'>
-                                    {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
+                                    {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)} placeholder = 'Preheat the grill...'/>)}
                                     {
                                         errors !== {} && <p className = 'errorMessage'>{errors?.steps}</p>
                                     }
@@ -223,7 +223,7 @@ export default function Form () {
                     <div className = 'formSection2-2'>
                         <div className = 'formImage'>
                             <label className = 'formLabel'>Add a photo</label>
-                                <input className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange}/>
+                                <input className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange} placeholder = 'https://spoonacular.com/image/312x231.jpg'/>
                                 {/* <p>{recipe?.image}</p> */}
                                 {
                                     errors !== {} && <p className = 'errorMessage'>{errors?.image}</p>

@@ -65,7 +65,7 @@
 }
 .formInputTitle:focus {
     outline: none;
-    box-shadow: 0 0 1px 1px green;
+    box-shadow: 0 0 1.5px 1.5px green;
     border: 2px solid white;
 }
 /*____________________*/
@@ -148,7 +148,7 @@
 }
 .formTextareaDescription:focus {
     outline: none;
-    box-shadow: 0 0 1px 1px green;
+    box-shadow: 0 0 1.5px 1.5px green;
     border: 2px solid white;
 }
 /*____________________*/
@@ -180,7 +180,7 @@
 }
 .formTextAreaInstructions:focus {
     outline: none;
-    box-shadow: 0 0 1px 1px green;
+    box-shadow: 0 0 1.5px 1.5px green;
     border: 2px solid white;
 }
 .formAddStepButton {
@@ -225,7 +225,7 @@
 }
 .formInputImage:focus {
     outline: none;
-    box-shadow: 0 0 1px 1px green;
+    box-shadow: 0 0 1.5px 1.5px green;
     border: 2px solid white;
 }
 /*____________________*/
