@@ -167,7 +167,7 @@ export default function Form () {
     return (
         <div className = 'fullForm'>
             <div className = 'formImageContainer'>
-                <img src = {formImage}/>
+                <img src = {formImage} alt = 'decorative fruits and vegetables'/>
             </div>
             <form className = 'form' onSubmit = {handleSubmit}>
                 <h1>CREATE YOUR RECIPE</h1>

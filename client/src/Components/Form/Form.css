@@ -33,8 +33,7 @@
     padding: 10px 50px 50px;
     background-color: bisque;
     font-family: 'proxima-nova';
-    /*or... */
-    /* font-weight: 700; */
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.3);
 }
 
 /*____________________________________________________________*/
@@ -144,7 +143,7 @@
     padding: 15px;
     font-size: 18px;
     border-radius: 7px;
-    border: 1px solid black;
+    border: 2px solid black;
     font-family: 'source-sans-pro';
 }
 .formTextareaDescription:focus {
@@ -175,7 +174,7 @@
     height: 70px;
     padding: 15px;
     font-size: 18px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 7px;
     font-family: 'source-sans-pro';
 }
@@ -196,8 +195,9 @@
     cursor: pointer;
 }
 .formAddStepButton:hover {
-    background-color: #B54D37;
+    background-color: rgb(181, 77, 55);
     color: #FFF4ED;
+    box-shadow: 0 0.3rem 0.5rem rgba(181, 77, 55, 0.7);
 }
 
 /*____________________________________________________________*/
@@ -219,7 +219,7 @@
     height: 30px;
     padding: 6px 15px;
     font-size: 18px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 7px;
     font-family: 'source-sans-pro';
 }
@@ -241,7 +241,6 @@
 
     width: 100%;
     color: #588B8B;
-    /* font-family: 'source-sans-pro'; */
 }
 .checkboxC {
     display: flex;
@@ -271,13 +270,15 @@
     background-color: #545454;
     color: white;
     border: none;
-    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.4);
     font-family: 'proxima-nova';
     cursor: pointer;
 }
 .formSubmitButton:hover {
     background-color: black;
     color: #FFF4ED;
+    box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.8);
+
 }
 
 /*____________________________________________________________*/

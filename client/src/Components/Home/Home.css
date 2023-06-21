@@ -85,6 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 9px;
 
     margin: 0 38.5%;
     height: 40px;

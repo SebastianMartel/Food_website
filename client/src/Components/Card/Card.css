@@ -22,30 +22,27 @@
     align-items: center;
     flex-direction: column;
 
-    transition: transform 0.5s;
-    transform: translateY(100%);
+    transition: transform 0.7s;
+    transform: translateY(-100%);
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    color: white;
-    font-size: 16px;
+    color: #E6E6E6;
+    font-size: 17px;
     background-color: #C8553D;
-    /* background-color: #588B8B; */
-    /* background-color: #F28F3B; */
+    font-family: 'proxima-nova';
 }
 
 .card:hover .cardInner {
-    transform: translateY(0%);
+    transform: translateY(-15%);
 }
 
 .cardTitle {
-    align-items: start;
-    font-family: 'proxima-nova';
-    font-size: 20px;
-    text-align: start;
-    font-weight: 900;
     margin: 0;
+    text-align: start;
+    font-size: 20px;
+    font-family: 'proxima-nova';
 }
 
 

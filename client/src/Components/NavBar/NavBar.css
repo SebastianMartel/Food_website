@@ -22,7 +22,7 @@
 
     background-color: #FFF4ED;
     z-index: 9999;
-    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,.3);
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.3);
 }
 
 /*____________________________________________________________*/
@@ -44,7 +44,7 @@
 .selectLabelFilter:hover {
     background-color: #588B8B;
     color: #FFF4ED;
-    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,.5)
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.5)
 }
 
 .selectListFilter {
@@ -65,7 +65,7 @@
     display: block;
 }
 .selectWrapperFilter:hover .selectLabelFilter {
-    border-bottom: 5px solid black;
+    border-bottom: 7px solid black;
 }
 
 .selectListFilter li {
@@ -78,12 +78,12 @@
     width: 192.7px;
 }
 .selectListFilter li:hover {
-    background-color: #e6e6e6;
+    background-color: #E6E6E6;
 }
 
 /*____________________________________________________________*/
 .createRecipe {
-    background-color: #FFD5C2;
+    background-color: bisque;
     border: none;
     border-radius: 7px;
     color: black;
