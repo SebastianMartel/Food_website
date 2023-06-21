@@ -31,7 +31,8 @@
     gap: 40px;
     margin: 250px 25% 100px;
     padding: 0 50px 50px;
-    background-color: bisque;
+    background-color: #588B8B;
+    color:white;
     font-family: 'proxima-nova';
     /*or... font-weight: 700; */
 }
@@ -60,6 +61,7 @@
     height: 30px;
     padding: 6px 15px;
     font-size: 18px;
+    border: 2px solid black;
     border-radius: 7px;
     font-family: 'source-sans-pro';
 }
@@ -155,7 +157,7 @@
     box-shadow: 0 0 1px 1px green;
     border: 2px solid white;
 }
-
+/*____________________*/
 .formInstructions {
     display: flex;
     flex-direction: column;
@@ -204,19 +206,32 @@
 .formSection2-2 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 40px;
 
     width: 48%;
-    border: 1px solid yellow;
+    border: 1px solid red;
 }
 
-.formPhoto {
+.formImage {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
 }
-
+.formInputImage {
+    min-width: 90%;
+    height: 30px;
+    padding: 6px 15px;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 7px;
+    font-family: 'source-sans-pro';
+}
+.formInputImage:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px green;
+    border: 2px solid white;
+}
+/*____________________*/
 .formDiets {
     display: flex;
     flex-direction: column;
@@ -233,6 +248,20 @@
 }
 .checkboxR {
     display: flex;
+}
+
+/*____________________________________________________________*/
+.formSubmitButton {
+    align-self: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #545454;
+    color: white;
+    border: none;
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.4);
+    font-family: 'proxima-nova';
+    cursor: pointer;
 }
 
 /*____________________________________________________________*/

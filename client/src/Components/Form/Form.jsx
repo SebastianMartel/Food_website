@@ -2,6 +2,7 @@
 // words of title can't have more than 12 characters.
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+// import { useNavigate } from "react-router-dom";
 
 import validation from '../Validation/validation';
 
@@ -220,9 +221,9 @@ export default function Form () {
                     </div>
 
                     <div className = 'formSection2-2'>
-                        <div className = 'formPhoto'>
+                        <div className = 'formImage'>
                             <label className = 'formLabel'>Add a photo</label>
-                                <input name = 'image' value = {recipe.image} onChange = {syncChange}/>
+                                <input className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange}/>
                                 {/* <p>{recipe?.image}</p> */}
                                 {
                                     errors !== {} && <p className = 'errorMessage'>{errors?.image}</p>
@@ -277,7 +278,7 @@ export default function Form () {
                                     </div>
                                 </div>
                         </div>
-                        <button type = 'submit'>POST!</button>
+                        <button className = 'formSubmitButton' type = 'submit'>POST!</button>
                     </div>
                 </div>
 
