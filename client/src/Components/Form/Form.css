@@ -1,8 +1,19 @@
-.mainDiv {
+@font-face {
+    font-family: 'proxima-nova';
+    src: url('../../Media/proxima-nova/Proxima-nova-extrabold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'source-sans-pro';
+    src: url('../../Media//source-sans-pro/SourceSansPro-Regular.otf') format('opentype');
+  }
+
+.fullForm {
     /* margin-top: 15vh; */
     margin-top: 115px;
 }
 
+/*____________________________________________________________*/
 .formImageContainer {
     position: absolute;
     /* width: 50px;
@@ -12,25 +23,143 @@
     margin-top: -100px;
 }
 
+/*____________________________________________________________*/
 .form {
     display: flex;
     flex-direction: column;
+
     gap: 20px;
-    margin: 250px 29% 0;
+    margin: 250px 27% 100px;
+    padding: 0 50px 50px;
     background-color: bisque;
+    font-family: 'proxima-nova';
+    /*or... font-weight: 700; */
 }
 
+/*____________________________________________________________*/
+.formSection1 {
+    display: flex;
+    /* border: 1px solid red; */
+}
+
+.formLabel {
+    margin: 0 0 10px;
+    font-size: 25px;
+}
+/*____________________*/
+.formTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 50%;
+}
+.formInputTitle{
+    min-width: 50%;
+    height: 30px;
+}
+.formInputTitle:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px green;
+    border: 2px solid white;
+
+}
+/*____________________*/
+.formHealthScore {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 50%;
+    /* border: 1px solid red; */
+}
+.formInputHealthScore {
+    width: 80px;
+    height: 50px;
+    font-size: 40px;
+    font-family: 'proxima-nova';
+    color: #FFF;
+    background-color: #FFD700;
+    border: none;
+    text-align: center;
+}
+.formInputHealthScore:focus {
+    outline: none;
+}
+/* .formInputHealthScore::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+} */
+
+/*____________________________________________________________*/
+.formSection2 {
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px solid red;
+}
+
+/*____________________________________________________________*/
+.formSection2-1 {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid yellow;
+    width: 50%;
+}
+
+.formDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.formInstructions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+/*____________________________________________________________*/
+.formSection2-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 50%;
+    border: 1px solid yellow;
+}
+
+.formPhoto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.formDiets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 .checkboxes {
     display: flex;
-    flex-direction: row;
+    font-family: 'source-sans-pro';
+    /* font-weight: 700; */
 }
-
 .checkboxC {
     display: flex;
     flex-direction: column;
 }
-
 .checkboxR {
     display: flex;
-    flex-direction: row;
+}
+
+/*____________________________________________________________*/
+.errorMessage {
+    margin: 10px 0;
+    font-size: 12px;
+    text-align: start;
+    cursor: default;
 }

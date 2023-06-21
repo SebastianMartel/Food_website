@@ -50,7 +50,7 @@ export default function Form () {
         })
 
         const [errors, setErrors] = useState({});
-        const [steps, setSteps] = useState([]);
+        const [steps, setSteps] = useState([1]);
 
 
         const syncSteps = (event, index) => {
@@ -164,7 +164,7 @@ export default function Form () {
 
 
     return (
-        <div className = 'mainDiv'>
+        <div className = 'fullForm'>
             <div className = 'formImageContainer'>
                 <img src = {formImage}/>
             </div>
@@ -172,55 +172,57 @@ export default function Form () {
                 <h1>Create your recipe</h1>
                 <div className = 'formSection1'>
                     <div className = 'formTitle'>
-                        <label>Name</label>
-                            <input name = 'title' value = {recipe.title} onChange = {syncChange}/>
-                            <p>{recipe?.title}</p>
+                        <label className = 'formLabel'>Name your recipe</label>
+                            <input className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange}/>
+                            {/* <p>{recipe?.title}</p> */}
                             {
-                                errors !== {} && <p>{errors?.title}</p>
+                                errors !== {} && <p className = 'errorMessage'>{errors?.title}</p>
                             }
                     </div>
                     <div className = 'formHealthScore'>
-                        <label>HealthScore</label>
-                            <input name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange}/>
-                            <p>{recipe?.healthScore}</p>
-                            {
-                                errors !== {} && <p>{errors?.healthScore}</p>
-                            }
+                            <div className = 'healthScoreCircle'>
+                                <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3"/>
+                            </div>
+                        <label className = 'formLabel'>Health score</label>
+                            {/* <p>{recipe?.healthScore}</p> */}
+                            {/* {
+                                errors !== {} && <p className = 'errorMessage'>{errors?.healthScore}</p>
+                            } */}
                     </div>
                 </div>
 
                 <div className = 'formSection2'>
                     <div className = 'formSection2-1'>
                         <div className = 'formDescription'>
-                            <label>Description</label>
+                            <label className = 'formLabel'>Description</label>
                                 <textarea name = 'summary' value = {recipe.summary} onChange = {syncChange}/>
-                                <p>{recipe?.summary}</p>
+                                {/* <p>{recipe?.summary}</p> */}
                                 {
-                                    errors !== {} && <p>{errors?.summary}</p>
+                                    errors !== {} && <p className = 'errorMessage'>{errors?.summary}</p>
                                 }
                         </div>
                         <div className = 'formInstructions'>
-                            <label>Instructions</label>
+                            <label className = 'formLabel'>Instructions</label>
                                 {steps.map((step, index) => <textarea key = {index} name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)}/>)}
                                 {
-                                    errors !== {} && <p>{errors?.steps}</p>
+                                    errors !== {} && <p className = 'errorMessage'>{errors?.steps}</p>
                                 }
                                 <button type = 'button' onClick = {addStep}>+ ADD STEP</button>
-                                <p>{recipe?.stepByStep[0]}</p>
+                                {/* <p>{recipe?.stepByStep[0]}</p> */}
                         </div>
                     </div>
 
                     <div className = 'formSection2-2'>
                         <div className = 'formPhoto'>
-                            <label>Add a photo</label>
+                            <label className = 'formLabel'>Add a photo</label>
                                 <input name = 'image' value = {recipe.image} onChange = {syncChange}/>
-                                <p>{recipe?.image}</p>
+                                {/* <p>{recipe?.image}</p> */}
                                 {
-                                    errors !== {} && <p>{errors?.image}</p>
+                                    errors !== {} && <p className = 'errorMessage'>{errors?.image}</p>
                                 }
                         </div>
                         <div className = 'formDiets'>
-                            <label>Select diets</label>
+                            <label className = 'formLabel'>Select diets</label>
                                 <div className = 'checkboxes'>
                                     <div className = 'checkboxC'>
                                         <div className = 'checkboxR'>
@@ -268,8 +270,8 @@ export default function Form () {
                                     </div>
                                 </div>
                         </div>
+                        <button type = 'submit'>POST!</button>
                     </div>
-                    <button type = 'submit'>POST!</button>
                 </div>
 
             </form>

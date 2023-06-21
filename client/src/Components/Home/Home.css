@@ -85,13 +85,36 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    
+
     margin: 0 38.5%;
     height: 40px;
     width: 300px;
     padding: 0 20px;
     color: green;
-    background-color:lightgreen;
+    background-color: #e5f2e5;
     border-radius: 5px;
     border: 3px solid green;
+
+    animation: show_toast 1s ease forwards;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    animation-name: show_toast;
+
+    @keyframes show_toast {
+        
+        0% {
+            transform: translateY(-100%);
+        }
+        40% {
+            transform: translateY(10%);
+        }
+        100%, 80% {
+            transform: translateX(0);
+        }
+    }
 }
