@@ -40,16 +40,7 @@ export function App ( { allRecipes, searchResults } ) {
 
 
     useEffect(() => {
-        console.log(allRecipes);
-    }, [allRecipes])
-
-    useEffect(() => {
-        console.log(searchResults)
-    }, [searchResults])
-
-    useEffect(() => {
         dispatch(getAllRecipes());
-        console.log(searching)
     }, [searching])
 
 
@@ -60,7 +51,18 @@ export function App ( { allRecipes, searchResults } ) {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home searching = {searching} allRecipes = {allRecipes} currentAllRecipes = {currentAllRecipes} searchResults = {searchResults} currentSearchResults = {currentSearchResults} recipesPerPage = {recipesPerPage} paginate = {paginate} successfullDelete = {successfullDelete}/>}/>
+                <Route path = '/home' element = { 
+                    <Home 
+                        searching = {searching} 
+                        allRecipes = {allRecipes}
+                        currentAllRecipes = {currentAllRecipes} 
+                        searchResults = {searchResults} 
+                        currentSearchResults = {currentSearchResults} 
+                        recipesPerPage = {recipesPerPage} 
+                        paginate = {paginate} 
+                        successfullDelete = {successfullDelete}
+                    />
+                }/>
                 <Route path = '/detail/:id' element={ <Detail setSuccessfullDelete = {setSuccessfullDelete}/> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>

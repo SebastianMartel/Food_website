@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from 'react-redux'; // removed connect, think it's unnecessary
+import { useDispatch } from 'react-redux';
 import { filterAllRecipes } from '../../Redux/actions';
 
 
@@ -30,21 +29,10 @@ export default function NavBar ( { setSearching } ) {
         dispatch(filterAllRecipes(value))
     }
 
-    // const handleDietsCliFilterck = () => {
-    //     setShowDietsFilter(!showDietsFilter);
-    //     setShowOriginFilter(false);
-    // };
-
-    // const handleOriginClick = () => {
-    //     setShowOriginFilter(!showOriginFilter);
-    //     setShowDietsFilter(false);
-    // };
-
 
     return (
         <div className = "menu">
             <StyledNavLink to = '/home'>
-                {/* <h1 className = 'title' onClick = {() => {setSearching(false)}}>N O V A</h1> */}
                 <img src = {mainLogo} alt = 'NOVA logo' onClick = {() => {setSearching(false)}}/>
             </StyledNavLink>
             <SearchBar setSearching = {setSearching}/>
@@ -54,7 +42,7 @@ export default function NavBar ( { setSearching } ) {
                     EXPLORE BY DIETS
                 </div>
                 <ul className = 'selectListFilter'>
-                    <li onClick = {() => {handleFilter('All')}}>All</li>{/*maybe remove this and only use the one in Show all. Makes no sense having two*/}
+                    <li onClick = {() => {handleFilter('All')}}>All</li>
                     <li onClick = {() => {handleFilter('gluten free')}}>Gluten free</li>
                     <li onClick = {() => {handleFilter('dairy free')}}>Dairy free</li>
                     <li onClick = {() => {handleFilter('lacto ovo vegetarian')}}>Lacto ovo vegetarian</li>

@@ -9,13 +9,11 @@ import './Detail.css'
 export default function Detail ( { setSuccessfullDelete } ) {
 
 
-        const [details, setDetails] = useState({})
+    const [details, setDetails] = useState({})
 
-        const [hasSteps, setHasSteps] = useState(false)
+    const [hasSteps, setHasSteps] = useState(false)
 
-        const [showConfirm, setShowConfirm] = useState(false)
-
-        const [updatedDiets, setUpdatedDiets] = useState({})
+    const [showConfirm, setShowConfirm] = useState(false)
 
 
         const { id } = useParams()
@@ -51,7 +49,6 @@ export default function Detail ( { setSuccessfullDelete } ) {
             const recipeFound = data
             setDetails(recipeFound)
         }
-        console.log(details)
         getRecipeById()
 
     },[id])
@@ -66,17 +63,17 @@ export default function Detail ( { setSuccessfullDelete } ) {
     return (
         <div className = "detail">
             <div className = "detailSection1">
-                <h1 className = "recipeTitle">{details?.title}</h1>{/* Screws the width of the first section when the title has a word really long */}
+                <h1 className = "recipeTitle">{details?.title}</h1>
                 <p>{details?.summary}</p>
                 <div className = 'detailDietsList'>
+                    <h2>Diets</h2>
                     {
                         details?.diets && Object.keys(details?.diets).map((dietKey) => {
                             return (
-                                <p>{details?.diets[dietKey]}</p>
+                                <p style = {{margin: '5px'}}>{details?.diets[dietKey]}</p>
                             )
                         })
                     }
-                    <p>{details?.diets?.length}</p>
                 </div>
             </div>
 

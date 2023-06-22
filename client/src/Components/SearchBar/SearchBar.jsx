@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect, useDispatch } from 'react-redux';
 
 import { getRecipesByName } from '../../Redux/actions';
@@ -7,7 +7,7 @@ import './SearchBar.css'
 //__________________________________________________
 
 
-export function SearchBar ( { setSearching, searchResults } ) {
+export function SearchBar ( { setSearching } ) {
 
 
         const [input, setInput] = useState('')
@@ -36,11 +36,6 @@ export function SearchBar ( { setSearching, searchResults } ) {
         setShowSearchTitle(false);
         setShowSearchSection(true);
     }
-
-    // REMOVE:
-    // useEffect(() => {
-    //     console.log(searchResults)
-    // }, [searchResults])
 
 
     return (

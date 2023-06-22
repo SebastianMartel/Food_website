@@ -1,12 +1,10 @@
 import axios from 'axios';
-const json = require('../json.json');
 
 export const ALL_RECIPES = 'ALL_RECIPES';
 export const SEARCH = 'SEARCH';
 export const FILTER = 'FILTER';
 export const SORT = 'SORT';
 export const POST = 'POST';
-// export const HEALTH_SCORE_SORT = 'HEALTH_SCORE_SORT';
 //__________________________________________________
 
 
@@ -62,22 +60,3 @@ export const filterAllRecipes = (filter) => {
         payload: filter
     }
 }
-
-// export const postRecipes = (recipe) => {
-    
-//     return async (dispatch) => {
-
-//         try {
-//             const URL = 'http://localhost:3001/recipes';
-//             const { data } = axios.post(URL, recipe)
-            
-//             dispatch({
-//                 type: POST,
-//                 payload: data
-//             })
-
-//         } catch (error) {
-//             throw new Error(error.message);
-//         }
-//     }
-// }

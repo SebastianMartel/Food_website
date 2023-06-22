@@ -1,4 +1,3 @@
-// uncheck diets.
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -110,7 +109,7 @@ export default function Form () {
                 stepByStep: [],
                 diets: []
                 })
-                setSteps([0])
+                setSteps([''])
                 setMode({
                     glutenFree: false,
                     dairyFree: false,
@@ -124,9 +123,9 @@ export default function Form () {
                     fodmapFriendly: false
                 })
                 setSuccessfullPost(true)
-                setTimeout(() => {
-                    setSuccessfullPost(false)
-                }, 13000)
+            setTimeout(() => {
+                setSuccessfullPost(false)
+            }, 13000)
         }
 
         const post = async (recipe) => {
@@ -142,31 +141,10 @@ export default function Form () {
             }
         }
 
-        // REMOVE:
-        // useEffect(() => {
-        //     console.log(errors)
-        // }, [errors])
-
-        // REMOVE:
-        // useEffect(() => {
-        //     setSuccessfullPost(true)
-        //     setTimeout(() => {
-        //         setSuccessfullPost(false)
-        //     }, 13000)
-        // }, [])
 
     useEffect(() => {
         setErrors(validation(recipe));
     }, [recipe])
-
-    // REMOVE:
-    useEffect(() => {
-        console.log(recipe.stepByStep);
-    }, [recipe.stepByStep])
-    // REMOVE:
-    useEffect(() => {
-        console.log(recipe.diets);
-    }, [recipe.diets])
 
 
     return (
