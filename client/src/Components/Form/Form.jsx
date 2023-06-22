@@ -24,19 +24,6 @@ export default function Form () {
             diets: []
         })
 
-        const [boxes, setBoxes] = useState([
-            'gluten free',
-            'dairy free',
-            'lacto ovo vegetarian',
-            'vegan',
-            'paleolithic',
-            'primal',
-            'whole 30',
-            'pescatarian',
-            'ketogenic',
-            'fodmap friendly'
-        ])
-
         const [mode, setMode] = useState({
             glutenFree: false,
             dairyFree: false,
@@ -150,6 +137,9 @@ export default function Form () {
             }
         }
 
+        useEffect(() => {
+            console.log(errors)
+        }, [errors])
 
     useEffect(() => {
         setErrors(validation(recipe));
@@ -204,7 +194,7 @@ export default function Form () {
                             <label className = 'formLabel'>Description</label>
                                 <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
                                 {
-                                    errors.message && <p className = 'errorMessage'>{errors?.summary}</p>
+                                    errors.summary && <p className = 'errorMessage'>{errors?.summary}</p>
                                 }
                         </div>
                         <div className = 'formInstructions'>
@@ -213,7 +203,7 @@ export default function Form () {
                                 <div className = 'formInstructionsSteps'>
                                     {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)} placeholder = 'Preheat the grill...'/>)}
                                     {
-                                        errors.steps && <p className = 'errorMessage'>{errors?.steps}</p>
+                                        errors.stepByStep && <p className = 'errorMessage'>{errors?.stepByStep}</p>
                                     }
                                 </div>
                                 <button className = 'formAddStepButton' type = 'button' onClick = {addStep}>+ ADD STEP</button>
@@ -280,7 +270,21 @@ export default function Form () {
                                     </div>
                                 </div>
                         </div>
-                        <button className = 'formSubmitButton' type = 'submit'>S U B M I T</button>
+                        <div>
+                            {
+                                errors?.title && <p>*Name</p>
+                            }
+                            {
+                                errors?.healthScore && <p>*Health score</p>
+                            }
+                            {
+                                errors?.summary && <p>*Description</p>
+                            }
+                            {
+                                errors?.stepByStep && <p>*Directions</p>
+                            }
+                        </div>
+                        <button className = {Object.keys(errors).length === 0 ? 'formSubmitButtonAllowed' : 'formSubmitButtonDisallowed'} type = 'submit'>S U B M I T</button>
                     </div>
                 </div>
 

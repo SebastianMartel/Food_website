@@ -21,7 +21,7 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
             <StyledNavLink to = {`/detail/${id}`}>
                 <div className = 'card'>
                     <div className = 'cardImage'>
-                        <img src = {image} alt = {title} style = {{borderRadius : '7px'}}/>
+                        <img src = {image} alt = {title} style = {{borderRadius : '0 0 10px 10px'}}/>
                     </div>
                     <div className = 'cardInner'>
                         <div className = 'diets'>

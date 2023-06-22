@@ -262,7 +262,26 @@
 }
 
 /*____________________________________________________________*/
-.formSubmitButton {
+.formSubmitButtonDisallowed {
+    align-self: center;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #FFF4ED;
+    color: black;
+    border: none;
+    /* box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.4); */
+    font-family: 'proxima-nova';
+    cursor: not-allowed;
+    pointer-events: none;
+}
+/* .formSubmitButtonDisallowed:hover {
+    background-color: black;
+    color: #FFF4ED;
+    box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.8);
+} */
+
+.formSubmitButtonAllowed {
     align-self: center;
     width: 200px;
     height: 50px;
@@ -274,13 +293,11 @@
     font-family: 'proxima-nova';
     cursor: pointer;
 }
-.formSubmitButton:hover {
+.formSubmitButtonAllowed:hover {
     background-color: black;
     color: #FFF4ED;
     box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.8);
-
 }
-
 /*____________________________________________________________*/
 .errorMessage {
     margin: 10px 0;
