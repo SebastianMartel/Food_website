@@ -23,7 +23,7 @@ export function App ( { allRecipes, searchResults } ) {
 
         const [searching, setSearching] = useState(false)
 
-        const [deleteSuccess,setDeleteSuccess] = useState(false)
+        const [successfullDelete,setSuccessfullDelete] = useState(false)
 
 
     const { pathname } = useLocation();
@@ -63,8 +63,8 @@ export function App ( { allRecipes, searchResults } ) {
             }
             <Routes>
                 <Route path = '/' element = { <Landing/> }/>
-                <Route path = '/home' element = { <Home searching = {searching} allRecipes = {allRecipes} currentAllRecipes = {currentAllRecipes} searchResults = {searchResults} currentSearchResults = {currentSearchResults} recipesPerPage = {recipesPerPage} paginate = {paginate} deleteSuccess = {deleteSuccess}/>}/>
-                <Route path = '/detail/:id' element={ <Detail setDeleteSuccess = {setDeleteSuccess}/> } />
+                <Route path = '/home' element = { <Home searching = {searching} allRecipes = {allRecipes} currentAllRecipes = {currentAllRecipes} searchResults = {searchResults} currentSearchResults = {currentSearchResults} recipesPerPage = {recipesPerPage} paginate = {paginate} successfullDelete = {successfullDelete}/>}/>
+                <Route path = '/detail/:id' element={ <Detail setSuccessfullDelete = {setSuccessfullDelete}/> } />
                 <Route path = '/form' element = { <Form/> }/>
             </Routes>
         </div>

@@ -6,7 +6,7 @@ import './Detail.css'
 //__________________________________________________
 
 
-export default function Detail ( { setDeleteSuccess } ) {
+export default function Detail ( { setSuccessfullDelete } ) {
 
 
         const [details, setDetails] = useState({})
@@ -31,9 +31,9 @@ export default function Detail ( { setDeleteSuccess } ) {
         const deleteRecipe = async () => {
             const URL = 'http://localhost:3001/recipes'
             await axios.delete(`${URL}/${id}`)
-            setDeleteSuccess(true)
+            setSuccessfullDelete(true)
             setTimeout(() => {
-                setDeleteSuccess(false)
+                setSuccessfullDelete(false)
             }, 8000)
             navigate('/home')
         }
