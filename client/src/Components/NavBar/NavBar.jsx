@@ -15,15 +15,12 @@ const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: black;
 `
+
+
 //__________________________________________________
 
 
 export default function NavBar ( { setSearching } ) {
-
-
-        // const [showDietsFilter, setShowDietsFilter] = useState(false)
-
-        // const [showOriginFilter, setShowOriginFilter] = useState(false)
 
 
     const dispatch = useDispatch()

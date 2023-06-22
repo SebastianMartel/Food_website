@@ -8,4 +8,4 @@
 // 8) continue pagination.
 // 9) setSearching false used to render ALL the recipes.
 //
-//10) next: test the requests, add alert message after form submited. style delete recipe alert message.
+// 10) next: test the requests, add alert message after form submited. style delete recipe alert message.

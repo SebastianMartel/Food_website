@@ -1,9 +1,5 @@
 import './Pagination.css'
-import styled from "styled-components";
-//__________________________________________________
 
-const StyledDiv = styled.div`
-`
 
 //__________________________________________________
 export default function Pagination ( { searching, recipesPerPage, totalAllRecipes, totalSearchResults, paginate } ) {
@@ -21,7 +17,7 @@ export default function Pagination ( { searching, recipesPerPage, totalAllRecipe
     }
 
     return (
-        <StyledDiv>
+        <div>
             <div className = 'navPage'>
                 {
                     searching === true
@@ -47,6 +43,6 @@ export default function Pagination ( { searching, recipesPerPage, totalAllRecipe
                     })
                 }
             </div>
-        </StyledDiv>
+        </div>
     )
 }

@@ -1,11 +1,9 @@
 .detail {
     display: flex;
     /* grid-template-columns: 1fr 1fr 1fr; */
-    
-    /* border: 1px solid red; */
     height: 100%;
-    /* margin-top : 15vh; */
     margin-top: 115px;
+    /* margin-top : 15vh; */
 }
 
 .detailSection1 {

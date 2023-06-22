@@ -34,7 +34,7 @@ export default function Detail ( { setSuccessfullDelete } ) {
             setSuccessfullDelete(true)
             setTimeout(() => {
                 setSuccessfullDelete(false)
-            }, 8000)
+            }, 13000)
             navigate('/home')
         }
 

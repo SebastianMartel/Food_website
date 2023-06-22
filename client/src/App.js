@@ -1,5 +1,3 @@
-// uncomment dispatch, to continue working.
-
 import { useState, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -17,7 +15,6 @@ import Form from './Components/Form/Form';
 export function App ( { allRecipes, searchResults } ) {
 
 
-        // const [loading, setLoading] = useState(false);
         const [currentPage, setCurrentPage] = useState(1);
         const [recipesPerPage] = useState(9);
 
@@ -72,6 +69,7 @@ export function App ( { allRecipes, searchResults } ) {
 }
 
 
+//__________________________________________________
 const mapStateToProps = (state) => {
     return {
         allRecipes : state.allRecipes,

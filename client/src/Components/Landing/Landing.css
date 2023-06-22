@@ -10,10 +10,15 @@
 }
 
 .welcome {
-    color: black;
+    color: #545454;
+    font-size: 1.5rem;
+    margin: 0
+}
 
+.websiteTitle {
+    color: black;
     font-size: 3rem;
-    font-weight: bold;
+    margin-top: 0.2em
 }
 
 .mainButton {
@@ -29,11 +34,11 @@
     border:#85BAA1;
     border-radius: 7px;
     background-color: #85BAA1;
-    animation: bgColor 7000ms infinite;
+    animation: changingColorInifnite 7s infinite;
     cursor: pointer;
 }
 
-@keyframes bgColor {
+@keyframes changingColorInifnite {
     0% {
         background-color: #85BAA1;
     }
@@ -55,7 +60,7 @@
     }
 }
 
-/* @keyframes bgColor {
+/* @keyframes changingColorInifnite {
     0% {
         background-color: #85BAA1;
     }

@@ -40,8 +40,8 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
                             <li onClick = {() => {handleOrder('D')}}>Less healthy</li>
                     </div>
                 </div>
-                {/* <p>ALL {allRecipes?.length}</p>
-                <p>SEARCH {searchResults?.length}</p> */}
+                <p>ALL {allRecipes?.length}</p>
+                <p>SEARCH {searchResults?.length}</p>
             </div>
             {
                 successfullDelete && (

@@ -67,6 +67,7 @@ export function SearchBar ( { setSearching, searchResults } ) {
 }
 
 
+//__________________________________________________
 const mapStateToProps = (state) => {
     return {
         searchResults: state.searchResults

@@ -6,7 +6,6 @@ import Card from "../Card/Card";
 const StyledCardBox = styled.div `
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;;
     justify-content: space-evenly;
     gap: 5rem;
 
@@ -51,7 +50,6 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
     if (!searching) {
         return (
             <StyledCardBox>
-                {/* { loading && <h2>Loading...</h2>} */}
                 {
                     currentAllRecipes?.map((recipe) => {
                         return (
