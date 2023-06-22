@@ -15,14 +15,14 @@ const getAllRecipes = async (req, res) => {
 // O: get all the 100 recipes so they can be used for the pagination, include DB recipes.
     try {
         // API recipes:
-        // const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
+        const ENDPOINT = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
 
-        // const response = await axios(ENDPOINT)
-        // const { data } = response
-        // const { results } = data
+        const response = await axios(ENDPOINT)
+        const { data } = response
+        const { results } = data
+        // const results = json.results
 
         // DB recipes:
-        const results = json.results
 
         const recipesDB = await findAllRecipesDB()
 
