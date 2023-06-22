@@ -1,12 +1,9 @@
 // uncheck diets.
-// words of title can't have more than 12 characters.
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-// import { useNavigate } from "react-router-dom";
 
 import validation from '../Validation/validation';
 
-import styled from "styled-components";
 import './Form.css'
 import formImage from '../../Media/formImage.png'
 //__________________________________________________
@@ -113,7 +110,7 @@ export default function Form () {
                 stepByStep: [],
                 diets: []
                 })
-                setSteps([1])
+                setSteps([0])
                 setMode({
                     glutenFree: false,
                     dairyFree: false,
@@ -129,7 +126,7 @@ export default function Form () {
                 setSuccessfullPost(true)
                 setTimeout(() => {
                     setSuccessfullPost(false)
-                }, 8000)
+                }, 13000)
         }
 
         const post = async (recipe) => {
@@ -145,25 +142,28 @@ export default function Form () {
             }
         }
 
-        useEffect(() => {
-            console.log(errors)
-        }, [errors])
+        // REMOVE:
+        // useEffect(() => {
+        //     console.log(errors)
+        // }, [errors])
 
-        useEffect(() => {
-            setSuccessfullPost(true)
-            setTimeout(() => {
-                setSuccessfullPost(false)
-            }, 13000)
-        }, [])
+        // REMOVE:
+        // useEffect(() => {
+        //     setSuccessfullPost(true)
+        //     setTimeout(() => {
+        //         setSuccessfullPost(false)
+        //     }, 13000)
+        // }, [])
 
     useEffect(() => {
         setErrors(validation(recipe));
     }, [recipe])
 
+    // REMOVE:
     useEffect(() => {
         console.log(recipe.stepByStep);
     }, [recipe.stepByStep])
-
+    // REMOVE:
     useEffect(() => {
         console.log(recipe.diets);
     }, [recipe.diets])
@@ -187,19 +187,19 @@ export default function Form () {
                 <div className = 'formSection1'>
                     <div className = 'formTitle'>
                         {/* TITLE */}
-                        <label className = 'formLabel'>Name your recipe</label>
-                            <input className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange} placeholder = 'Juicy grilled sirloin with...'/>
+                        <label for = 'title' className = 'formLabel'>Name your recipe</label>
+                            <input id = 'title' className = 'formInputTitle' name = 'title' value = {recipe.title} onChange = {syncChange} placeholder = 'Juicy grilled sirloin with...'/>
                             {
                                 errors.title && <p className = 'errorMessage'>{errors.title}</p>
                             }
                     </div>
                     <div className = 'formHealthScore'>
                         <div className = 'healthScoreCircle'>
-                            <input className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3" placeholder = "?"/>
+                            <input id = 'healthScore' className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3" placeholder = "?"/>
                         </div>
                         {/* HEALTH SCORE */}
                         <div className = 'formHealthScoreLabel-Errors'>
-                            <label className = 'formLabel' style = {{textAlign: 'start'}}>Health score</label>
+                            <label for = 'healthScore' className = 'formLabel' style = {{textAlign: 'start'}}>Health score</label>
                                 <div>
                                 {
                                     errors.healthScore && <p className = 'errorMessage'>{errors?.healthScore}</p>
@@ -217,17 +217,17 @@ export default function Form () {
                             {
 
                             }
-                            <label className = 'formLabel'>Description</label>
-                                <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
+                            <label for = 'description' className = 'formLabel'>Description</label>
+                                <textarea id = 'description' className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
                                 {
                                     errors.summary && <p className = 'errorMessage'>{errors?.summary}</p>
                                 }
                         </div>
                         <div className = 'formInstructions'>
                             {/* DIRECTIONS */}
-                            <label className = 'formLabel'>Directions</label>
+                            <label for = 'instructions' className = 'formLabel'>Directions</label>
                                 <div className = 'formInstructionsSteps'>
-                                    {steps.map((step, index) => <textarea key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)} placeholder = 'Preheat the grill...'/>)}
+                                    {steps.map((step, index) => <textarea id = 'instructions' key = {index} className = 'formTextAreaInstructions' name = {`stepByStep[${index}]`} value = {recipe.stepByStep[index]} onChange = {(event) => syncSteps(event, index)} placeholder = 'Preheat the grill...'/>)}
                                     {
                                         errors.stepByStep && <p className = 'errorMessage'>{errors?.stepByStep}</p>
                                     }
@@ -239,9 +239,9 @@ export default function Form () {
                     <div className = 'formSection2-2'>
                         {/* IMAGE */}
                         <div className = 'formImage'>
-                            <label className = 'formLabel'>Add a photo</label>
+                            <label for = 'image' className = 'formLabel'>Add a photo</label>
                                 <p style = {{margin: '0 0 10px'}}>*Supported file extensions: .PNG | .JPG</p>
-                                <input className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange} placeholder = 'https://spoonacular.com/image/312x231.jpg'/>
+                                <input id = 'image' className = 'formInputImage' name = 'image' value = {recipe.image} onChange = {syncChange} placeholder = 'https://spoonacular.com/image/312x231.jpg'/>
                                 {
                                     errors.image && <p className = 'errorMessage'>{errors?.image}</p>
                                 }
