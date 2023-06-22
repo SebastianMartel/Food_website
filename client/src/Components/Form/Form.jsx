@@ -24,6 +24,7 @@ export default function Form () {
             diets: []
         })
 
+        //DIET:
         const [mode, setMode] = useState({
             glutenFree: false,
             dairyFree: false,
@@ -36,9 +37,12 @@ export default function Form () {
             ketogenic: false,
             fodmapFriendly: false
         })
-
-        const [errors, setErrors] = useState({});
+        //STEPS:
         const [steps, setSteps] = useState([1]);
+        //ERRORS:
+        const [errors, setErrors] = useState({});
+        //ALERT MESSAGE:
+        const [successfullPost, setSuccessfullPost] = useState(false)
 
 
         const syncSteps = (event, index) => {
@@ -101,27 +105,31 @@ export default function Form () {
         const handleSubmit = (event) => {
             event.preventDefault();
             post(recipe);
-            setRecipe({
+                setRecipe({
                 title: '',
                 image: '',
                 summary: '',
-                healthScore: 0,
+                healthScore: '',
                 stepByStep: [],
                 diets: []
-            })
-            setSteps([1])
-            setMode({
-                glutenFree: false,
-                dairyFree: false,
-                lactoOvoVegetarian: false,
-                vegan: false,
-                paleolithic: false,
-                primal: false,
-                whole30: false,
-                pescatarian: false,
-                ketogenic: false,
-                fodmapFriendly: false
-            })
+                })
+                setSteps([1])
+                setMode({
+                    glutenFree: false,
+                    dairyFree: false,
+                    lactoOvoVegetarian: false,
+                    vegan: false,
+                    paleolithic: false,
+                    primal: false,
+                    whole30: false,
+                    pescatarian: false,
+                    ketogenic: false,
+                    fodmapFriendly: false
+                })
+                setSuccessfullPost(true)
+                setTimeout(() => {
+                    setSuccessfullPost(false)
+                }, 8000)
         }
 
         const post = async (recipe) => {
@@ -159,6 +167,14 @@ export default function Form () {
             <div className = 'formImageContainer'>
                 <img src = {formImage} alt = 'decorative fruits and vegetables'/>
             </div>
+            {
+                true && (
+                    <div className = 'successfullPostMessage'>
+                        <svg style = {{fill: '#008000'}} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                        you have successfully posted your recipe
+                    </div>
+                )
+            }
             <form className = 'form' onSubmit = {handleSubmit}>
                 <h1>CREATE YOUR RECIPE</h1>
                 <div className = 'formSection1'>
@@ -191,6 +207,9 @@ export default function Form () {
                     <div className = 'formSection2-1'>
                         <div className = 'formDescription'>
                             {/* DESCRIPTION */}
+                            {
+
+                            }
                             <label className = 'formLabel'>Description</label>
                                 <textarea className = 'formTextareaDescription' name = 'summary' value = {recipe.summary} onChange = {syncChange} placeholder = 'Prime sirloin steak cooked to perfection on the grill. Seasoned with a blend of aromatics herbs such as rosemary, thyme...'/>
                                 {
@@ -270,21 +289,22 @@ export default function Form () {
                                     </div>
                                 </div>
                         </div>
-                        <div>
+                        {/* ALL THE ERRORS */}
+                        <div className = 'formRequirements'>
                             {
-                                errors?.title && <p>*Name</p>
+                                errors?.title && <p style = {{margin: '10px 0'}}>*Name required</p>
                             }
                             {
-                                errors?.healthScore && <p>*Health score</p>
+                                errors?.healthScore && <p style = {{margin: '10px 0'}}>*Health score required</p>
                             }
                             {
-                                errors?.summary && <p>*Description</p>
+                                errors?.summary && <p style = {{margin: '10px 0'}}>*Description required</p>
                             }
                             {
-                                errors?.stepByStep && <p>*Directions</p>
+                                errors?.stepByStep && <p style = {{margin: '10px 0'}}>*Directions required</p>
                             }
                         </div>
-                        <button className = {Object.keys(errors).length === 0 ? 'formSubmitButtonAllowed' : 'formSubmitButtonDisallowed'} type = 'submit'>S U B M I T</button>
+                        <button className = {Object.keys(errors).length === 0 ? 'formSubmitButtonAllowed' : 'formSubmitButtonDisallowed'} type = {Object.keys(errors).length === 0 ? 'submit' : 'button'}>S U B M I T</button>
                     </div>
                 </div>
 
