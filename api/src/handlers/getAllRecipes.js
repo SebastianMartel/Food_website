@@ -5,7 +5,6 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const { API_KEY } = process.env;
 const { findAllRecipesDB } = require('../controllers/RecipeControllers')
-const json = require('../json.json')
 //__________________________________________________
 
 
@@ -20,7 +19,6 @@ const getAllRecipes = async (req, res) => {
         const response = await axios(ENDPOINT)
         const { data } = response
         const { results } = data
-        // const results = json.results
 
         // DB recipes:
 

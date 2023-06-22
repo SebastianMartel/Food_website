@@ -2,6 +2,8 @@ const { Recipe, Diet } = require('../db')
 const { Sequelize } = require('sequelize')
 //__________________________________________________
 
+
+
 // add diets:
 const findAllRecipesDB = async () => {
 
@@ -66,6 +68,7 @@ const createRecipeDB = async (recipe, diets) => { // receive diet from parameter
     }
 }
 
+
 const deleteRecipeDB = async (id) => {
     try {
 
@@ -101,24 +104,6 @@ const findRecipeByIdDB = async (id) => {
 const findRecipeByNameDB = async (name) => {
 
     try {
-        // const recipe = await Recipe.findAll({
-        //     include: {
-        //         model: Diet,
-        //         attributes: ["name"],
-        //         through: {
-        //           attributes: []
-        //         }
-        //     },
-        //     where: {
-        //         title: {
-        //             [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
-        //         }, 
-        //     }
-        // })
-
-        // return recipe
-
-        // OPTION 2, like the one I use in getRecipesById:
 
         const recipes = await Recipe.findAll({
             where: {
@@ -161,15 +146,6 @@ const findRecipeByNameDB = async (name) => {
         throw new Error(error.message)
     }
 }
-// test:
-// (async () => {
-//     try {
-//       const result = await findRecipeByNameDB("LOMO");
-//       console.log(result);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   })();
 
 
 

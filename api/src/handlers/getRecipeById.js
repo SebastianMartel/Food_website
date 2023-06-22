@@ -23,26 +23,12 @@ const getRecipeById = async (req, res) => {
 
         if (isValidUUID(id)) {
             // in case the id is a UUID type, it will look for the recipe's id that matches the one asked by params through the DB.
-            // FIXED // FIX: it has to include the diet associated to the recipe -----------------------------------------------^^
 
             const recipe = await findRecipeByIdDB(id)
 
-            if (recipe) { /* this is to check if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
-
-                {
-                    "error": "recipe.getDiets is not a function"
-                }
-            */
+            if (recipe) { 
 
                 const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
-
-            // or... I can use this option to avoid any possible error like he one above:
-                // {include: {
-                //     model: Diet,
-                //     attributes: ["name"],
-                //     through: {
-                //       attributes: []
-                //     }}}
 
                 const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
                 for (const diet of dietsDB) {
@@ -64,10 +50,9 @@ const getRecipeById = async (req, res) => {
             } else return recipe
 
         } else if (!isValidUUID(id)) {
+            // now, in case the id is NOT a UUID type, it will look through the API for the desired recipe.
 
             const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-            // now, in case the id is NOT a UUID type, it will look through the API for the desired recipe.
-            // response: { data: { id: ..., title: ..., ... }, ... }
             const response = await axios(ENDPOINT)
             const { data } = response
 
@@ -77,7 +62,7 @@ const getRecipeById = async (req, res) => {
                 image: data?.image,
                 summary: data?.summary.replace(/<[^>]+>/g, ''),
                 healthScore: data?.healthScore,
-                stepByStep: data?.analyzedInstructions[0]?.steps, //FIXED // FIX (later, working in the front): it's showing, unnecessary properties.
+                stepByStep: data?.analyzedInstructions[0]?.steps,
                 diets: data?.diets
             }
 
