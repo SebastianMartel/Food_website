@@ -1,4 +1,4 @@
-import { ALL_RECIPES, SEARCH, FILTER, SORT, ERROR, RESET_ERROR } from "./actions";
+import { ALL_RECIPES, SEARCH, FILTER, SORT, SEARCH_ERROR, RESET_SEARCH_ERROR, API_ERROR, RESET_API_ERROR } from "./actions";
 //__________________________________________________
 
 
@@ -7,7 +7,8 @@ import { ALL_RECIPES, SEARCH, FILTER, SORT, ERROR, RESET_ERROR } from "./actions
         allRecipesCopy: [],
         searchResults: [],
         searchResultsCopy: [],
-        error: null
+        searchError: false,
+        apiError: false
     };
 
 
@@ -25,6 +26,18 @@ const reducer = (state = initialState, { type, payload }) => {
                 allRecipesCopy: payload,
             };
     //__________________________________________________
+        case API_ERROR:
+            return {
+                ...state,
+                apiError: true
+            }
+    //__________________________________________________
+        case RESET_API_ERROR:
+            return {
+                ...state,
+                apiError: false
+            }
+    //__________________________________________________
         case SEARCH:
             return {
                 ...state,
@@ -32,16 +45,16 @@ const reducer = (state = initialState, { type, payload }) => {
                 searchResultsCopy: [...payload],
             };
     //__________________________________________________
-        case ERROR:
+        case SEARCH_ERROR:
             return {
                 ...state,
-                error: 'No match'
+                searchError: true
             }
     //__________________________________________________
-        case RESET_ERROR:
+        case RESET_SEARCH_ERROR:
             return {
                 ...state,
-                error: null
+                searchError: null
             }
     //__________________________________________________
         case SORT:

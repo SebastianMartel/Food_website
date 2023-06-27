@@ -5,8 +5,10 @@ export const SEARCH = 'SEARCH';
 export const FILTER = 'FILTER';
 export const SORT = 'SORT';
 export const POST = 'POST';
-export const ERROR = 'ERROR';
-export const RESET_ERROR ='RESET_ERROR';
+export const SEARCH_ERROR = 'ERROR';
+export const RESET_SEARCH_ERROR ='RESET_SEARCH_ERROR';
+export const API_ERROR = 'API_ERROR';
+export const RESET_API_ERROR = 'RESET_API_ERROR';
 //__________________________________________________
 
 
@@ -23,9 +25,14 @@ export const getAllRecipes = () => {
             payload: data
         });
 
+        dispatch({
+            type: RESET_API_ERROR,
+        })
+
         } catch (error) {
-            throw new Error(error.message);
-            // you need to use another api key.
+            dispatch({
+                type: API_ERROR
+            })
         }
     };
 };
@@ -46,15 +53,15 @@ export const getRecipesByName = (name) => {
 
         } catch (error) {
             dispatch({
-                type: ERROR,
+                type: SEARCH_ERROR,
             })
         }
     }
 }
 //__________________________________________________
-export const resetError = () => {
+export const resetSearchError = () => {
     return {
-        type: RESET_ERROR,
+        type: RESET_SEARCH_ERROR,
     }
 }
 //__________________________________________________

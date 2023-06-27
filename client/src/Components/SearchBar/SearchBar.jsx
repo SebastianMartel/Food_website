@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { connect, useDispatch } from 'react-redux';
 
-import { getRecipesByName, resetError } from '../../Redux/actions';
+import { getRecipesByName } from '../../Redux/actions';
 
 import './SearchBar.css'
 //__________________________________________________
 
 
-export function SearchBar ( { setSearching, error } ) {
+export function SearchBar ( { setSearching } ) {
 
 
         const [input, setInput] = useState('')
@@ -68,7 +68,6 @@ export function SearchBar ( { setSearching, error } ) {
 const mapStateToProps = (state) => {
     return {
         searchResults: state.searchResults,
-        error: state.error
     }
 }
 

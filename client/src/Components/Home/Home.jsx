@@ -1,5 +1,5 @@
 import { useDispatch, connect} from 'react-redux';
-import { sortAllRecipes, resetError } from '../../Redux/actions';
+import { getAllRecipes, sortAllRecipes, resetSearchError } from '../../Redux/actions';
 
 import './Home.css'
 import CardBox from "../Cardbox/Cardbox";
@@ -7,7 +7,7 @@ import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
 
-export function Home ( { searching, setSearching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete, error } ) {
+export function Home ( { searching, setSearching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete, searchError, apiError } ) {
 
 
     const dispatch = useDispatch()
@@ -52,10 +52,18 @@ export function Home ( { searching, setSearching, allRecipes, searchResults, cur
                 )
             }
             {
-                error && (
+                apiError && (
                     <>
-                        <p>{error}</p>
-                        <button onClick = {() => {setSearching(false); dispatch(resetError())}}>Back to home</button>
+                        <p>There was a problem with the server, try using another api-key or search 'https://spoonacular.com/food-api/' for more information.</p>
+                        <button onClick = {() => dispatch(getAllRecipes())}>RELOAD</button>
+                    </>
+                )
+            }
+            {
+                !apiError && searchError && (
+                    <>
+                        <p>No matches</p>
+                        <button onClick = {() => {setSearching(false); dispatch(resetSearchError())}}>Back to home</button>
                     </>
                 )
             }
@@ -68,7 +76,8 @@ export function Home ( { searching, setSearching, allRecipes, searchResults, cur
 
 const mapStateToProps = (state) => {
     return {
-        error: state.error
+        searchError: state.searchError,
+        apiError: state.apiError
     }
 }
 
