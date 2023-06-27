@@ -5,11 +5,18 @@
 
 .detail {
     display: flex;
+    align-items: center;
+    justify-content: center;
     /* grid-template-columns: 1fr 1fr 1fr; */
     height: 100%;
     margin: 115px 0 50px;
     /* margin-top : 15vh; */
     font-size: 18px;
+}
+
+/*____________________________________________________________*/
+.idRequestError {
+    font-size: 50px;
 }
 
 /*____________________________________________________________*/

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import './Detail.css'
-// STEPS can be optimized. Handle errors in the axios requests, create a new state...
 //__________________________________________________
 
 
@@ -15,6 +14,8 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
     const [hasSteps, setHasSteps] = useState(false) // in case a recipe doesn't have steps, it shows something else...
 
     const [showConfirm, setShowConfirm] = useState(false) // controls the confirm delete box.
+
+    const [idRequestError, setIdRequestError] = useState(false) // to handle the axios error.
 
 
         const { id } = useParams() // this is used to check the id type of the current recipe.
@@ -39,7 +40,7 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
                 navigate('/home'); // redirects to the home page.
 
             } catch (error) {
-                throw new Error(error.message);
+                throw new Error(error.message); // is it even possible for this to display??
             }
         }
 
@@ -58,9 +59,10 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
                 const recipeFound = data;
                 // save the data in the local state.
                 setDetails(recipeFound);
+                setIdRequestError(false)
 
             } catch (error) {
-                throw new Error(error.message);
+                setIdRequestError(true);
             }
         }
         getRecipeById()
@@ -77,77 +79,85 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
     return (
         <div className = "detail">
 
-            {/* SECTION 1 */}
-            <div className = "detailSection1">
-                <h1 className = "recipeTitle">{details?.title}</h1>
-                <p>{details?.summary}</p>
-                <div className = 'detailDietsList'>
-                    <h2 style = {{margin: '0 0 20px'}}>Diets</h2>
-                    {
-                        details?.diets && Object.keys(details?.diets).map((dietKey) => {
-                            return (
-                                <p style = {{margin: '5px'}}>{details?.diets[dietKey]}</p>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-
-           {/* SECTION 2 */}
-            <div className = "detailSection2">
-                <h2 className = 'detailPreparationTitle'>P R E P A R A T I O N</h2>
-                <div className = 'detailPreparationSteps'>
-                    {
-                        hasSteps === true
-                        ? (
-                            details?.stepByStep?.map((step) => {
-                            if (step !== '') { // in case the step is an empty string, the <p> element won't render.
-                                return (
-                                    <p>{step}</p>
-                                )
+            { idRequestError ?
+            // In case there's a problem, the next element will be displayed...
+                (
+                    <p className = "idRequestError">Sorry, we couldn't find the recipe</p>
+                )
+            : ( // Else, the detail section will be displayed.
+                <>
+                    <div className = "detailSection1">
+                        <h1 className = "recipeTitle">{details?.title}</h1>
+                        <p>{details?.summary}</p>
+                        <div className = 'detailDietsList'>
+                            <h2 style = {{margin: '0 0 20px'}}>Diets</h2>
+                            {
+                                details?.diets && Object.keys(details?.diets).map((dietKey) => {
+                                    return (
+                                        <p style = {{margin: '5px'}}>{details?.diets[dietKey]}</p>
+                                    )
+                                })
                             }
-                        })) : (
-                            <p>Sorry, we are currently working on it...</p> // this is the text for the recipes which don't have steps defined.
-                        )
-                    }
-                </div>
-            </div>
-
-           {/* SECTION 3 */}
-            <div className = "detailSection3">
-                <img src = {details?.image} alt = {details?.title}/>
-                <div className = 'healthScore'>
-                    <div className = 'healthScoreCircle'>
-                        <span className = 'healthScoreValue'>
-                            {details?.healthScore}
-                        </span>
-                        <span class="diagonalLine"></span>
-
-                        <span class="healthScoreLabel">Health Score</span>
-                    </div>
-                </div>
-                <p>ID: {details?.id}</p>
-                {/* The DELETE button will only display if the recipes comes from the DB. */}
-                {
-                    isValidUUID(details?.id) && (
-                        <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>
-                    )
-                }
-            </div>
-
-            {
-                showConfirm && (
-                    <div className = 'confirmBox'>
-                        <div className = 'confirmBoxContent'>
-                            <p className = 'confirmQuestion'>Are you sure you want to delete your recipe? This action is irreversible</p>
-                            <div className = 'confirmDeleteButtons'>
-                                <button className = 'deleteRecipe' onClick = {deleteRecipe}>YES, I'M SURE</button>
-                                <button className = 'dontDeleteRecipe' onClick = {confirmDelete}>NO</button>
-                            </div>
                         </div>
                     </div>
-                )
-            }
+
+                    {/* SECTION 2 */}
+                        <div className = "detailSection2">
+                            <h2 className = 'detailPreparationTitle'>P R E P A R A T I O N</h2>
+                            <div className = 'detailPreparationSteps'>
+                                {
+                                    hasSteps === true
+                                    ? (
+                                        details?.stepByStep?.map((step) => {
+                                        if (step !== '') { // in case the step is an empty string, the <p> element won't render.
+                                            return (
+                                                <p>{step}</p>
+                                            )
+                                        }
+                                    })) : (
+                                        <p>Sorry, we are currently working on it...</p> // this is the text for the recipes which don't have steps defined.
+                                    )
+                                }
+                            </div>
+                        </div>
+
+                    {/* SECTION 3 */}
+                        <div className = "detailSection3">
+                            <img src = {details?.image} alt = {details?.title}/>
+                            <div className = 'healthScore'>
+                                <div className = 'healthScoreCircle'>
+                                    <span className = 'healthScoreValue'>
+                                        {details?.healthScore}
+                                    </span>
+                                    <span class="diagonalLine"></span>
+
+                                    <span class="healthScoreLabel">Health Score</span>
+                                </div>
+                            </div>
+                            <p>ID: {details?.id}</p>
+                            {/* The DELETE button will only display if the recipes comes from the DB. */}
+                            {
+                                isValidUUID(details?.id) && (
+                                    <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>
+                                )
+                            }
+                        </div>
+
+                    {
+                        showConfirm && (
+                            <div className = 'confirmBox'>
+                                <div className = 'confirmBoxContent'>
+                                    <p className = 'confirmQuestion'>Are you sure you want to delete your recipe? This action is irreversible</p>
+                                    <div className = 'confirmDeleteButtons'>
+                                        <button className = 'deleteRecipe' onClick = {deleteRecipe}>YES, I'M SURE</button>
+                                        <button className = 'dontDeleteRecipe' onClick = {confirmDelete}>NO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                </>
+            )}
         </div>
     )
 }
