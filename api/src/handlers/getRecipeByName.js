@@ -42,14 +42,10 @@ const getRecipeByName = async (req, res) => {
             ...recipesAPI, ...recipesDB
         ]
 
-        const objeto = {
-          mensaje: 'no encontrado'
-        }
-
         if (allRecipes.length > 0) {
             return res.status(200).json(allRecipes);
           } else {
-            return res.status(404).json(objeto);
+            return res.status(404).send('Not found');
           }
 
     } catch (error) {

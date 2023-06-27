@@ -5,7 +5,8 @@ export const SEARCH = 'SEARCH';
 export const FILTER = 'FILTER';
 export const SORT = 'SORT';
 export const POST = 'POST';
-export const ERROR = 'ERROR'
+export const ERROR = 'ERROR';
+export const RESET_ERROR ='RESET_ERROR';
 //__________________________________________________
 
 
@@ -24,10 +25,11 @@ export const getAllRecipes = () => {
 
         } catch (error) {
             throw new Error(error.message);
+            // you need to use another api key.
         }
     };
 };
-
+//__________________________________________________
 export const getRecipesByName = (name) => {
 
     return async (dispatch) => {
@@ -43,21 +45,26 @@ export const getRecipesByName = (name) => {
         })
 
         } catch (error) {
-            console.log('Not found');
             dispatch({
                 type: ERROR,
             })
         }
     }
 }
-
+//__________________________________________________
+export const resetError = () => {
+    return {
+        type: RESET_ERROR,
+    }
+}
+//__________________________________________________
 export const sortAllRecipes = (name) => {
     return {
         type: SORT,
         payload: name
     }
 }
-
+//__________________________________________________
 export const filterAllRecipes = (filter) => {
     return {
         type: FILTER,

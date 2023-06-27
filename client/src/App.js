@@ -41,7 +41,7 @@ export function App ( { allRecipes, searchResults } ) {
 
 
     useEffect(() => {
-        dispatch(getAllRecipes());
+        // dispatch(getAllRecipes());
     }, [searching])
 
 
@@ -55,6 +55,7 @@ export function App ( { allRecipes, searchResults } ) {
                 <Route path = '/home' element = { 
                     <Home 
                         searching = {searching} 
+                        setSearching = {setSearching}
                         allRecipes = {allRecipes}
                         currentAllRecipes = {currentAllRecipes} 
                         searchResults = {searchResults} 

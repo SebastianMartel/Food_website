@@ -1,4 +1,4 @@
-import { ALL_RECIPES, SEARCH, FILTER, SORT, ERROR } from "./actions";
+import { ALL_RECIPES, SEARCH, FILTER, SORT, ERROR, RESET_ERROR } from "./actions";
 //__________________________________________________
 
 
@@ -7,7 +7,7 @@ import { ALL_RECIPES, SEARCH, FILTER, SORT, ERROR } from "./actions";
         allRecipesCopy: [],
         searchResults: [],
         searchResultsCopy: [],
-        error: ''
+        error: null
     };
 
 
@@ -17,12 +17,6 @@ const reducer = (state = initialState, { type, payload }) => {
     let sortedSearchResults;
 
     switch (type) {
-        case ERROR:
-            return {
-                ...state,
-                searchResults: [],
-                error: 'No se encontró los resultados'
-            }
 
         case ALL_RECIPES:
             return {
@@ -37,6 +31,18 @@ const reducer = (state = initialState, { type, payload }) => {
                 searchResults: [...payload],
                 searchResultsCopy: [...payload],
             };
+    //__________________________________________________
+        case ERROR:
+            return {
+                ...state,
+                error: 'No match'
+            }
+    //__________________________________________________
+        case RESET_ERROR:
+            return {
+                ...state,
+                error: null
+            }
     //__________________________________________________
         case SORT:
             sortedRecipes = [...state.allRecipes];

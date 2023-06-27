@@ -1,5 +1,5 @@
 import { useDispatch, connect} from 'react-redux';
-import { sortAllRecipes } from '../../Redux/actions';
+import { sortAllRecipes, resetError } from '../../Redux/actions';
 
 import './Home.css'
 import CardBox from "../Cardbox/Cardbox";
@@ -7,7 +7,7 @@ import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
 
-export function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete, error } ) {
+export function Home ( { searching, setSearching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete, error } ) {
 
 
     const dispatch = useDispatch()
@@ -52,7 +52,12 @@ export function Home ( { searching, allRecipes, searchResults, currentAllRecipes
                 )
             }
             {
-                error.length > 0 && <p>{error}</p>
+                error && (
+                    <>
+                        <p>{error}</p>
+                        <button onClick = {() => {setSearching(false); dispatch(resetError())}}>Back to home</button>
+                    </>
+                )
             }
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
