@@ -105,6 +105,25 @@ const findRecipeByNameDB = async (name) => {
 
     try {
 
+        // const recipe = await Recipe.findAll({
+        //     include: {
+        //         model: Diet,
+        //         attributes: ["name"],
+        //         through: {
+        //           attributes: []
+        //         }
+        //     },
+        //     where: {
+        //         title: {
+        //             [Sequelize.Op.iLike]: `%${name}%`, // finds all the matches regardless of case: capitals, lowcase, and spaces.
+        //         }, 
+        //     }
+        // })
+
+        // return recipe
+
+        // OPTION 2, like the one I use in getRecipesById:
+
         const recipes = await Recipe.findAll({
             where: {
                 title: {

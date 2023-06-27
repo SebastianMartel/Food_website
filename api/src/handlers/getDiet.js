@@ -8,7 +8,9 @@ const { createDietDB } = require('../controllers/DietControllers');
 //__________________________________________________
 
 
+// FIX: avoid creating new recipes in the DB when they already has been created.
 
+// API DOC diets: Gluten Free, Ketogenic, Vegetarian, Lacto-Vegetarian, Ovo-Vegetarian, Vegan, Pescetarian, Paleo, Primal, Low FODMAP, Whole30.
 const getDiet = async (req, res) => {
 
 // O: create in the DB all the diets of the recipes I'm working with.

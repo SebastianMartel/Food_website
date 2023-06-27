@@ -26,9 +26,22 @@ const getRecipeById = async (req, res) => {
 
             const recipe = await findRecipeByIdDB(id)
 
-            if (recipe) { 
+            if (recipe) { /* this checks if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
+            
+                {
+                    "error": "recipe.getDiets is not a function"
+                }
+            */
 
                 const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
+
+            // or... I can use this option to avoid any possible error like the one above:
+                // {include: {
+                //     model: Diet,
+                //     attributes: ["name"],
+                //     through: {
+                //       attributes: []
+                //     }}}
 
                 const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
                 for (const diet of dietsDB) {
@@ -55,7 +68,7 @@ const getRecipeById = async (req, res) => {
             const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
             const response = await axios(ENDPOINT)
             const { data } = response
-
+            // FIX: send clean info to the front:
             const recipe = {
                 id: data.id,
                 title: data?.title,
