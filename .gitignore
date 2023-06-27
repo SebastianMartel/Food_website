@@ -106,14 +106,5 @@ dist
 # package-lock.json
 package-lock.json
 
-# IniciandoUnPI.md
-IniciandoUnPI.md
-
-#README.md
-README.md
-
-# commentsExample.png
-commentsExample.png
-
-# cooking.png
-cooking.png
+# gitignore
+.gitignore
