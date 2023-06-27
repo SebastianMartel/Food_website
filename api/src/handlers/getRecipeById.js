@@ -49,12 +49,12 @@ const getRecipeById = async (req, res) => {
                 }
 
                 const newRecipe = { // adds the diets to the object.
-                    id: recipe.id,
-                    title: recipe.title,
-                    image: recipe.image,
-                    summary: recipe.summary,
-                    healthScore: recipe.healthScore,
-                    stepByStep: recipe.stepByStep,
+                    id: recipe?.id,
+                    title: recipe?.title,
+                    image: recipe?.image,
+                    summary: recipe?.summary,
+                    healthScore: recipe?.healthScore,
+                    stepByStep: recipe?.stepByStep,
                     diets: associatedDiets // array with ONLY the name of the diets.
                 }
 
@@ -68,14 +68,14 @@ const getRecipeById = async (req, res) => {
             const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
             const response = await axios(ENDPOINT)
             const { data } = response
-            // FIX: send clean info to the front:
+
             const recipe = {
-                id: data.id,
+                id: data?.id,
                 title: data?.title,
                 image: data?.image,
                 summary: data?.summary.replace(/<[^>]+>/g, ''),
                 healthScore: data?.healthScore,
-                stepByStep: data?.analyzedInstructions[0]?.steps,
+                stepByStep: data?.analyzedInstructions[0]?.steps.map((step) => step.step),
                 diets: data?.diets
             }
 

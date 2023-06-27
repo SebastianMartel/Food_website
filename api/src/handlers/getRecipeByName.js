@@ -28,9 +28,9 @@ const getRecipeByName = async (req, res) => {
             id: recipe?.id,
             title: recipe?.title,
             image: recipe?.image,
-            summary: recipe?.summary,
+            summary: recipe?.summary.replace(/<[^>]+>/g, ''),
             healthScore: recipe?.healthScore,
-            stepByStep: recipe?.analyzedInstructions[0]?.steps,
+            stepByStep: recipe?.analyzedInstructions[0]?.steps.map((step) => step.step),
             diets: recipe?.diets,
           }));
 

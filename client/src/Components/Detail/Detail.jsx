@@ -98,7 +98,7 @@ export default function Detail ( { setSuccessfullDelete } ) {
                             ? (
                                 details?.stepByStep?.map((step) => {
                                     return (
-                                        <p>{step.step}</p>
+                                        <p>{step}</p>
                                     )
                                 })
                             ) : (
