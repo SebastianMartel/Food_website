@@ -10,18 +10,21 @@ import NavBar from './Components/NavBar/NavBar';
 import Detail from './Components/Detail/Detail';
 import Form from './Components/Form/Form';
 import Error404 from './Components/Error404/Error404';
+
+//CHECK THE ARRAY OF DEPENDENCIES IN useEffect(line: 47)
 //__________________________________________________
 
 
 export function App ( { allRecipes, searchResults } ) {
 
 
+        // for the pagination:
         const [currentPage, setCurrentPage] = useState(1);
         const [recipesPerPage] = useState(9);
 
-        const [searching, setSearching] = useState(false)
+        const [searching, setSearching] = useState(false) // use then in NavBarc.jsx, Home.jsx, Cardbox,jsx and Pagination.jsx
 
-        const [successfullDelete,setSuccessfullDelete] = useState(false)
+        const [successfullDelete,setSuccessfullDelete] = useState(false) // the alert is set to false until the card is deleted. Used in Home.jsx and Detail.jsx.
 
 
     const { pathname } = useLocation();
@@ -29,17 +32,18 @@ export function App ( { allRecipes, searchResults } ) {
     const dispatch = useDispatch();
 
 
-    // // get current posts:
+    // get current posts:
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-    const currentAllRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-    const currentSearchResults = searchResults.slice(indexOfFirstRecipe, indexOfLastRecipe)
+    const currentAllRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe); // at first, a total of 12 pages.
+    const currentSearchResults = searchResults.slice(indexOfFirstRecipe, indexOfLastRecipe) // since it's about the search results, this will shorten the pages bar. 
     // changes the page:
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
 
 
+    // dispatch all the cards everytime the component renders, if searching state changes, it will run again.
     useEffect(() => {
         dispatch(getAllRecipes());
     }, [searching])

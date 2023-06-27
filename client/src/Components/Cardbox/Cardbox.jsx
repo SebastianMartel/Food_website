@@ -24,7 +24,8 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
     //   };
     // *NOT NECESSARY FOR NOW.
 
-    if (searching) {
+
+    if (searching) { // when the user search a recipe, the searching mode activates and the recipes from the 'searchResults' redux state renders...
         return (
             <StyledCardBox>
                 {
@@ -47,7 +48,7 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
         )
     }
 
-    if (!searching) {
+    if (!searching) { // otherwise, the recipes from allRecipes redux state will render.
         return (
             <StyledCardBox>
                 {

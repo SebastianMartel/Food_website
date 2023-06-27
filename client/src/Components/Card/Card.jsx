@@ -13,7 +13,7 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
                     <div className = 'cardImage'>
                         <img src = {image} alt = {title} style = {{borderRadius : '0 0 10px 10px'}}/>
                     </div>
-                    <div className = 'cardInner'>
+                    <div className = 'cardInner'> {/*This will be displayed on hover*/}
                         <div className = 'diets'>
                             {
                                 diets.map((diet) => <p class = 'diet'>{diet}</p>)

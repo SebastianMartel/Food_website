@@ -3,20 +3,21 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import './Detail.css'
+// STEPS can be optimized. Handle errors in the axios requests, create a new state...
 //__________________________________________________
 
 
-export default function Detail ( { setSuccessfullDelete } ) {
+export default function Detail ( { setSuccessfullDelete } ) { // takes the function to control the success alert.
 
 
-    const [details, setDetails] = useState({})
+    const [details, setDetails] = useState({}) // stores the recipe properties from the request.
 
-    const [hasSteps, setHasSteps] = useState(false)
+    const [hasSteps, setHasSteps] = useState(false) // in case a recipe doesn't have steps, it shows something else...
 
-    const [showConfirm, setShowConfirm] = useState(false)
+    const [showConfirm, setShowConfirm] = useState(false) // controls the confirm delete box.
 
 
-        const { id } = useParams()
+        const { id } = useParams() // this is used to check the id type of the current recipe.
 
         const navigate = useNavigate()
 
@@ -26,32 +27,45 @@ export default function Detail ( { setSuccessfullDelete } ) {
             return uuidPattern.test(id);
         };
 
-        const deleteRecipe = async () => {
-            const URL = 'http://localhost:3001/recipes'
-            await axios.delete(`${URL}/${id}`)
-            setSuccessfullDelete(true)
-            setTimeout(() => {
-                setSuccessfullDelete(false)
-            }, 13000)
-            navigate('/home')
+        const deleteRecipe = async () => { // makes a request to the server and then, the server deletes the recipe from the DB.
+
+            try {
+                const URL = 'http://localhost:3001/recipes';
+                await axios.delete(`${URL}/${id}`);
+                setSuccessfullDelete(true) // shows the alert.
+                setTimeout(() => {
+                    setSuccessfullDelete(false); // hides the alert after 13 seconds.
+                }, 13000);
+                navigate('/home'); // redirects to the home page.
+
+            } catch (error) {
+                throw new Error(error.message);
+            }
         }
 
         const confirmDelete = () => {
-            setShowConfirm(!showConfirm)
+            setShowConfirm(!showConfirm) // this will toggle the display. If click on DELETE RECIPE, it will show the box, if click on NO (from the box), it will hide the box.
         }
 
 
     useEffect(() => {
-
+        // makes a request to get the recipe data.
         const getRecipeById = async () => {
-            const URL = 'http://localhost:3001/recipes'
-            const { data } = await axios(`${URL}/${id}`)
-            const recipeFound = data
-            setDetails(recipeFound)
+
+            try {
+                const URL = 'http://localhost:3001/recipes';
+                const { data } = await axios(`${URL}/${id}`);
+                const recipeFound = data;
+                // save the data in the local state.
+                setDetails(recipeFound);
+
+            } catch (error) {
+                throw new Error(error.message);
+            }
         }
         getRecipeById()
 
-    },[id])
+    },[id]) // in '/detail:id', everytime the id changes, the function will run again due to the id in the array of dependecies.
 
     useEffect(() => {
         if (details?.stepByStep?.length > 0) {
@@ -62,6 +76,8 @@ export default function Detail ( { setSuccessfullDelete } ) {
 
     return (
         <div className = "detail">
+
+            {/* SECTION 1 */}
             <div className = "detailSection1">
                 <h1 className = "recipeTitle">{details?.title}</h1>
                 <p>{details?.summary}</p>
@@ -77,38 +93,27 @@ export default function Detail ( { setSuccessfullDelete } ) {
                 </div>
             </div>
 
+           {/* SECTION 2 */}
             <div className = "detailSection2">
                 <h2 className = 'detailPreparationTitle'>P R E P A R A T I O N</h2>
                 <div className = 'detailPreparationSteps'>
                     {
-                        isValidUUID(details?.id)
+                        hasSteps === true
                         ? (
-                            hasSteps === true
-                            ? (details?.stepByStep?.map((step) => {
-                                if (step !== '') {
-                                    return (
-                                        <p>{step}</p>
-                                    )
-                                }
-                            })) : (
-                                <p>we are working on it</p>
-                            )
-                        ) : (
-                            hasSteps === true
-                            ? (
-                                details?.stepByStep?.map((step) => {
-                                    return (
-                                        <p>{step}</p>
-                                    )
-                                })
-                            ) : (
-                                <p>we are working on it</p>
-                            )
+                            details?.stepByStep?.map((step) => {
+                            if (step !== '') { // in case the step is an empty string, the <p> element won't render.
+                                return (
+                                    <p>{step}</p>
+                                )
+                            }
+                        })) : (
+                            <p>Sorry, we are currently working on it...</p> // this is the text for the recipes which don't have steps defined.
                         )
                     }
                 </div>
             </div>
 
+           {/* SECTION 3 */}
             <div className = "detailSection3">
                 <img src = {details?.image} alt = {details?.title}/>
                 <div className = 'healthScore'>
@@ -122,12 +127,14 @@ export default function Detail ( { setSuccessfullDelete } ) {
                     </div>
                 </div>
                 <p>ID: {details?.id}</p>
+                {/* The DELETE button will only display if the recipes comes from the DB. */}
                 {
                     isValidUUID(details?.id) && (
                         <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>
                     )
                 }
             </div>
+
             {
                 showConfirm && (
                     <div className = 'confirmBox'>

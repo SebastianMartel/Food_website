@@ -7,7 +7,7 @@ import './Form.css'
 import formImage from '../../Media/formImage.png'
 //__________________________________________________
 
-
+// add button to bring all the diets from the DB
 export default function Form () {
 
 

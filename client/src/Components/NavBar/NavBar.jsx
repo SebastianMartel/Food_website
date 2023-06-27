@@ -26,7 +26,7 @@ export default function NavBar ( { setSearching } ) {
 
 
     const handleFilter = (value) => {
-        dispatch(filterAllRecipes(value))
+        dispatch(filterAllRecipes(value)) // uses the imported action to dispatch it with the respective value, making it possible to filter the recipes.
     }
 
 
@@ -37,6 +37,7 @@ export default function NavBar ( { setSearching } ) {
             </StyledNavLink>
             <SearchBar setSearching = {setSearching}/>
 
+            {/* BY DIETS */}
             <div className = 'selectWrapperFilter'>
                 <div className = 'selectLabelFilter'>
                     EXPLORE BY DIETS
@@ -56,6 +57,7 @@ export default function NavBar ( { setSearching } ) {
                 </ul>
             </div>
 
+            {/* BY ORIGIN */}
             <div className = 'selectWrapperFilter'>
                 <div className = 'selectLabelFilter'>
                     EXPLORE BY CREATOR
@@ -67,6 +69,7 @@ export default function NavBar ( { setSearching } ) {
                 </ul>
             </div>
 
+            {/*FORM LINK*/}
             <NavLink to = '/form'>
                 <button className = 'createRecipe'>POST YOUR RECIPE</button>
             </NavLink>

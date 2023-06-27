@@ -4,6 +4,8 @@ import './Pagination.css'
 //__________________________________________________
 export default function Pagination ( { searching, recipesPerPage, totalAllRecipes, totalSearchResults, paginate } ) {
 
+    // 2 constants to control the length of the page bar.
+
     const pageNumbersAllRecipes = [];
 
     const pageNumbersSearchResults = [];
