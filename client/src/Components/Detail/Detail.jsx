@@ -66,7 +66,7 @@ export default function Detail ( { setSuccessfullDelete } ) {
                 <h1 className = "recipeTitle">{details?.title}</h1>
                 <p>{details?.summary}</p>
                 <div className = 'detailDietsList'>
-                    <h2>Diets</h2>
+                    <h2 style = {{margin: '0 0 20px'}}>Diets</h2>
                     {
                         details?.diets && Object.keys(details?.diets).map((dietKey) => {
                             return (
@@ -77,34 +77,36 @@ export default function Detail ( { setSuccessfullDelete } ) {
                 </div>
             </div>
 
-            <div className = "detailSectionSteps">
-                <h2 className = 'preparationTitle'>P R E P A R A T I O N</h2>
-                {
-                    isValidUUID(details?.id)
-                    ? (
-                        hasSteps === true
-                        ? (details?.stepByStep?.map((step) => {
-                            if (step !== '') {
-                                return (
-                                    <p>{step}</p>
-                                )
-                            }
-                        })) : (
-                            <p>we are working on it</p>
-                        )
-                    ) : (
-                        hasSteps === true
+            <div className = "detailSection2">
+                <h2 className = 'detailPreparationTitle'>P R E P A R A T I O N</h2>
+                <div className = 'detailPreparationSteps'>
+                    {
+                        isValidUUID(details?.id)
                         ? (
-                            details?.stepByStep?.map((step) => {
-                                return (
-                                    <p>{step.step}</p>
-                                )
-                            })
+                            hasSteps === true
+                            ? (details?.stepByStep?.map((step) => {
+                                if (step !== '') {
+                                    return (
+                                        <p>{step}</p>
+                                    )
+                                }
+                            })) : (
+                                <p>we are working on it</p>
+                            )
                         ) : (
-                            <p>we are working on it</p>
+                            hasSteps === true
+                            ? (
+                                details?.stepByStep?.map((step) => {
+                                    return (
+                                        <p>{step.step}</p>
+                                    )
+                                })
+                            ) : (
+                                <p>we are working on it</p>
+                            )
                         )
-                    )
-                }
+                    }
+                </div>
             </div>
 
             <div className = "detailSection3">
@@ -119,7 +121,7 @@ export default function Detail ( { setSuccessfullDelete } ) {
                         <span class="healthScoreLabel">Health Score</span>
                     </div>
                 </div>
-                <p>{details?.id}</p>
+                <p>ID: {details?.id}</p>
                 {
                     isValidUUID(details?.id) && (
                         <button className = 'confirmDelete' onClick = {confirmDelete}>DELETE RECIPE</button>

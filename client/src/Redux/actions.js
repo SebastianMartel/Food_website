@@ -5,6 +5,7 @@ export const SEARCH = 'SEARCH';
 export const FILTER = 'FILTER';
 export const SORT = 'SORT';
 export const POST = 'POST';
+export const ERROR = 'ERROR'
 //__________________________________________________
 
 
@@ -42,7 +43,10 @@ export const getRecipesByName = (name) => {
         })
 
         } catch (error) {
-            throw new Error(error.message);
+            console.log('Not found');
+            dispatch({
+                type: ERROR,
+            })
         }
     }
 }

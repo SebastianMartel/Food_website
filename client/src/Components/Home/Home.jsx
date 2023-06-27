@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect} from 'react-redux';
 import { sortAllRecipes } from '../../Redux/actions';
 
 import './Home.css'
@@ -7,7 +7,7 @@ import Pagination from '../Pagination/Pagination';
 //__________________________________________________
 
 
-export default function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete } ) {
+export function Home ( { searching, allRecipes, searchResults, currentAllRecipes, currentSearchResults, recipesPerPage, paginate, successfullDelete, error } ) {
 
 
     const dispatch = useDispatch()
@@ -40,16 +40,19 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
                             <li onClick = {() => {handleOrder('D')}}>Less healthy</li>
                     </div>
                 </div>
-                <p>ALL {allRecipes?.length}</p>
-                <p>SEARCH {searchResults?.length}</p>
+                {/* <p>ALL {allRecipes?.length}</p>
+                <p>SEARCH {searchResults?.length}</p> */}
             </div>
             {
                 successfullDelete && (
                     <div className = 'successfullDeleteMessage'>
                         <svg style = {{fill: '#008000'}} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                        you have successfully deleted your recipe
+                        You have successfully deleted your recipe
                     </div>
                 )
+            }
+            {
+                error.length > 0 && <p>{error}</p>
             }
             <CardBox searching = {searching} allRecipes = {allRecipes} searchResults = {searchResults} currentAllRecipes = {currentAllRecipes} currentSearchResults = {currentSearchResults}/>
             <Pagination searching = {searching} recipesPerPage = {recipesPerPage} totalAllRecipes = {allRecipes.length} totalSearchResults = {searchResults.length} paginate = {paginate}/>
@@ -57,3 +60,15 @@ export default function Home ( { searching, allRecipes, searchResults, currentAl
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        error: state.error
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    null
+)(Home)

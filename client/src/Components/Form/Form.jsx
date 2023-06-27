@@ -153,10 +153,10 @@ export default function Form () {
                 <img src = {formImage} alt = 'decorative fruits and vegetables'/>
             </div>
             {
-                successfullPost && (
+                true && (
                     <div className = 'successfullPostMessage'>
                         <svg style = {{fill: '#008000'}} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                        you have successfully posted your recipe
+                        You have successfully posted your recipe
                     </div>
                 )
             }
@@ -172,7 +172,7 @@ export default function Form () {
                             }
                     </div>
                     <div className = 'formHealthScore'>
-                        <div className = 'healthScoreCircle'>
+                        <div className = 'healthScoreCircle' style = {{border: errors.healthScore ? '2px solid red' : 'none'}}>
                             <input id = 'healthScore' className = 'formInputHealthScore' name = 'healthScore' value = {recipe.healthScore} onChange = {syncChange} maxLength = "3" placeholder = "?"/>
                         </div>
                         {/* HEALTH SCORE */}
@@ -292,7 +292,6 @@ export default function Form () {
                         <button className = {Object.keys(errors).length === 0 ? 'formSubmitButtonAllowed' : 'formSubmitButtonDisallowed'} type = {Object.keys(errors).length === 0 ? 'submit' : 'button'}>S U B M I T</button>
                     </div>
                 </div>
-
             </form>
         </div>
     )

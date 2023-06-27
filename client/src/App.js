@@ -9,6 +9,7 @@ import Home from './Components/Home/Home';
 import NavBar from './Components/NavBar/NavBar';
 import Detail from './Components/Detail/Detail';
 import Form from './Components/Form/Form';
+import Error404 from './Components/Error404/Error404';
 //__________________________________________________
 
 
@@ -65,6 +66,7 @@ export function App ( { allRecipes, searchResults } ) {
                 }/>
                 <Route path = '/detail/:id' element={ <Detail setSuccessfullDelete = {setSuccessfullDelete}/> } />
                 <Route path = '/form' element = { <Form/> }/>
+                <Route path = '*' element = { <Error404/> }></Route>
             </Routes>
         </div>
     );
