@@ -4,6 +4,8 @@ import { getAllRecipes, sortAllRecipes, resetSearchError } from '../../Redux/act
 import './Home.css'
 import CardBox from "../Cardbox/Cardbox";
 import Pagination from '../Pagination/Pagination';
+import { useEffect } from 'react';
+// INCLUDE SEARCHRECIPES REDUX STATE IN THE USEEFFECT FUNCTION.
 //__________________________________________________
 
 
@@ -16,6 +18,11 @@ export function Home ( { searching, setSearching, allRecipes, searchResults, cur
     const handleOrder = (value) => {
         dispatch(sortAllRecipes(value)) // uses the imported action to dispatch it with the respective value, making it possible to order the recipes.
     }
+
+
+    useEffect(() => {
+        dispatch(getAllRecipes()) // everytime home renders, the recipes will update to the latest modification. For example, after creating a new recipe or deleting a recipe, it will navigate to /home where the recipes will be up to date with the last allRecipes state version.
+    }, [])
 
 
     return (
@@ -60,7 +67,7 @@ export function Home ( { searching, setSearching, allRecipes, searchResults, cur
                 apiError && (
                     <>
                         {/* In case there is a problem with the api key... */}
-                        <p>There was a problem with the server, try using another api-key or search 'https://spoonacular.com/food-api/' for more information.</p>
+                        <p>{apiError}</p>
                         <button onClick = {() => dispatch(getAllRecipes())}>RELOAD</button>
                         {/* onClick dispatch the action again, updating the redux state. */}
                     </>
@@ -69,7 +76,7 @@ export function Home ( { searching, setSearching, allRecipes, searchResults, cur
             {
                 !apiError && searchError && (
                     <> {/* In case there are no problems with the api key, but there's a problem with the search... */}
-                        <p>No matches</p>
+                        <p>{searchError}</p>
                         <button onClick = {() => {setSearching(false); dispatch(resetSearchError())}}>Back to home</button>
                         {/* the button -setSearching- to false making it possible to display allRecipes (this logic is stated in CarBox.jsx). And, to hide the message and button dispatch the imported action, which cleans the searchError redux state setting it to false. */}
                     </>

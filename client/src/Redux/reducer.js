@@ -29,7 +29,7 @@ const reducer = (state = initialState, { type, payload }) => {
         case API_ERROR:
             return {
                 ...state,
-                apiError: true
+                apiError: payload
             }
     //__________________________________________________
         case RESET_API_ERROR:
@@ -48,13 +48,13 @@ const reducer = (state = initialState, { type, payload }) => {
         case SEARCH_ERROR:
             return {
                 ...state,
-                searchError: true
+                searchError: payload
             }
     //__________________________________________________
         case RESET_SEARCH_ERROR:
             return {
                 ...state,
-                searchError: null
+                searchError: false
             }
     //__________________________________________________
         case SORT:

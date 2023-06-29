@@ -17,6 +17,8 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
 
     const [idRequestError, setIdRequestError] = useState(false) // to handle the axios error.
 
+    const [idRequestErrorMessage, setIdRequestErrorMessage] = useState('')
+
 
         const { id } = useParams() // this is used to check the id type of the current recipe.
 
@@ -59,15 +61,23 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
                 const recipeFound = data;
                 // save the data in the local state.
                 setDetails(recipeFound);
-                setIdRequestError(false)
+                setIdRequestError(false) // in case all goes well, the error won't be displayed.
 
             } catch (error) {
-                setIdRequestError(true);
+                console.log(error)
+                error.response && error.response.status === 404
+                ? (
+                    setIdRequestErrorMessage(error.response.data)
+                ) : (
+                    setIdRequestErrorMessage("There was a problem with the server, try using another api-key or search 'https://spoonacular.com/food-api/' for more information.")
+                )
+
+                setIdRequestError(true); // in case things go wrong, the error will be displayed.
             }
         }
         getRecipeById()
 
-    },[id]) // in '/detail:id', everytime the id changes, the function will run again due to the id in the array of dependecies.
+    },[id]) // in '/detail:id', everytime the ID in the URL changes, the function will run again due to the id in the array of dependecies.
 
     useEffect(() => {
         if (details?.stepByStep?.length > 0) {
@@ -82,7 +92,7 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
             { idRequestError ?
             // In case there's a problem, the next element will be displayed...
                 (
-                    <p className = "idRequestError">Sorry, we couldn't find the recipe</p>
+                    <p className = "idRequestError">{idRequestErrorMessage}</p>
                 )
             : ( // Else, the detail section will be displayed.
                 <>

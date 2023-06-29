@@ -20,18 +20,19 @@ export const getAllRecipes = () => {
             const URL = 'http://localhost:3001/recipes/all';
             const { data } = await axios(URL);
 
-        dispatch({
-            type: ALL_RECIPES,
-            payload: data
-        });
+            dispatch({
+                type: ALL_RECIPES,
+                payload: data
+            });
 
-        dispatch({
-            type: RESET_API_ERROR,
-        })
+            dispatch({
+                type: RESET_API_ERROR,
+            })
 
         } catch (error) {
             dispatch({
-                type: API_ERROR
+                type: API_ERROR,
+                payload: "There was a problem with the server, try using another api-key or search 'https://spoonacular.com/food-api/' for more information."
             })
         }
     };
@@ -46,15 +47,25 @@ export const getRecipesByName = (name) => {
             const URL = 'http://localhost:3001/recipes';
             const { data } = await axios(`${URL}?name=${name}`);
 
-        dispatch({
-            type: SEARCH,
-            payload: data
-        })
+            dispatch({
+                type: SEARCH,
+                payload: data
+            })
 
         } catch (error) {
-            dispatch({
-                type: SEARCH_ERROR,
-            })
+
+            error.response && error.response.status === 404
+            ? (
+                dispatch({
+                    type: SEARCH_ERROR,
+                    payload: error.response.data,
+                })
+            ) : (
+                dispatch({
+                    type: SEARCH_ERROR,
+                    payload: "There was a problem with the server, try using another api-key or search 'https://spoonacular.com/food-api/' for more information.",
+                })
+            )
         }
     }
 }
