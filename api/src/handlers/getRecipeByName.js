@@ -43,13 +43,13 @@ const getRecipeByName = async (req, res) => {
         ]
 
         if (allRecipes.length > 0) {
-            return res.status(200).json(allRecipes);
-          } else {
-            return res.status(404).send('Not found');
-          }
+          return res.status(200).json(allRecipes);
+        } else {
+          return res.status(404).send('Not matches found');
+        }
 
     } catch (error) {
-            return res.status(500).json({error: error.message})
+        return res.status(500).json({error: error.message})
     }
 }
 

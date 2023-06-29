@@ -10,10 +10,10 @@ const deleteRecipe = async (req, res) => {
         
         const removed = await deleteRecipeDB(id)
 
-            res.status(200).json(removed)
+            return res.status(200).json(removed)
 
     } catch (error) {
-        throw new Error(error.message)
+        return res.status(500).json({error: error.message})
     }
 }
 

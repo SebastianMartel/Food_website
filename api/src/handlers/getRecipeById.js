@@ -16,58 +16,60 @@ const getRecipeById = async (req, res) => {
 
         const { id } = req.params
 
-            const isValidUUID = (id) => { // checks if the id is a UUID type.
+            const validDBID = (id) => { // checks if the id is a UUID type.
                 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
                 return uuidPattern.test(id);
             };
 
-        if (isValidUUID(id)) {
+        if (validDBID(id)) {
             // in case the id is a UUID type, it will look for the recipe's id that matches the one asked by params through the DB.
 
-            const recipe = await findRecipeByIdDB(id)
+            const recipe = await findRecipeByIdDB(id) // returns a string ('Not found') in case it wasn't found.
 
-            if (recipe) { /* this checks if the recipe exists in the DB or not, but DOESN'T work. I get this error: 
-            
-                {
-                    "error": "recipe.getDiets is not a function"
-                }
-            */
+            if (typeof(recipe) === 'object') { // this checks if the recipe exists in the DB or not.
 
                 const dietsDB = await recipe.getDiets() // sequelize method, gets all the diets associated to the recipe.
 
-            // or... I can use this option to avoid any possible error like the one above:
+                // or... I can use this option to avoid any possible error:
                 // {include: {
                 //     model: Diet,
                 //     attributes: ["name"],
                 //     through: {
                 //       attributes: []
-                //     }}}
+                //     }
+                // }}
 
-                const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
-                for (const diet of dietsDB) {
-                    associatedDiets.push(diet.name)
-                }
+                if (dietsDB.length > 0) {
 
-                const newRecipe = { // adds the diets to the object.
-                    id: recipe?.id,
-                    title: recipe?.title,
-                    image: recipe?.image,
-                    summary: recipe?.summary,
-                    healthScore: recipe?.healthScore,
-                    stepByStep: recipe?.stepByStep,
-                    diets: associatedDiets // array with ONLY the name of the diets.
-                }
+                    const associatedDiets = [] // creates a new array to store ONLY the name of the associated diets.
+                    for (const diet of dietsDB) {
+                        associatedDiets.push(diet.name)
+                    }
 
-                return res.status(200).json(newRecipe)
+                    const newRecipe = { // adds the diets to the object.
+                        id: recipe?.id,
+                        title: recipe?.title,
+                        image: recipe?.image,
+                        summary: recipe?.summary,
+                        healthScore: recipe?.healthScore,
+                        stepByStep: recipe?.stepByStep,
+                        diets: associatedDiets // array with ONLY the name of the diets.
+                    }
 
-            } else return recipe
+                    // the whole point of this if statement is to add the associated diets...
 
-        } else if (!isValidUUID(id)) {
+                    return res.status(200).json(newRecipe)
+
+                } else return res.status(200).json(recipe) // ...in case there are no associated diets. MAYBE JUST REMOVE THIS BECAUSE IN CASE THERE ARE NO ASSOCIATED DIETS, IT WON'T ADD ANYTHING.
+
+            } else return res.status(404).send('Unable to find the recipe with the specified ID') // in case it's a UUID type, but doesn't exist in the DB.
+
+        } else if (!validDBID(id)) {
             // now, in case the id is NOT a UUID type, it will look through the API for the desired recipe.
 
-            const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-            const response = await axios(ENDPOINT)
-            const { data } = response
+            const ENDPOINT = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`;
+            const response = await axios(ENDPOINT);
+            const { data } = response;
 
             const recipe = {
                 id: data?.id,
@@ -77,15 +79,23 @@ const getRecipeById = async (req, res) => {
                 healthScore: data?.healthScore,
                 stepByStep: data?.analyzedInstructions[0]?.steps.map((step) => step.step),
                 diets: data?.diets
+            };
+
+            if (recipe) {
+                return res.status(200).json(recipe); // in case exists in the API.
+            } else {
+                return res.status(404).send('Unable to find the recipe with the specified ID'); // in case it's any type of ID, but doesn't exists in the API. Check catch statement for more details.
             }
-
-                return res.status(200).json(recipe)
-
-        } else {
-            return res.status(404).send('Not found')
         }
+
     } catch (error) {
-            return res.status(500).json({error: error.message})
+
+        // since the API throws a 404 error, this if statement handles that case.
+        if (error.response && error.response.status === 404) {
+            return res.status(404).send('Unable to find the recipe with the specified ID');
+        } else {
+            return res.status(500).json({ error: error.message });
+        }
     }
 }
 
