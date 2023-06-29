@@ -39,6 +39,8 @@ export default function Form () {
         const [errors, setErrors] = useState({});
         //ALERT MESSAGE:
         const [successfullPost, setSuccessfullPost] = useState(false)
+        //DIET REQUEST ERROR:
+        const [dietRequestError, setDietRequestError] = useState(false)
 
 
         const syncSteps = (event, index) => {
@@ -98,34 +100,50 @@ export default function Form () {
             setSteps([...steps, '']);
         }
 
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            post(recipe);
-                setRecipe({
-                title: '',
-                image: '',
-                summary: '',
-                healthScore: '',
-                stepByStep: [],
-                diets: []
-                })
-                setSteps([''])
-                setMode({
-                    glutenFree: false,
-                    dairyFree: false,
-                    lactoOvoVegetarian: false,
-                    vegan: false,
-                    paleolithic: false,
-                    primal: false,
-                    whole30: false,
-                    pescatarian: false,
-                    ketogenic: false,
-                    fodmapFriendly: false
-                })
-                setSuccessfullPost(true)
-            setTimeout(() => {
-                setSuccessfullPost(false)
-            }, 13000)
+        const handleSubmit = async (event) => {
+            try {
+                event.preventDefault()
+                const URL = 'http://localhost:3001/diets'
+                const diets = await axios(URL) // fetches the diets and store them in the DB.
+
+                if (diets) {
+
+                    setDietRequestError(false)
+                    // event.preventDefault();
+                    post(recipe);
+                        setRecipe({
+                        title: '',
+                        image: '',
+                        summary: '',
+                        healthScore: '',
+                        stepByStep: [],
+                        diets: []
+                        })
+                        setSteps([''])
+                        setMode({
+                            glutenFree: false,
+                            dairyFree: false,
+                            lactoOvoVegetarian: false,
+                            vegan: false,
+                            paleolithic: false,
+                            primal: false,
+                            whole30: false,
+                            pescatarian: false,
+                            ketogenic: false,
+                            fodmapFriendly: false
+                        })
+                        setSuccessfullPost(true)
+                    setTimeout(() => {
+                        setSuccessfullPost(false)
+                    }, 13000)
+                }
+
+            } catch (error) {
+                setDietRequestError(true)
+                setTimeout(() => {
+                    setDietRequestError(false)
+                }, 13000)
+            }
         }
 
         const post = async (recipe) => {
@@ -157,6 +175,14 @@ export default function Form () {
                     <div className = 'successfullPostMessage'>
                         <svg style = {{fill: '#008000'}} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
                         You have successfully posted your recipe
+                    </div>
+                )
+            }
+            {
+                dietRequestError && (
+                    <div className = 'successfullPostMessage'>
+                        <svg style = {{fill: '#008000'}} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                        There was an error fetching the diets. Try again later.
                     </div>
                 )
             }
