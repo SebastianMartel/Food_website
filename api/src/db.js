@@ -4,19 +4,24 @@ const path = require('path');
 
 // doesn't work: require('dotenv').config();
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY_RENDER } = process.env;
 //__________________________________________________
 
 
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
-//   logging: false, // set to console.log to see the raw SQL queries
-//   native: false, // let's Sequelize know we can use pg-native for ~30% more speed
+//   logging: false, // set to console.log to see the raw SQL queries.
+//   native: false, // let's Sequelize know we can use pg-native for ~30% more speed.
 // });
 
-const sequelize = new Sequelize(DB_DEPLOY, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // let's Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize(DB_DEPLOY_RENDER, {
+  logging: false, // set to console.log to see the raw SQL queries.
+  native: false, // let's Sequelize know we can use pg-native for ~30% more speed.
+  dialectOptions: { // render deploy requirement.
+    ssl: {
+      require: true
+    }
+  }
 });
 
 const basename = path.basename(__filename);
