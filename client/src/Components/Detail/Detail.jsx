@@ -118,10 +118,10 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
                                 {
                                     hasSteps === true
                                     ? (
-                                        details?.stepByStep?.map((step) => {
+                                        details?.stepByStep?.map((step, index) => {
                                         if (step !== '') { // in case the step is an empty string, the <p> element won't render.
                                             return (
-                                                <p>{step}</p>
+                                                <p key = {index}>{step}</p>
                                             )
                                         }
                                     })) : (

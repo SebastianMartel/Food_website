@@ -29,10 +29,11 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
         return (
             <StyledCardBox>
                 {
-                    currentSearchResults?.map((recipe) => {
+                    currentSearchResults?.map((recipe, index) => {
                         // const diets = getDiets(recipe); // to handle the lowcase/uppercase matter.
                         return (
                             <Card
+                                key = {index}
                                 id = {recipe?.id}
                                 title = {recipe?.title}
                                 summary = {recipe?.summary}
@@ -52,9 +53,10 @@ export default function CardBox ( { searching, currentAllRecipes, currentSearchR
         return (
             <StyledCardBox>
                 {
-                    currentAllRecipes?.map((recipe) => {
+                    currentAllRecipes?.map((recipe, index) => {
                         return (
                             <Card
+                                key = {index}
                                 id = {recipe?.id}
                                 title = {recipe?.title}
                                 summary = {recipe?.summary}

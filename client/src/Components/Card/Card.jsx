@@ -16,7 +16,7 @@ export default function Card ( {id, title, image, summary, healthScore, steps, d
                     <div className = 'cardInner'> {/*This will be displayed on hover*/}
                         <div className = 'diets'>
                             {
-                                diets?.map((diet) => <p class = 'diet'>{diet}</p>)
+                                diets?.map((diet, index) => <p key = {index} class = 'diet'>{diet}</p>)
                             }
                         </div>
                     </div>
