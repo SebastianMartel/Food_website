@@ -4,7 +4,7 @@ const path = require('path');
 
 // doesn't work: require('dotenv').config();
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY_RENDER } = process.env;
+const { DB_DEPLOY_RENDER } = process.env;
 //__________________________________________________
 
 
@@ -19,7 +19,7 @@ const sequelize = new Sequelize(DB_DEPLOY_RENDER, {
   native: false, // let's Sequelize know we can use pg-native for ~30% more speed.
   dialectOptions: { // render deploy requirement.
     ssl: {
-      require: true
+      require: true,
     }
   }
 });
