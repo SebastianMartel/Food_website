@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { axiosGetAllRecipes, axiosGetRecipesByName } from '../axiosRequests';
+
+//__________________________________________________
 
 export const ALL_RECIPES = 'ALL_RECIPES';
 export const SEARCH = 'SEARCH';
@@ -17,8 +20,7 @@ export const getAllRecipes = () => {
     return async (dispatch) => {
 
         try {
-            const URL = 'http://localhost:3001/recipes/all';
-            const { data } = await axios(URL);
+            const data = await axiosGetAllRecipes()
 
             dispatch({
                 type: ALL_RECIPES,
@@ -44,8 +46,7 @@ export const getRecipesByName = (name) => {
 
         try {
 
-            const URL = 'http://localhost:3001/recipes';
-            const { data } = await axios(`${URL}?name=${name}`);
+            const data = await axiosGetRecipesByName(name)
 
             dispatch({
                 type: SEARCH,

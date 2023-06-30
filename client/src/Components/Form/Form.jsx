@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import { axiosGetDiet, axiosPostRecipe } from '../../axiosRequests';
 import validation from '../Validation/validation';
 
 import './Form.css'
@@ -102,9 +103,8 @@ export default function Form () {
 
         const handleSubmit = async (event) => {
             try {
-                event.preventDefault()
-                const URL = 'http://localhost:3001/diets'
-                const diets = await axios(URL) // fetches the diets and store them in the DB.
+                event.preventDefault();
+                const diets = await axiosGetDiet(); // fetches the diets and store them in the DB.
 
                 if (diets) {
 
@@ -149,9 +149,7 @@ export default function Form () {
         const post = async (recipe) => {
 
             try {
-                const URL = `http://localhost:3001/recipes`;
-
-                const newRecipe = await axios.post(URL, recipe);
+                const newRecipe = await axiosPostRecipe(recipe);
                 console.log(newRecipe);
 
             } catch (error) {

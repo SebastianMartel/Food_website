@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { axiosGetRecipeById, axiosDeleteRecipe } from "../../axiosRequests";
 
 import './Detail.css'
 //__________________________________________________
@@ -33,9 +34,9 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
         const deleteRecipe = async () => { // makes a request to the server and then, the server deletes the recipe from the DB.
 
             try {
-                const URL = 'http://localhost:3001/recipes';
-                await axios.delete(`${URL}/${id}`);
-                setSuccessfullDelete(true) // shows the alert.
+                await axiosDeleteRecipe(id);
+
+                setSuccessfullDelete(true); // shows the alert.
                 setTimeout(() => {
                     setSuccessfullDelete(false); // hides the alert after 13 seconds.
                 }, 13000);
@@ -56,8 +57,9 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
         const getRecipeById = async () => {
 
             try {
-                const URL = 'http://localhost:3001/recipes';
-                const { data } = await axios(`${URL}/${id}`);
+
+                const data = await axiosGetRecipeById(id)
+
                 const recipeFound = data;
                 // save the data in the local state.
                 setDetails(recipeFound);
