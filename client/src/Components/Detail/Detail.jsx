@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { axiosGetRecipeById, axiosDeleteRecipe } from "../../axiosRequests";
@@ -121,12 +120,14 @@ export default function Detail ( { setSuccessfullDelete } ) { // takes the funct
                                     hasSteps === true
                                     ? (
                                         details?.stepByStep?.map((step, index) => {
-                                        if (step !== '') { // in case the step is an empty string, the <p> element won't render.
-                                            return (
-                                                <p key = {index}>{step}</p>
-                                            )
-                                        }
-                                    })) : (
+                                            if (step !== '') { // in case the step is an empty string, the <p> element won't render.
+                                                return (
+                                                    <p key = {index}>{step}</p>
+                                                )
+                                            }
+                                            return null;
+                                        })
+                                    ) : (
                                         <p>Sorry, we are currently working on it...</p> // this is the text for the recipes which don't have steps defined.
                                     )
                                 }

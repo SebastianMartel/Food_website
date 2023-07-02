@@ -6,11 +6,16 @@ import store from './Redux/store'
 import { Provider } from 'react-redux'
 
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 
 import './index.css';
 
 import App from './App';
 //__________________________________________________
+
+// axios.defaults.baseURL = 'http://localhost:3001'
+axios.defaults.baseURL = 'https://nova-renderer.onrender.com/'
+
 
 
 ReactDOM.render(

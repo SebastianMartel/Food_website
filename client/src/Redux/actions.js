@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosGetAllRecipes, axiosGetRecipesByName } from '../axiosRequests';
 
 //__________________________________________________
